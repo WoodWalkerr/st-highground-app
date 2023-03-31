@@ -1,0 +1,24 @@
+{
+  "name": "st-highground-app",
+  "version": "1.0.0",
+  "description": "HighGround app",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon ./server.js localhost 5432",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Melven",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.22",
+    "pg": "^8.10.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.30.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
