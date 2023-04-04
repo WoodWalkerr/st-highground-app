@@ -4,6 +4,9 @@ class UserService {
     async getUsers() {
         return await userRepository.getUsers()
     }
+    async createUser(user) {
+        return await userRepository.createUser(user)
+    }
 
     // CREATE
     // async createUser() {}

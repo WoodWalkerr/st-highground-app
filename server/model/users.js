@@ -3,13 +3,36 @@ module.exports = (sequelize, DataTypes, Model) => {
 
     User.init(
         {
-            username: {
+            id: {
+                type: DataTypes.INTEGER,
+                primaryKey: true,
+                autoIncrement: true
+            },
+            name : {
                 type: DataTypes.STRING,
+                allowNull: false
+            },
+            email : {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+            password : {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+            phone_number : {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+            type : {
+                type: DataTypes.STRING,
+                allowNull: false
             },
         },
         {
             sequelize,
-            modelName: 'users',
+            modelName: 'user',
+            tableName: 'user'
         }
     )
 
