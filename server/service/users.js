@@ -4,8 +4,8 @@ class UserService {
     async getUsers(user) {
         return await userRepository.getUsers(user)
     }
-    async getUsersById(user) {
-        return await userRepository.getUsersById(user)
+    async getUserById(id) {
+        return await userRepository.getUserById(id)
     }
     async createUser(user) {
         return await userRepository.createUser(user)
@@ -13,8 +13,8 @@ class UserService {
     async deleteUser(user) {
         return await userRepository.deleteUser(user)
     }
-    async updateUser(user) {
-        return await userRepository.updateUser(user)
+    async updateUser(id) {
+        return await userRepository.updateUser(id)
     }
 }
 

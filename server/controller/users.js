@@ -5,8 +5,8 @@ class UserController {
     async getUsers(user) {
         return await userService.getUsers(user)
     }
-    async getUsersById(user) {
-        return await userService.getUsersById(user)
+    async getUserById(user) {
+        return await userService.getUserById(user)
     }
     async createUser(user) {
         return await userService.createUser(user)
@@ -14,8 +14,8 @@ class UserController {
     async deleteUser(user) {
         return await userService.deleteUser(user)
     }
-    async updateUser(user) {
-        return await userService.updateUser(user)
+    async updateUser(id) {
+        return await userService.updateUser(id)
     }
 
 

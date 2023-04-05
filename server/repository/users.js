@@ -16,14 +16,14 @@ class UserRepository {
                 order: [['id', 'ASC']],
             })
             return users
-        } catch (error) {
-            console.log('Error in getting users', error)
+        } catch (err) {
+            console.log('Error in getting users', err)
             return []
         }
     }
 
     //GET USER BY ID
-    async getUsersById(id) {
+    async getUserById(id) {
         try {
           const user = await this.db.users.findByPk(id);
           if (!user) {
@@ -32,8 +32,8 @@ class UserRepository {
             console.log('User found');
           }
           return user;
-        } catch (error) {
-          console.error('Error in getting user', error);
+        } catch (err) {
+          console.error('Error in getting user', err);
           return null;
         }
       }
@@ -50,21 +50,21 @@ class UserRepository {
         }
     }
     // UPDATE 
-    async updateUser(id) {
+    async updateUser(id, data) {
         try {
             const user = await this.db.users.findByPk(id);
             if (user) {
-                await user.save();
+                await user.update(data);
                 console.log("Updated User");
+                return user;
             } else {
                 throw new Error('User not found');
             }
-        } catch (error) {
-            console.error(error.message);
-            throw error;
+        } catch (err) {
+            console.error(err.message);
+            throw err;
         }
     }
-    
 
     // DELETE
     async deleteUser(id) {
@@ -76,9 +76,9 @@ class UserRepository {
             } else {
                 console.log('User not found')
             }
-        } catch (error) {
-            console.error(error.message)
-            throw error
+        } catch (err) {
+            console.error(err.message)
+            throw err
         }
     }
 }
