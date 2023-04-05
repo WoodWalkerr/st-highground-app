@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { Fragment } from "react";
+import EditDasboard from "./components/editDashboard";
+import InputDashboard from "./components/inputDashboard";
+import ListDashboard from "./components/listDashboard";
+
 
 function App() {
   return (
-    <div>
-      <h1>Hello MotherFucker</h1>
-    </div>
-  )
+    <Fragment>
+      <EditDasboard />
+      <InputDashboard />
+      <ListDashboard />
+    </Fragment>
+  );
 }
 
-export default App
+export default App;
