@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs')
 const { connect } = require('../config/db')
 const users = require('../model/users')
 
@@ -15,9 +16,8 @@ class UserRepository {
                 order: [['id', 'ASC']],
             })
             return users
-        } catch (err) {
-            console.log('Error in getting users', err)
-            return []
+        } catch (error) {
+            console.log('Error: ', error)
         }
     }
 
@@ -30,69 +30,52 @@ class UserRepository {
                 console.log('User found')
             }
             return user
-        } catch (err) {
-            console.log('Error in getting user', err)
+        } catch (error) {
+            console.log('Error: ', error)
         }
     }
 
     async createUser(user) {
+        let userData = {}
+
         try {
-            const createdUser = await this.db.users.create(user)
-            console.log('User created successfully')
+            const password = user.password
+            const salt = bcrypt.genSaltSync(10)
+            const hashedPassword = bcrypt.hashSync(password, salt)
+
+            userData = { ...user, password: hashedPassword }
+            const createdUser = await this.db.users.create(userData)
             return createdUser
         } catch (error) {
-            console.log(error)
-            return []
+            console.log('Error: ', error)
         }
     }
 
     async updateUser(user) {
-        console.log("Updating User");
-        let data = {};
+        let data = {}
 
         try {
-          data = await this.db.users.update(
-            {...user},
-            {
-              where: {
-                id: user.id,
-              },
-            }
-          );
+            data = await this.db.users.update(
+                { ...user },
+                {
+                    where: {
+                        id: user.id,
+                    },
+                }
+            )
+            return data
         } catch (error) {
-          console.log("Error:", error);
+            console.log('Error: ', error)
         }
-        return data;
-      }
-
-    // async updateUser(user) {
-    //     let data = {};
-    //     try {
-    //         data = await this.db.users.update(user),
-    //         // console.log("Updated User") 
-    //         {
-    //             where{
-    //                 id: user.id
-    //             }
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    //      return data;
-
-    // }
+        return data
+    }
 
     async deleteUser(id) {
         try {
-            const user = await this.db.users.findByPk(id)
-            if (user) {
-                await user.destroy()
-                console.log('User deleted successfully')
-            } else {
-                console.log('User not found')
-            }
-        } catch (err) {
-            console.log(err.message)
-            throw err
+            const user = await this.db.users.destroy({ where: { id } })
+            return user
+        } catch (error) {
+            console.log('Error: ', error)
         }
     }
 }
