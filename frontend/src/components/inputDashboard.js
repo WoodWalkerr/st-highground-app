@@ -33,15 +33,15 @@ const InputDashboard = () => {
     
     return (
         <Fragment>
-            <h1 className="text-center font-bold text-4xl">High Ground App</h1>
-            <div className="flex justify-center items-center">
+            <h1 className="text-center font-bold text-4xl bg-blue-300">Sign-Up</h1>
+            <div className="flex justify-center items-center bg-blue-300">
                 <form
-                    className="flex flex-col w-[35%] justify-center my-4"
+                    className="flex flex-col w-[35%] justify-center my-5 bg-blue-300"
                     onSubmit={onSubmitForm}
                 >
                     <input
                         type="text"
-                        className="py-2 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        className="py-2 px-3 my-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Name"
                         value={name}
                         onChange={(e) =>
@@ -50,7 +50,7 @@ const InputDashboard = () => {
                     />
                     <input
                         type="email"
-                        className="py-2 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        className="py-2 px-3 my-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Email"
                         value={email}
                         onChange={(e) =>
@@ -59,7 +59,7 @@ const InputDashboard = () => {
                     />
                     <input
                         type="password"
-                        className="py-2 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        className="py-2 px-3 my-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Password"
                         value={password}
                         onChange={(e) =>
@@ -68,7 +68,7 @@ const InputDashboard = () => {
                     />
                     <input
                         type="tel"
-                        className="py-2 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        className="py-2 px-3 my-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Phone Number"
                         value={phone_number}
                         onChange={(e) =>
@@ -77,18 +77,18 @@ const InputDashboard = () => {
                     />
                    <input
                         type="text"
-                        className="py-2 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        className="py-2 px-3  my-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Type"
                         value={type}
                         onChange={(e) =>
                             setUser({ ...user, type: e.target.value })
                         }
                     />
-                    <button className="py-2 px-4 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                    <button className="py-2 px-4 my-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                         Add
                     </button>
                 </form>
-            </div>
+                </div>
         </Fragment>
     )
 }

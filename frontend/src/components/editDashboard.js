@@ -1,16 +1,16 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState } from 'react';
 
 const EditDashboard = ({ user }) => {
-  const [name, setName] = useState(user?.name || '')
-  const [email, setEmail] = useState(user?.email || '')
-  const [phoneNumber, setPhoneNumber] = useState(user?.phoneNumber || '')
-  const [type, setType] = useState(user?.type || '')
+  const [name, setName] = useState(user?.name || '');
+  const [email, setEmail] = useState(user?.email || '');
+  const [phoneNumber, setPhoneNumber] = useState(user?.phoneNumber || '');
+  const [type, setType] = useState(user?.type || '');
 
   // update user information
   const updateUser = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      const body = { name, email, phoneNumber, type }
+      const body = { name, email, phoneNumber, type };
       const response = await fetch(
         `http://localhost:8080/api/v1/users/${user.id}`,
         {
@@ -18,22 +18,22 @@ const EditDashboard = ({ user }) => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(body),
         }
-      )
-      window.location = '/'
+      );
+      window.location = '/';
     } catch (error) {
-      console.error(error.message)
+      console.error(error.message);
     }
-  }
+  };
 
-  const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(false);
 
   const toggleModal = () => {
-    setShowModal(!showModal)
-    setName(user?.name || '')
-    setEmail(user?.email || '')
-    setPhoneNumber(user?.phoneNumber || '')
-    setType(user?.type || '')
-  }
+    setShowModal(!showModal);
+    setName(user?.name || '');
+    setEmail(user?.email || '');
+    setPhoneNumber(user?.phoneNumber || '');
+    setType(user?.type || '');
+  };
 
   return (
     <Fragment>
@@ -90,8 +90,8 @@ const EditDashboard = ({ user }) => {
                   <button
                     className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
                     onClick={(e) => {
-                      toggleModal()
-                      updateUser(e)
+                      toggleModal();
+                      updateUser(e);
                     }}
                   >
                     Save
@@ -109,7 +109,7 @@ const EditDashboard = ({ user }) => {
         </div>
       )}
     </Fragment>
-  )
-}
+  );
+};
 
 export default EditDashboard;
