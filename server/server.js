@@ -27,10 +27,18 @@ app.post("/api/v1/users", (req, res) => {
     usersController.createUser(req.body.user).then((data) => res.json(data));
   });
 
-app.put('/api/v1/users', (req,res) => {
-    usersController.updateUser(req.body.user).then((data) => res.json(data))
-})
-
+  app.put('/api/v1/users/:id', (req, res) => {
+    const { id } = req.params;
+    const user = req.body;
+  
+    usersController.updateUser({ ...user, id })
+      .then((data) => res.json(data))
+      .catch((error) => {
+        console.log('Error:', error);
+        res.status(500).send('Server error!');
+      });
+  });
+  
 app.delete('/api/v1/users/:id', (req,res) => {
     usersController.deleteUser(req.params.id).then((data) => res.json(data))
 })

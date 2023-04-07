@@ -18,8 +18,8 @@ class UserController {
         return await userService.deleteUser(user)
     }
     
-    async updateUser(id) {
-        return await userService.updateUser(id)
+    async updateUser(user) {
+        return await userService.updateUser(user)
     }
 }
 

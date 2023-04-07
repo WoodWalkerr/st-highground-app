@@ -51,24 +51,22 @@ class UserRepository {
         }
     }
 
-    async updateUser(user) {
-        let data = {}
 
+    async updateUser(user) {
         try {
-            data = await this.db.users.update(
-                { ...user },
-                {
-                    where: {
-                        id: user.id,
-                    },
-                }
-            )
-            return data
+          const data = await this.db.users.update(
+            { ...user },
+            {
+              where: {
+                id: user.id
+              },
+            }
+          );
+          return data;
         } catch (error) {
-            console.log('Error: ', error)
+          console.log('Error:', error);
         }
-        return data
-    }
+      }
 
     async deleteUser(id) {
         try {
