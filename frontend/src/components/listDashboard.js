@@ -30,18 +30,29 @@ const ListDasboard = () => {
     useEffect(() => {
         getUser()
     }, [])
-    
 
     return (
         <Fragment>
-            <div className='flex justify-center items-center uppercase my-5 text-4xl'>
-                <h1 className='font-bold'>List Dashboard</h1>
+            <div className="flex justify-center items-center uppercase my-5 text-4xl">
+                <h1 className="font-bold">List Dashboard</h1>
             </div>
             <table className="max-w-6xl mx-auto border-collapse border border-slate-400 ...">
                 <thead>
                     <tr>
                         <th className="border border-slate-300 px-10 py-5">
                             ID
+                        </th>
+                        <th className="border border-slate-300 px-10 py-5">
+                            Name
+                        </th>
+                        <th className="border border-slate-300 px-10 py-5">
+                            Email
+                        </th>
+                        <th className="border border-slate-300 px-10 py-5">
+                            Phone Number
+                        </th>
+                        <th className="border border-slate-300 px-10 py-5">
+                            Type
                         </th>
                         <th className="border border-slate-300 px-10 py-5">
                             Edit
@@ -55,6 +66,10 @@ const ListDasboard = () => {
                     {user.map((user) => (
                         <tr key={user.id}>
                             <td className="text-center">{user.id}</td>
+                            <td className="text-center">{user.name}</td>
+                            <td className="text-center">{user.email}</td>
+                            <td className="text-center">{user.phone_number}</td>
+                            <td className="text-center">{user.type}</td>
                             <td>
                                 <EditDasboard user={user} />
                             </td>

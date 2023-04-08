@@ -36,7 +36,7 @@ const InputDashboard = () => {
             <h1 className="text-center font-bold text-4xl bg-blue-300">Sign-Up</h1>
             <div className="flex justify-center items-center bg-blue-300">
                 <form
-                    className="flex flex-col w-[35%] justify-center my-5 bg-blue-300"
+                    className="flex flex-col w-[40%] justify-center my-5 bg-blue-300"
                     onSubmit={onSubmitForm}
                 >
                     <input
@@ -85,7 +85,7 @@ const InputDashboard = () => {
                         }
                     />
                     <button className="py-2 px-4 my-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                        Add
+                        Submit
                     </button>
                 </form>
                 </div>
