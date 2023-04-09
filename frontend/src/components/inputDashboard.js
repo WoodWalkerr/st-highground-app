@@ -31,6 +31,7 @@ const InputDashboard = () => {
       }
     }
     
+    
     return (
         <Fragment>
             <h1 className="text-center font-bold text-4xl bg-blue-300">Sign-Up</h1>
