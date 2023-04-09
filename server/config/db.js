@@ -6,6 +6,7 @@ const connect = () => {
     const userName = process.env.DB_USER
     const password = process.env.DB_PASSWORD
 
+
     const sequelize = new Sequelize(database, userName, password, {
         host: hostName,
         dialect: 'postgres',

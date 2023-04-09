@@ -2,9 +2,12 @@ const { deleteUser } = require('../repository/users')
 const userService = require('../service/users')
 
 class UserController {
-    async getUsers(user) {
-        return await userService.getUsers(user)
+    async getAllUsers(user) {
+        return await userService.getAllUsers(user)
     }
+    // async authenticateUser(email, password) {
+    //     return await userService.authenticateUser(email, password);
+    // }
 
     async getUserById(user) {
         return await userService.getUserById(user)

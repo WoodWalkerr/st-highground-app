@@ -9,7 +9,7 @@ class UserRepository {
         this.db = connect()
     }
 
-    async getUsers() {
+    async getAllUsers() {
         try {
             console.log('Fetching Users')
             const users = await this.db.users.findAll({
@@ -34,6 +34,24 @@ class UserRepository {
             console.log('Error: ', error)
         }
     }
+
+    // async authenticateUser(email, password) {
+    //     try {
+    //       const user = await this.db.users.findOne({ where: { email } })
+    //       if (!user) {
+    //         return null
+    //       }
+    //       const passwordMatch = bcrypt.compareSync(password, user.password)
+    //       if (!passwordMatch) {
+    //         return null
+    //       }
+    //       return user
+    //     } catch (error) {
+    //       console.log('Error: ', error)
+    //       throw new Error('Failed to authenticate user')
+    //     }
+    //   }
+
 
     async createUser(user) {
         let userData = {}
