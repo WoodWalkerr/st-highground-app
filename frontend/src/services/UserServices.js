@@ -22,21 +22,14 @@ export const createUser = async (user) => {
     }
 }
 
-export const updateUser = async (id, data) => {
-    try {
-        const response = await fetch(
-            `http://localhost:8080/api/v1/users/${id}`,
-            {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data),
-            }
-        )
-        return response
-    } catch (error) {
-        console.error(error)
-        throw error
-    }
+export async function updateUser(userDetails) {
+    const response = await fetch('http://localhost:8080/api/v1/users', {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ "user": userDetails }),
+    });
+    return await response.json()
+    // console.log(JSON.stringify({ "user": userDetails }))
 }
 
 export async function deleteUser(id) {
