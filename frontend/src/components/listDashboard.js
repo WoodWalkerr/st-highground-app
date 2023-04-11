@@ -1,36 +1,35 @@
-import React, { Fragment, useEffect, useState } from 'react'
-import EditDasboard from './editDashboard'
+import React, { Fragment, useEffect, useState } from 'react';
+import EditDasboard from './editDashboard';
+import { getUsers, deleteUser } from '../services/UserServices';
+
 
 const ListDasboard = () => {
-    const [user, setUser] = useState([])
+  const [user, setUser] = useState([]);
 
-    const deleteUser = async (id) => {
-        try {
-            const confirmed = window.confirm('Are you sure you want to delete this user?')
-            if (confirmed) {
-                const deleteUser = await fetch(
-                    `http://localhost:8080/api/v1/users/${id}`,
-                    { method: 'DELETE' }
-                )
-                setUser(user.filter((u) => u.id !== id))
-            }
-        } catch (error) {
-            console.error(error.message)
-        }
+  const handleDeleteUser = async (id) => {
+    try {
+      const success = await deleteUser(id);
+      if (success) {
+        setUser((prevUsers) => prevUsers.filter((u) => u.id !== id));
+      }
+    } catch (error) {
+      console.error(error.message);
     }
-    const getUser = async () => {
-        try {
-            const response = await fetch('http://localhost:8080/api/v1/users')
-            const jsonData = await response.json()
-            setUser(jsonData)
-        } catch (error) {
-            console.error(error.message)
-        }
-    }
+  };
 
-    useEffect(() => {
-        getUser()
-    }, [])
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const users = await getUsers();
+        setUser(users);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
 
     return (
         <Fragment>
@@ -77,7 +76,7 @@ const ListDasboard = () => {
                             <td className="flex justify-center items-center py-4 mx-10">
                                 <button
                                     className="bg-red-500 rounded-md text-white w-20 h-10 from-red-500 to-red-800 font-normal"
-                                    onClick={() => deleteUser(user.id)}
+                                    onClick={() => handleDeleteUser(user.id)}
                                 >
                                     Delete
                                 </button>

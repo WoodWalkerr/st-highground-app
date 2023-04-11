@@ -1,37 +1,31 @@
-import React, { Fragment, useState } from 'react'
+
+import React, { Fragment, useState } from 'react';
+import { createUser } from '../services/UserServices';
 
 const InputDashboard = () => {
-    const [user, setUser] = useState({
-        name: '',
-        email: '',
-        password: '',
-        phone_number: '',
-        type: '',
-    })
+  const [user, setUser] = useState({
+    name: '',
+    email: '',
+    password: '',
+    phone_number: '',
+    type: '',
+  });
 
-    const { name, email, password, phone_number, type } = user
+  const { name, email, password, phone_number, type } = user;
 
-    const onSubmitForm = async (e) => {
-      e.preventDefault()
-      if (!name || !email || !password || !phone_number || !type) {
-        alert('Please fill in all fields')
-        return
-      }
-      try {
-        const body = { user }
-        const response = await fetch('http://localhost:8080/api/v1/users', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(body),
-        })
-    
-        window.location = '/'
-      } catch (error) {
-        console.error(error.message)
-      }
+  const onSubmitForm = async (e) => {
+    e.preventDefault();
+    if (!name || !email || !password || !phone_number || !type) {
+      alert('Please fill in all fields');
+      return;
     }
-    
-    
+    try {
+      await createUser(user);
+      window.location = '/';
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
     return (
         <Fragment>
             <h1 className="text-center font-bold text-4xl bg-blue-300">Sign-Up</h1>
