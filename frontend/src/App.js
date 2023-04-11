@@ -1,5 +1,4 @@
 import React, { Fragment } from "react"
-import EditDasboard from "./components/editDashboard"
 import InputDashboard from "./components/inputDashboard"
 import ListDashboard from "./components/listDashboard"
 import Navbar from "./common/navbar"
@@ -10,7 +9,6 @@ function App() {
     <Fragment>
       <Navbar />
       <Splash />
-      <EditDasboard />
       <InputDashboard />
       <ListDashboard />
     </Fragment>

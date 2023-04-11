@@ -45,7 +45,7 @@ export async function deleteUser(id) {
             'Are you sure you want to delete this user?'
         )
         if (confirmed) {
-            const response = await fetch(
+            const deleteUser = await fetch(
                 `http://localhost:8080/api/v1/users/${id}`,
                 { method: 'DELETE' }
             )

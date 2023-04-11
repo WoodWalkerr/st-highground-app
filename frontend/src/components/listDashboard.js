@@ -1,35 +1,33 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import EditDasboard from './editDashboard';
-import { getUsers, deleteUser } from '../services/UserServices';
-
+import React, { Fragment, useEffect, useState } from 'react'
+import EditDasboard from './editDashboard'
+import { getUsers, deleteUser } from '../services/UserServices'
 
 const ListDasboard = () => {
-  const [user, setUser] = useState([]);
+    const [user, setUser] = useState([])
 
-  const handleDeleteUser = async (id) => {
-    try {
-      const success = await deleteUser(id);
-      if (success) {
-        setUser((prevUsers) => prevUsers.filter((u) => u.id !== id));
-      }
-    } catch (error) {
-      console.error(error.message);
+    const handleDeleteUser = async (id) => {
+        try {
+            const success = await deleteUser(id)
+            if (success) {
+                setUser((prevUsers) => prevUsers.filter((u) => u.id !== id))
+            }
+        } catch (error) {
+            console.error(error.message)
+        }
     }
-  };
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const users = await getUsers();
-        setUser(users);
-      } catch (error) {
-        console.error(error.message);
-      }
-    };
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                const users = await getUsers()
+                setUser(users)
+            } catch (error) {
+                console.error(error.message)
+            }
+        }
 
-    fetchUsers();
-  }, []);
-
+        fetchUsers()
+    }, [])
 
     return (
         <Fragment>
