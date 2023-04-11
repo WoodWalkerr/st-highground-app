@@ -5,7 +5,7 @@ import { BellIcon } from '@heroicons/react/24/outline'
 export const navigation = [
     {
         id: 1,
-        link: 'Login',
+        link: 'Log in',
     },
     {
         id: 2,

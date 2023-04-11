@@ -6,17 +6,18 @@ const ListDasboard = () => {
 
     const deleteUser = async (id) => {
         try {
-            const deleteUser = await fetch(
-                `http://localhost:8080/api/v1/users/${id}`,
-                { method: 'DELETE' }
-            )
-
-            setUser(user.filter((u) => u.id !== id))
+            const confirmed = window.confirm('Are you sure you want to delete this user?')
+            if (confirmed) {
+                const deleteUser = await fetch(
+                    `http://localhost:8080/api/v1/users/${id}`,
+                    { method: 'DELETE' }
+                )
+                setUser(user.filter((u) => u.id !== id))
+            }
         } catch (error) {
             console.error(error.message)
         }
     }
-
     const getUser = async () => {
         try {
             const response = await fetch('http://localhost:8080/api/v1/users')

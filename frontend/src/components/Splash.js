@@ -7,9 +7,6 @@ function Splash() {
                 <h1 className="text-4xl font-bold text-center mb-8">
                     WELCOME TO HIGHGROUND
                 </h1>
-                <h4 className="text-md text-center mb-8">
-                    To book a visit click on the button below
-                </h4>
                 <div className="flex justify-center">
                     <a
                         href="/"
