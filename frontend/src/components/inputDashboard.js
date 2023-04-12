@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
 import { createUser } from '../services/UserServices'
 
 const InputDashboard = () => {
@@ -25,75 +25,84 @@ const InputDashboard = () => {
             console.error(error.message)
         }
     }
-        return (
-            <div className="flex min-h-full items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
-                <div className="w-full max-w-md space-y-8">
-                    <div>
-                        {/* <img
-                            className="mx-auto h-12 w-auto"
-                            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                            alt="Your Company"
-                        /> */}
-                        <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-                            Sign in to your account
-                        </h2>
-                    </div>
-                    <form className="mt-8 space-y-6" onSubmit={onSubmitForm}>
-                        <div className="-space-y-px rounded-md shadow-sm">
-                            <div>
-                                <label
-                                    htmlFor="name"
-                                    className="block text-gray-700 text-sm font-bold mb-2"
-                                >
-                                    Username
-                                </label>
+
+    return (
+        <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+            <div className="sm:mx-auto sm:w-full sm:max-w-md">
+                <h2 className="mt-6 text-center text-4xl font-bold text-gray-900">
+                    Sign up
+                </h2>
+            </div>
+
+            <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+                <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                    <form className="space-y-6" onSubmit={onSubmitForm}>
+                        <div>
+                            <label
+                                htmlFor="name"
+                                className="block text-sm font-medium text-gray-700"
+                            >
+                                User Name
+                            </label>
+                            <div className="mt-1">
                                 <input
                                     id="name"
                                     name="name"
                                     type="text"
-                                    autoComplete="current-name"
-                                    className="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                    placeholder="UserName"
+                                    autoComplete="name"
+                                    required
                                     value={name}
                                     onChange={(e) =>
-                                        setUser({ ...user, name: e.target.value })
+                                        setUser({
+                                            ...user,
+                                            name: e.target.value,
+                                        })
                                     }
+                                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 />
                             </div>
-                            <div>
-                                <label
-                                    htmlFor="email-address"
-                                    className="block text-gray-700 text-sm font-bold mb-2"
-                                >
-                                    Email Address
-                                </label>
+                        </div>
+
+                        <div>
+                            <label
+                                htmlFor="email"
+                                className="block text-sm font-medium text-gray-700"
+                            >
+                                Email address
+                            </label>
+                            <div className="mt-1">
                                 <input
-                                    id="email-address"
+                                    id="email"
                                     name="email"
                                     type="email"
-                                    autoComplete="current-email"
-                                    className="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                    placeholder="Email address"
+                                    autoComplete="email"
+                                    required
                                     value={email}
                                     onChange={(e) =>
-                                        setUser({ ...user, email: e.target.value })
+                                        setUser({
+                                            ...user,
+                                            email: e.target.value,
+                                        })
                                     }
+                                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 />
                             </div>
-                            <div>
-                                <label
-                                    htmlFor="password"
-                                    className="block text-gray-700 text-sm font-bold mb-2"
-                                >
-                                    Password
-                                </label>
+                        </div>
+
+                        <div>
+                            <label
+                                htmlFor="password"
+                                className="block text-sm font-medium text-gray-700"
+                            >
+                                Password
+                            </label>
+                            <div className="mt-1">
                                 <input
                                     id="password"
                                     name="password"
                                     type="password"
                                     autoComplete="current-password"
-                                    className="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                    placeholder="Password"
+                                    required
                                     value={password}
                                     onChange={(e) =>
                                         setUser({
@@ -101,22 +110,25 @@ const InputDashboard = () => {
                                             password: e.target.value,
                                         })
                                     }
+                                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 />
                             </div>
-                            <div>
-                                <label
-                                    htmlFor="mobile-Number"
-                                    className="block text-gray-700 text-sm font-bold mb-2"
-                                >
-                                    Mobile Number
-                                </label>
+                        </div>
+
+                        <div>
+                            <label
+                                htmlFor="phone_number"
+                                className="block text-sm font-medium text-gray-700"
+                            >
+                                Phone number
+                            </label>
+                            <div className="mt-1">
                                 <input
-                                    id="mobileNumber"
-                                    name="mobileNumber"
+                                    id="phone_number"
+                                    name="phone_number"
                                     type="tel"
-                                    autoComplete="current-mobileNumber"
-                                    className="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                    placeholder="Mobile Number"
+                                    autoComplete="tel"
+                                    required
                                     value={phone_number}
                                     onChange={(e) =>
                                         setUser({
@@ -124,22 +136,24 @@ const InputDashboard = () => {
                                             phone_number: e.target.value,
                                         })
                                     }
+                                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 />
                             </div>
-                            <div>
-                                <label
-                                    htmlFor="type"
-                                    className="block text-gray-700 text-sm font-bold mb-2"
-                                >
-                                    Type
-                                </label>
+                        </div>
+
+                        <div>
+                            <label
+                                htmlFor="type"
+                                className="block text-sm font-medium text-gray-700"
+                            >
+                                Account type
+                            </label>
+                            <div className="mt-1">
                                 <input
                                     id="type"
                                     name="type"
-                                    type="type"
-                                    autoComplete="current-type"
-                                    className="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                    placeholder="Type"
+                                    autoComplete="type"
+                                    required
                                     value={type}
                                     onChange={(e) =>
                                         setUser({
@@ -147,21 +161,24 @@ const InputDashboard = () => {
                                             type: e.target.value,
                                         })
                                     }
+                                    className="block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 />
                             </div>
                         </div>
+
                         <div>
                             <button
-                                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                 type="submit"
+                                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                             >
-                                Sign in
+                                Create account
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
-        )
+        </div>
+    )
 }
 
 export default InputDashboard

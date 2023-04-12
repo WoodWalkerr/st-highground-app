@@ -1,17 +1,7 @@
 import React, { useState } from 'react'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import { BellIcon } from '@heroicons/react/24/outline'
-
-export const navigation = [
-    {
-        id: 1,
-        link: 'Log in',
-    },
-    {
-        id: 2,
-        link: 'Sign-up',
-    },
-]
+import { navigation } from '../data/navbarLinks'
 
 const Navbar = () => {
     const [nav, setNav] = useState(false)

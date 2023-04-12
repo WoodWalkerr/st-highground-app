@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { updateUser } from '../services/UserServices';
 
 const EditDashboard = ({ user }) => {
@@ -32,7 +32,7 @@ const handleChange = (e) => {
   };
 
   return (
-    <Fragment>
+    <div>
       {/* Button to open the modal */}
       <div className="flex justify-center items-center py-4 mx-10">
         <button
@@ -54,6 +54,7 @@ const handleChange = (e) => {
                   <input
                     type="text"
                     placeholder="Username"
+                    name="name"
                     defaultValue={user.name}
                     onChange={handleChange} 
                   />
@@ -61,6 +62,7 @@ const handleChange = (e) => {
                 <div className="mb-4">
                   <input
                     type="text"
+                    name="email"
                     placeholder="Email"
                     defaultValue={user.email}
                     onChange={handleChange} 
@@ -69,8 +71,18 @@ const handleChange = (e) => {
                 <div className="mb-4">
                   <input
                     type="text"
+                    name="PhoneNumber"
                     placeholder="Phone Number"
                     defaultValue={user.PhoneNumber}
+                    onChange={handleChange} 
+                  />
+                </div>
+                <div className="mb-4">
+                  <input
+                    type="text"
+                    name="type"
+                    placeholder="Type"
+                    defaultValue={user.type}
                     onChange={handleChange} 
                   />
                 </div>
@@ -96,7 +108,7 @@ const handleChange = (e) => {
           </div>
         </div>
       )}
-    </Fragment>
+      </div>
   );
 };
 export default EditDashboard;

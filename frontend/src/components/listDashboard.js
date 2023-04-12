@@ -1,5 +1,5 @@
-import React, { Fragment, useEffect, useState } from 'react'
-import EditDasboard from './editDashboard'
+import React, { useEffect, useState } from 'react'
+import EditDasboard from './EditDashboard'
 import { getUsers, deleteUser } from '../services/UserServices'
 
 const ListDasboard = () => {
@@ -30,7 +30,7 @@ const ListDasboard = () => {
     }, [])
 
     return (
-        <Fragment>
+        <div>
             <div className="flex justify-center items-center uppercase my-5 text-4xl">
                 <h1 className="font-bold">List Dashboard</h1>
             </div>
@@ -83,7 +83,7 @@ const ListDasboard = () => {
                     ))}
                 </tbody>
             </table>
-        </Fragment>
+            </div>
     )
 }
 
