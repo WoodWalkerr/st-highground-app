@@ -1,6 +1,6 @@
 export async function getUsers() {
     try {
-        const response = await fetch('http://localhost:8080/api/v1/users')
+        const response = await fetch('/api/v1/users')
         const jsonData = await response.json()
         return jsonData
     } catch (error) {
@@ -11,7 +11,7 @@ export async function getUsers() {
 
 export const createUser = async (user) => {
     try {
-        const response = await fetch('http://localhost:8080/api/v1/users', {
+        const response = await fetch('/api/v1/users', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ user }),
@@ -23,7 +23,7 @@ export const createUser = async (user) => {
 }
 
 export async function updateUser(userDetails) {
-    const response = await fetch('http://localhost:8080/api/v1/users', {
+    const response = await fetch('/api/v1/users', {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ "user": userDetails }),
@@ -39,7 +39,7 @@ export async function deleteUser(id) {
         )
         if (confirmed) {
             const deleteUser = await fetch(
-                `http://localhost:8080/api/v1/users/${id}`,
+                `/api/v1/users/${id}`,
                 { method: 'DELETE' }
             )
             return true

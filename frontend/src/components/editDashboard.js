@@ -1,28 +1,25 @@
 import React, { Fragment, useState } from 'react';
 import { updateUser } from '../services/UserServices';
 
-const EditDashboard = ({ user }) => {
+const EditDashboard = ({ user: { id, name, email, password, phoneNumber, type } }) => {
+  const [userDetails, setUserDetails] = useState({
+    id: id || '',
+    name: name || '',
+    email: email || '',
+    password: password || '',
+    phoneNumber: phoneNumber || '',
+    type: type || '',
+  });
 
-  const [user_details, setUserDetails] = useState({
-    id: user?.id || '',
-    name: user?.name || '',
-    email: user?.email || '',
-    password: user?.password || '',
-    phoneNumber: user?.phoneNumber || '',
-    type: user?.type || '',
-});
-
-const handleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setUserDetails((prev) => {
-        return { ...prev, [name]: value };
-    })
-    console.log(name, value)
-};
+    setUserDetails((prev) => ({ ...prev, [name]: value }));
+    console.log(name, value);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateUser(user_details).then((console.log(user_details)));
+    updateUser(userDetails);
   };
 
   const [showModal, setShowModal] = useState(false);
@@ -30,7 +27,6 @@ const handleChange = (e) => {
   const toggleModal = (e) => {
     setShowModal(!showModal);
   };
-
   return (
     <Fragment>
       {/* Button to open the modal */}
@@ -55,25 +51,7 @@ const handleChange = (e) => {
                     type="text"
                     placeholder="Username"
                     name="name"
-                    defaultValue={user.name}
-                    onChange={handleChange} 
-                  />
-                </div>
-                <div className="mb-4">
-                  <input
-                    type="text"
-                    name="email"
-                    placeholder="Password"
-                    defaultValue={user.email}
-                    onChange={handleChange} 
-                  />
-                </div>
-                <div className="mb-4">
-                  <input
-                    type="text"
-                    name="PhoneNumber"
-                    placeholder="Phone Number"
-                    defaultValue={user.PhoneNumber}
+                    defaultValue={name}
                     onChange={handleChange} 
                   />
                 </div>
@@ -82,7 +60,16 @@ const handleChange = (e) => {
                     type="text"
                     name="email"
                     placeholder="Email"
-                    defaultValue={user.email}
+                    defaultValue={email}
+                    onChange={handleChange} 
+                  />
+                </div>
+                <div className="mb-4">
+                  <input
+                    type="text"
+                    name="PhoneNumber"
+                    placeholder="Phone Number"
+                    defaultValue={phoneNumber}
                     onChange={handleChange} 
                   />
                 </div>

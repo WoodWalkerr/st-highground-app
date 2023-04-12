@@ -1,34 +1,35 @@
-
-import React, { Fragment, useState } from 'react';
-import { createUser } from '../services/UserServices';
+import React, { Fragment, useState } from 'react'
+import { createUser } from '../services/UserServices'
 
 const InputDashboard = () => {
-  const [user, setUser] = useState({
-    name: '',
-    email: '',
-    password: '',
-    phone_number: '',
-    type: '',
-  });
+    const [user, setUser] = useState({
+        name: '',
+        email: '',
+        password: '',
+        phone_number: '',
+        type: '',
+    })
 
-  const { name, email, password, phone_number, type } = user;
+    const { name, email, password, phone_number, type } = user
 
-  const onSubmitForm = async (e) => {
-    e.preventDefault();
-    if (!name || !email || !password || !phone_number || !type) {
-      alert('Please fill in all fields');
-      return;
+    const onSubmitForm = async (e) => {
+        e.preventDefault()
+        if (!name || !email || !password || !phone_number || !type) {
+            alert('Please fill in all fields')
+            return
+        }
+        try {
+            await createUser(user)
+            window.location = '/'
+        } catch (error) {
+            console.error(error.message)
+        }
     }
-    try {
-      await createUser(user);
-      window.location = '/';
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
     return (
         <Fragment>
-            <h1 className="text-center font-bold text-4xl bg-blue-300">Sign-Up</h1>
+            <h1 className="text-center font-bold text-4xl bg-blue-300">
+                Sign-Up
+            </h1>
             <div className="flex justify-center items-center bg-blue-300">
                 <form
                     className="flex flex-col w-[40%] justify-center my-5 bg-blue-300"
@@ -57,6 +58,8 @@ const InputDashboard = () => {
                         className="py-2 px-3 my-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Password"
                         value={password}
+                        // {showPassword ? 'Hide' : 'Show'}
+
                         onChange={(e) =>
                             setUser({ ...user, password: e.target.value })
                         }
@@ -70,7 +73,7 @@ const InputDashboard = () => {
                             setUser({ ...user, phone_number: e.target.value })
                         }
                     />
-                   <input
+                    <input
                         type="text"
                         className="py-2 px-3  my-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Type"
@@ -83,7 +86,7 @@ const InputDashboard = () => {
                         Submit
                     </button>
                 </form>
-                </div>
+            </div>
         </Fragment>
     )
 }
