@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import EditDasboard from './EditDashboard'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash, faUser } from '@fortawesome/free-solid-svg-icons'
+import EditDashboard from './EditDashboard'
 import { getUsers, deleteUser } from '../services/UserServices'
 
 const ListDasboard = () => {
@@ -30,60 +32,74 @@ const ListDasboard = () => {
     }, [])
 
     return (
-        <div>
-            <div className="flex justify-center items-center uppercase my-5 text-4xl">
-                <h1 className="font-bold">List Dashboard</h1>
+        <div className="h-screen max-w-6xl mx-auto bg-white px-4 py-20">
+            <div className="flex justify-center items-center uppercase my-5 text-4xl text-gray-700">
+                <h1 className="font-bold tracking-wider">List Dashboard</h1>
             </div>
-            <table className="max-w-6xl mx-auto border-collapse border border-slate-400 ...">
+            <table className="max-w-6xl mx-auto border-collapse border border-gray-200 shadow-md rounded-md">
                 <thead>
-                    <tr>
-                        <th className="border border-slate-300 px-10 py-5">
+                    <tr className="bg-[#eaf0f7]">
+                        <th className="border border-gray-300 px-6 py-4 text-sm font-semibold text-gray-700">
+                        <FontAwesomeIcon icon={faUser} className="mr-2" />
                             ID
                         </th>
-                        <th className="border border-slate-300 px-10 py-5">
+                        <th className="border border-gray-300 px-6 py-4 text-md font-semibold text-gray-700">
                             Name
                         </th>
-                        <th className="border border-slate-300 px-10 py-5">
+                        <th className="border border-gray-300 px-6 py-4 text-md font-semibold text-gray-700">
                             Email
                         </th>
-                        <th className="border border-slate-300 px-10 py-5">
+                        <th className="border border-gray-300 px-6 py-4 text-md font-semibold text-gray-700">
                             Phone Number
                         </th>
-                        <th className="border border-slate-300 px-10 py-5">
+                        <th className="border border-gray-300 px-6 py-4 text-md font-semibold text-gray-700">
                             Type
                         </th>
-                        <th className="border border-slate-300 px-10 py-5">
+                        <th className="border border-gray-300 px-6 py-4 text-md font-semibold text-gray-700">
                             Edit
                         </th>
-                        <th className="border border-slate-300 px-10 py-5">
+                        <th className="border border-gray-300 px-6 py-4 text-md font-semibold text-gray-700">
                             Delete
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     {user.map((user) => (
-                        <tr key={user.id}>
-                            <td className="text-center">{user.id}</td>
-                            <td className="text-center">{user.name}</td>
-                            <td className="text-center">{user.email}</td>
-                            <td className="text-center">{user.phone_number}</td>
-                            <td className="text-center">{user.type}</td>
-                            <td>
-                                <EditDasboard user={user} />
+                        <tr
+                            key={user.id}
+                            className="hover:bg-gray-100 transition-colors text-sm"
+                        >
+                            <td className="border border-gray-500 px-6 bg-[#0a173b] text-center text-white font-light">
+                                {user.id}
                             </td>
-                            <td className="flex justify-center items-center py-4 mx-10">
+                            <td className="border border-gray-500 px-6 bg-[#0a173b] text-center text-white font-light">
+                                {user.name}
+                            </td>
+                            <td className="border border-gray-500 px-6 bg-[#0a173b] text-center text-white font-light">
+                                {user.email}
+                            </td>
+                            <td className="border border-gray-500 px-6 bg-[#0a173b] text-center text-white font-light">
+                                {user.phone_number}
+                            </td>
+                            <td className="border border-gray-500 px-6 bg-[#0a173b] text-center text-white font-light">
+                                {user.type}
+                            </td>
+                            <td className="border border-gray-500 bg-[#0a173b] text-center">
+                                <EditDashboard user={user} />
+                            </td>
+                            <td className="border border-gray-500 bg-[#0a173b] px-6 py-4 text-center">
                                 <button
-                                    className="bg-red-500 rounded-md text-white w-20 h-10 from-red-500 to-red-800 font-normal"
+                                    className="text-white w-10 h-10"
                                     onClick={() => handleDeleteUser(user.id)}
                                 >
-                                    Delete
+                                    <FontAwesomeIcon icon={faTrash} />
                                 </button>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
-            </div>
+        </div>
     )
 }
 

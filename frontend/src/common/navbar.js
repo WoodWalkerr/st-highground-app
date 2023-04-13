@@ -2,16 +2,11 @@ import React, { useState } from 'react'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import { BellIcon } from '@heroicons/react/24/outline'
 import { navigation } from '../data/navbarLinks'
+import { useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
     const [nav, setNav] = useState(false)
-
-    //   const handleCloseNav = () => {
-    //     if (nav) {
-    //       setNav(false);
-    //     }
-    //   };
-
+    const navigate = useNavigate()
     return (
         <div className="fixed flex items-center w-full h-20 px-4 md:px-12 bg-white text-black z-50">
             <div className="text-start mr-auto">
@@ -20,16 +15,17 @@ const Navbar = () => {
                 </p>
             </div>
 
-            {navigation.map(({ id, link }) => (
-                <ul className='list-none'>
-                <li
-                    key={id}
-                    className="px-3 cursor-pointer font-medium tracking-wider hover:scale-100 hover:text-gray-700"
-                >
-                    {link}
-                </li>
+            {navigation.map(({ id, link, path }) => (
+                <ul className="list-none">
+                    <li
+                        key={id}
+                        className="px-3 cursor-pointer font-medium tracking-wider hover:scale-100 hover:text-gray-700"
+                    >
+                        <button onClick={() => navigate(path)}> {link}</button>
+                    </li>
                 </ul>
             ))}
+
             <button
                 type="button"
                 className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"

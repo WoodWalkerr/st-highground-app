@@ -1,5 +1,7 @@
 require('dotenv').config()
 
+const verifyToken = require('./utils/jwtGenerator');
+
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const express = require('express')
@@ -35,6 +37,18 @@ app.put("/api/v1/users", (req, res) => {
 app.delete('/api/v1/users/:id', (req, res) => {
     usersController.deleteUser(req.params.id).then((data) => res.json(data))
 })
+
+app.get('/me', verifyToken, function(req, res) {
+    usersController.getUserById(req.userId, { password: 0 }, function (err, user) {
+      if (err) {
+        return res.status(500).send('There was a problem finding the user.');
+      }
+      if (!user) {
+        return res.status(404).send('No user found.');
+      }
+      res.status(200).send(user);
+    });
+  });
 
 app.listen(port, () => {
     console.log(`Server listening on the port: ${port}`)
