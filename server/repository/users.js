@@ -35,24 +35,6 @@ class UserRepository {
         }
     }
 
-    // async authenticateUser(email, password) {
-    //     try {
-    //       const user = await this.db.users.findOne({ where: { email } })
-    //       if (!user) {
-    //         return null
-    //       }
-    //       const passwordMatch = bcrypt.compareSync(password, user.password)
-    //       if (!passwordMatch) {
-    //         return null
-    //       }
-    //       return user
-    //     } catch (error) {
-    //       console.log('Error: ', error)
-    //       throw new Error('Failed to authenticate user')
-    //     }
-    //   }
-
-
     async createUser(user) {
         let userData = {}
 
@@ -70,7 +52,7 @@ class UserRepository {
     }
 
     async updateUser(user) {
-        let data = {};
+        let data = {}
 
         try {
             data = await this.db.users.update(
@@ -80,11 +62,11 @@ class UserRepository {
                         id: user.id,
                     },
                 }
-            );
+            )
         } catch (error) {
             console.log('Error: ', error)
         }
-        return data;
+        return data
     }
 
     async deleteUser(id) {

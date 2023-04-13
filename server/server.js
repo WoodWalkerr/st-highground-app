@@ -38,7 +38,7 @@ app.delete('/api/v1/users/:id', (req, res) => {
     usersController.deleteUser(req.params.id).then((data) => res.json(data))
 })
 
-app.get('/me', verifyToken, function(req, res) {
+app.get('/api/v1/login', verifyToken, function(req, res) {
     usersController.getUserById(req.userId, { password: 0 }, function (err, user) {
       if (err) {
         return res.status(500).send('There was a problem finding the user.');

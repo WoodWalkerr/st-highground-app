@@ -34,17 +34,18 @@ const EditDashboard = ({ user }) => {
 
     return (
         <div>
-            {/* Button to open the modal */}
-            <div className="flex justify-center items-center py-4 px-6">
+            <div className="flex justify-center group relative py-4 px-6">
                 <button
-                    className="rounded-md text-blue-800 w-10 h-10 hover:text-blue-300"
+                    className="rounded-md text-white w-10 h-10 hover:text-blue-300"
                     onClick={toggleModal}
                 >
                     <FontAwesomeIcon icon={faEdit} />
+                    <span className="absolute -top-10 left-1/2 transform -translate-x-1/2 scale-0 rounded bg-gray-300 p-2 text-xs text-black group-hover:scale-100">
+                        Edit
+                    </span>
                 </button>
             </div>
 
-            {/* Modal code */}
             {showModal && (
                 <div className="fixed z-10 inset-0 overflow-y-auto">
                     <div className="flex items-center justify-center min-h-screen">

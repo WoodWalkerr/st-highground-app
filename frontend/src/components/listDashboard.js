@@ -40,7 +40,7 @@ const ListDasboard = () => {
                 <thead>
                     <tr className="bg-[#eaf0f7]">
                         <th className="border border-gray-300 px-6 py-4 text-sm font-semibold text-gray-700">
-                        <FontAwesomeIcon icon={faUser} className="mr-2" />
+                            <FontAwesomeIcon icon={faUser} className="mr-2" />
                             ID
                         </th>
                         <th className="border border-gray-300 px-6 py-4 text-md font-semibold text-gray-700">
@@ -55,11 +55,11 @@ const ListDasboard = () => {
                         <th className="border border-gray-300 px-6 py-4 text-md font-semibold text-gray-700">
                             Type
                         </th>
-                        <th className="border border-gray-300 px-6 py-4 text-md font-semibold text-gray-700">
-                            Edit
-                        </th>
-                        <th className="border border-gray-300 px-6 py-4 text-md font-semibold text-gray-700">
-                            Delete
+                        <th
+                            colSpan={2}
+                            className="border border-gray-300 px-6 py-4 text-md font-semibold text-gray-700"
+                        >
+                            Actions
                         </th>
                     </tr>
                 </thead>
@@ -87,13 +87,20 @@ const ListDasboard = () => {
                             <td className="border border-gray-500 bg-[#0a173b] text-center">
                                 <EditDashboard user={user} />
                             </td>
-                            <td className="border border-gray-500 bg-[#0a173b] px-6 py-4 text-center">
-                                <button
-                                    className="text-white w-10 h-10"
-                                    onClick={() => handleDeleteUser(user.id)}
-                                >
-                                    <FontAwesomeIcon icon={faTrash} />
-                                </button>
+                            <td className="border border-gray-500 bg-[#0a173b] text-center relative">
+                                <td className="flex justify-center group relative py-4 px-6">
+                                    <button
+                                        className="rounded-md text-white w-10 h-10 hover:text-red-500"
+                                        onClick={() =>
+                                            handleDeleteUser(user.id)
+                                        }
+                                    >
+                                        <FontAwesomeIcon icon={faTrash} />
+                                        <span className="absolute -top-10 left-1/2 transform -translate-x-1/2 scale-0 rounded bg-gray-300 p-2 text-xs text-black group-hover:scale-100">
+                                            Delete
+                                        </span>
+                                    </button>
+                                </td>
                             </td>
                         </tr>
                     ))}

@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { FaBars, FaTimes } from 'react-icons/fa'
-import { BellIcon } from '@heroicons/react/24/outline'
 import { navigation } from '../data/navbarLinks'
 import { useNavigate } from 'react-router-dom'
 
@@ -10,9 +9,12 @@ const Navbar = () => {
     return (
         <div className="fixed flex items-center w-full h-20 px-4 md:px-12 bg-white text-black z-50">
             <div className="text-start mr-auto">
-                <p class="text-2xl ml-3 font-extrabold py-6 text-black dark:text-white bg-clip-text">
+                <button
+                    className="text-2xl ml-3 font-extrabold py-6 text-black dark:text-white bg-clip-text"
+                    onClick={() => navigate('/')}
+                >
                     HIGHGROUND.
-                </p>
+                </button>
             </div>
 
             {navigation.map(({ id, link, path }) => (
@@ -25,14 +27,6 @@ const Navbar = () => {
                     </li>
                 </ul>
             ))}
-
-            <button
-                type="button"
-                className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-            >
-                <span className="sr-only">View notifications</span>
-                <BellIcon className="h-6 w-6" aria-hidden="true" />
-            </button>
 
             <div className="cursor-pointer pr-4 z-10 text-gray-500 md:hidden">
                 {nav ? (

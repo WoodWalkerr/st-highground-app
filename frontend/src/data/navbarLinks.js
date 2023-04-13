@@ -3,7 +3,7 @@ export const navigation = [
     {
         id: 1,
         link: 'Log in',
-        path: "/"
+        path: "/login"
     },
     {
         id: 2,
