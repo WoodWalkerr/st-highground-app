@@ -150,7 +150,7 @@ function ScheduleBookForm() {
                         </button>
                         <button
                             type="submit"
-                            className="bg-green-500 text-white font-bold py-2 px-4 rounded-md hover:bg-green-700 mt-4"
+                            className="bg-gray-900 text-white font-bold py-2 px-4 rounded-md hover:bg-gray-700 mt-4"
                         >
                             Submit
                         </button>
