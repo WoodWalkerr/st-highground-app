@@ -7,12 +7,14 @@ class UserService {
     async getUserById(id) {
         return await userRepository.getUserById(id)
     }
+
+    async getUserByEmail(user) {
+        return await userRepository.authenticateUser(user);
+    }
     async createUser(user) {
         return await userRepository.createUser(user)
     }
-    // async authenticateUser(email, password) {
-    //     return await userRepository.authenticateUser(email, password);
-    // }
+
     async deleteUser(user) {
         return await userRepository.deleteUser(user)
     }

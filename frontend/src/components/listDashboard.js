@@ -67,7 +67,7 @@ const ListDasboard = () => {
                     {user.map((user) => (
                         <tr
                             key={user.id}
-                            className="hover:bg-gray-100 transition-colors text-sm"
+                            className="hover:bg-gray-100 transition-colors text-xs"
                         >
                             <td className="border border-gray-500 px-6 bg-[#0a173b] text-center text-white font-light">
                                 {user.id}
@@ -88,9 +88,9 @@ const ListDasboard = () => {
                                 <EditDashboard user={user} />
                             </td>
                             <td className="border border-gray-500 bg-[#0a173b] text-center relative">
-                                <td className="flex justify-center group relative py-4 px-6">
+                                <td className="flex justify-center group relative py-2 px-6">
                                     <button
-                                        className="rounded-md text-white w-10 h-10 hover:text-red-500"
+                                        className="rounded-md text-white hover:text-red-500"
                                         onClick={() =>
                                             handleDeleteUser(user.id)
                                         }

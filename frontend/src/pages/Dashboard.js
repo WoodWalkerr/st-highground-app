@@ -1,14 +1,14 @@
 import React from "react"
 import ListDashboard from "../components/ListDashboard"
 import Splash from "../components/Splash"
-// import Splash from "./components/Splash"
-// import Footer from "./components/Footer";
+import ScheduleBookForm from "../components/ScheduleBookForm";
 
 function Dashboard() {
   return (
     <div>
       <Splash />
       <ListDashboard />
+      <ScheduleBookForm />
     </div>
   );
 }

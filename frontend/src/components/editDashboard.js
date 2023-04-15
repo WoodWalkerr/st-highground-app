@@ -34,9 +34,9 @@ const EditDashboard = ({ user }) => {
 
     return (
         <div>
-            <div className="flex justify-center group relative py-4 px-6">
+            <div className="flex justify-center group relative py-1 px-6">
                 <button
-                    className="rounded-md text-white w-10 h-10 hover:text-blue-300"
+                    className="rounded-md text-white hover:text-blue-300"
                     onClick={toggleModal}
                 >
                     <FontAwesomeIcon icon={faEdit} />

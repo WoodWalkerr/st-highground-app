@@ -5,9 +5,10 @@ class UserController {
     async getAllUsers(user) {
         return await userService.getAllUsers(user)
     }
-    // async authenticateUser(email, password) {
-    //     return await userService.authenticateUser(email, password);
-    // }
+
+    async getUserByEmail(user) {
+        return await userService.authenticateUser(user);
+    }
 
     async getUserById(user) {
         return await userService.getUserById(user)

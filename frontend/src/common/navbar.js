@@ -40,7 +40,7 @@ const Navbar = () => {
                 <ul className="flex flex-col absolute top-0 left-0 w-full h-screen bg-white dark:bg-black text-black dark:text-white ">
                     <div className="text-start mr-auto">
                         <p class="text-2xl ml-3 font-extrabold px-4 md:px-12 py-6 text-white dark:text-black bg-clip-text">
-                            MELVEN.
+                            HIGHGROUND.
                         </p>
                     </div>
                     <li className="py-4 text-2xl flex justify-center pt-6 font-medium uppercase tracking-wider hover:text-gray-300">
@@ -66,3 +66,5 @@ const Navbar = () => {
 }
 
 export default Navbar
+
+

@@ -1,8 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Dashboard from './pages/Dashboard'
-import Signup from './components/Signup'
-import Login from './components/Login'
+import Signup from './authentication/Signup'
+import Login from './authentication/Login'
 import Navbar from './common/Navbar'
+import ScheduleBookForm from './components/ScheduleBookForm'
 
 function App() {
     return (
@@ -12,6 +13,7 @@ function App() {
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/sign-up" element={<Signup /> } />
                 <Route path="/login" element={<Login /> } />
+                <Route path="/schedule-a-visit" element={<ScheduleBookForm /> } />
             </Routes>
         </BrowserRouter>
     )
