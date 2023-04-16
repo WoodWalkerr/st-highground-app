@@ -25,20 +25,17 @@ function ScheduleBookForm() {
 
     const handleFormSubmit = (e) => {
         e.preventDefault()
-        // Use the formData object for form validation and submission
     }
 
+    const handlePrevious = () => {
+        setFormStep(formStep - 1)
+      }
+
     return (
-        <div className="bg-gray-100 h-screen flex flex-col justify-center items-center">
+        <div className="bg-gray-100 text-black h-screen flex flex-col justify-center items-center">
             <h1 className="text-2xl font-bold mb-8">Schedule a Visit</h1>
             {formStep === 1 && (
-                <form
-                    className="w-[20%]"
-                    onSubmit={(e) => {
-                        setFormStep(2)
-                        e.preventDefault()
-                    }}
-                >
+                <form className="w-[20%]" onSubmit={() => setFormStep(2)}>
                     <div className="relative flex flex-col mb-4">
                         <div className="flex items-center border border-gray-400 p-2 rounded-md">
                             <FontAwesomeIcon
@@ -48,6 +45,7 @@ function ScheduleBookForm() {
                             <input
                                 type="text"
                                 id="full-name"
+                                name="fullName"
                                 placeholder="Full Name"
                                 value={fullName}
                                 onChange={handleInputChange}
@@ -65,6 +63,7 @@ function ScheduleBookForm() {
                             <input
                                 type="email"
                                 id="email"
+                                name="email"
                                 placeholder="Email Address"
                                 value={email}
                                 onChange={handleInputChange}
@@ -72,7 +71,8 @@ function ScheduleBookForm() {
                             />
                         </div>
                     </div>
-                    <div className="flex flex-col mb-4">
+
+                    <div className="relative flex flex-col mb-4">
                         <div className="flex items-center border border-gray-400 p-2 rounded-md flex-1">
                             <FontAwesomeIcon
                                 icon={faPhone}
@@ -81,6 +81,7 @@ function ScheduleBookForm() {
                             <input
                                 type="text"
                                 id="phone"
+                                name="phoneNumber"
                                 placeholder="Phone Number"
                                 value={phoneNumber}
                                 onChange={handleInputChange}
@@ -96,64 +97,67 @@ function ScheduleBookForm() {
                     </div>
                 </form>
             )}
+
             {formStep === 2 && (
                 <form className="w-[20%]" onSubmit={handleFormSubmit}>
                     <div className="flex flex-col mb-4">
                         <input
                             type="date"
                             id="date"
+                            name="date"
                             placeholder="Date"
                             value={date}
                             onChange={handleInputChange}
-                            className="border border-gray-400 p-2 rounded-md"
+                            className="border border-gray-400 p-2 rounded
+              -md outline-none bg-gray-100 text-gray-700 mb-2"
                         />
-                    </div>
-                    <div
-                        className="flex flex-col mb-4
-"
-                    >
+                    </div>{' '}
+                    <div className="flex flex-col mb-4">
                         <input
                             type="time"
                             id="time"
+                            name="time"
                             placeholder="Time"
                             value={time}
                             onChange={handleInputChange}
-                            className="border border-gray-400 p-2 rounded-md"
+                            className="border border-gray-400 p-2 rounded-md outline-none bg-gray-100 text-gray-700 mb-2"
                         />
                     </div>
                     <div className="flex flex-col mb-4">
                         <input
                             type="number"
                             id="group-length"
-                            placeholder="Group Length"
+                            name="groupLength"
+                            placeholder="Number of visitor"
                             value={groupLength}
                             onChange={handleInputChange}
-                            className="border border-gray-400 p-2 rounded-md"
+                            className="border border-gray-400 p-2 rounded-md outline-none bg-gray-100 text-gray-700 mb-2"
                         />
                     </div>
                     <div className="flex flex-col mb-4">
                         <textarea
                             id="purpose"
-                            placeholder="Purpose of Visit"
+                            name="purpose"
+                            placeholder="Purpose"
                             value={purpose}
                             onChange={handleInputChange}
-                            className="border border-gray-400 p-2 rounded-md"
-                        ></textarea>
+                            className="border border-gray-400 p-2 rounded-md outline-none bg-gray-100 text-gray-700 mb-2"
+                        />
                     </div>
-                    <div className="flex justify-between">
-                        <button
-                            type="button"
-                            className="bg-gray-900 text-white font-bold py-2 px-4 rounded-md hover:bg-gray-700 mt-4"
-                            onClick={() => setFormStep(1)}
-                        >
-                            Previous
-                        </button>
-                        <button
-                            type="submit"
-                            className="bg-gray-900 text-white font-bold py-2 px-4 rounded-md hover:bg-gray-700 mt-4"
-                        >
-                            Submit
-                        </button>
+                    <div className='flex justify-between'>
+                    <button
+                        type="submit"
+                        className="bg-gray-900 text-white font-bold py-2 px-4 rounded-md hover:bg-gray-700 mt-4"
+                        onClick={handlePrevious}
+                    >
+                        Back
+                    </button>
+                    <button
+                        type="submit"
+                        className="bg-gray-900 text-white font-bold py-2 px-4 rounded-md hover:bg-gray-700 mt-4"
+                    >
+                        Submit
+                    </button>
                     </div>
                 </form>
             )}

@@ -40,12 +40,12 @@ const UserLogin = () => {
                             <img
                                 src={img}
                                 alt="Profile"
-                                className=" w-fit h-[100%] rounded-l-lg object-cover object-center mx-auto md:mx-0 shadow-lg hover:shadow-2xl"
+                                className=" w-fit h-[100%] rounded-l-lg object-cover object-center mx-auto"
                             />
                         </div>
                         <div className="p-6 sm:p-10 md:rounded-r-lg">
                             <h2 className="text-2xl text-center font-bold mb-5">
-                                Login
+                                Sign In
                             </h2>
                             <form onClick={onSubmitForm}>
                                 <div className="mb-4 ">
@@ -79,17 +79,6 @@ const UserLogin = () => {
                                     />
                                 </div>
                                 <div className="mb-6">
-                                    <div className="flex items-center">
-                                        <input
-                                            className="mr-2"
-                                            type="checkbox"
-                                        />
-                                        <label>
-                                            I agree to the license terms.
-                                        </label>
-                                    </div>
-                                </div>
-                                <div className="mb-6">
                                     <button
                                         className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                                         type="submit"
@@ -99,7 +88,7 @@ const UserLogin = () => {
                                 </div>
                                 <a
                                     className="block text-center text-gray-500 text-sm font-bold mb-2"
-                                    href="/"
+                                    href="/sign-up"
                                 >
                                     Don't have an account? Sign up.
                                 </a>

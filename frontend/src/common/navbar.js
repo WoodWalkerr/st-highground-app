@@ -10,7 +10,7 @@ const Navbar = () => {
         <div className="fixed flex items-center w-full h-20 px-4 md:px-12 bg-white text-black z-50">
             <div className="text-start mr-auto">
                 <button
-                    className="text-2xl ml-3 font-extrabold py-6 text-black dark:text-white bg-clip-text"
+                    className="text-2xl ml-3 font-extrabold py-6 text-black bg-clip-text"
                     onClick={() => navigate('/')}
                 >
                     HIGHGROUND.
