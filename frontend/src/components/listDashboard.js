@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import EditDashboard from './EditDashboard'
 import { getUsers, deleteUser } from '../services/UserServices'
 
@@ -32,17 +32,17 @@ const ListDasboard = () => {
     }, [])
 
     return (
-        <div className="h-screen max-w-6xl mx-auto bg-white px-4 py-20">
-            <div className="flex justify-center items-center uppercase my-5 text-4xl text-gray-700">
-                <h1 className="font-bold tracking-wider">List Dashboard</h1>
+        <div className="h-screen max-w-6xl md:min-w-min mx-auto bg-white px-4 py-20">
+            <div className="flex justify-center items-center uppercase my-5 text-xl sm:text-2xl text-gray-700">
+                <h1 className="font-bold  tracking-wider">List Dashboard</h1>
             </div>
             <table className="max-w-6xl mx-auto border-collapse border border-gray-200 shadow-md rounded-md">
                 <thead>
                     <tr className="bg-[#eaf0f7]">
-                        <th className="border border-gray-300 px-6 py-4 text-sm font-semibold text-gray-700">
-                            <FontAwesomeIcon icon={faUser} className="mr-2" />
-                            ID
+                    <th className="border border-gray-300 px-6 py-4 text-md font-semibold text-gray-700">
+                            No.
                         </th>
+                 
                         <th className="border border-gray-300 px-6 py-4 text-md font-semibold text-gray-700">
                             Name
                         </th>
@@ -64,13 +64,13 @@ const ListDasboard = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {user.map((user) => (
+                    {user.map((user, index) => (
                         <tr
                             key={user.id}
                             className="hover:bg-gray-100 transition-colors text-xs"
                         >
                             <td className="border border-gray-500 px-6 bg-[#0a173b] text-center text-white font-light">
-                                {user.id}
+                                {index + 1}
                             </td>
                             <td className="border border-gray-500 px-6 bg-[#0a173b] text-center text-white font-light">
                                 {user.name}

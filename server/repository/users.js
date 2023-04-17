@@ -64,15 +64,15 @@ class UserRepository {
 //     console.log('Error:', err)
 //     return res.status(500).send('Error on the server.')
 // })
-    async createUser(user) {
+    async createUser(users) {
         let userData = {}
 
         try {
-            const password = user.password
+            const password = users.password
             const salt = bcrypt.genSaltSync(10)
             const hashedPassword = bcrypt.hashSync(password, salt)
 
-            userData = { ...user, password: hashedPassword }
+            userData = { ...users, password: hashedPassword }
             const createdUser = await this.db.users.create(userData)
             return createdUser
         } catch (error) {
@@ -80,15 +80,15 @@ class UserRepository {
         }
     }
 
-    async updateUser(user) {
+    async updateUser(users) {
         let data = {}
 
         try {
             data = await this.db.users.update(
-                { ...user },
+                { ...users },
                 {
                     where: {
-                        id: user.id,
+                        id: users.id,
                     },
                 }
             )

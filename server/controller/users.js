@@ -10,9 +10,9 @@ class UserController {
         return await userService.authenticateUser(user);
     }
 
-    async getUserById(user) {
-        return await userService.getUserById(user)
-    }
+    // async getUserById(user) {
+    //     return await userService.getUserById(user)
+    // }
 
     async createUser(user) {
         return await userService.createUser(user)

@@ -9,12 +9,12 @@ export async function getUsers() {
     }
 }
 
-export const createUser = async (user) => {
+export const createUser = async (users) => {
     try {
         const response = await fetch('/api/v1/users', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ user }),
+            body: JSON.stringify({ users }),
         })
         return response.json()
     } catch (error) {
