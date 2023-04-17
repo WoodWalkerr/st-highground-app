@@ -1,7 +1,7 @@
 import React from "react"
 import ListDashboard from "../components/ListDashboard"
 import Splash from "../components/Splash"
-// import Sample from '../authentication/sample'
+// import Sample from '../components/sample'
 
 function Dashboard() {
   return (

@@ -12,7 +12,8 @@ function App() {
             <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/sign-up" element={<Signup /> } />
-                <Route path="/login" element={<Login /> } />
+                <Route path="/sign-in" element={<Login /> } />
+                <Route path="/schedule-a-visit" element={<ScheduleBookForm /> } />
                 <Route path="/schedule-a-visit" element={<ScheduleBookForm /> } />
             </Routes>
         </BrowserRouter>

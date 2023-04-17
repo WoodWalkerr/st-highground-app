@@ -2,7 +2,7 @@ export const navigation = [
     {
         id: 1,
         link: 'Sign In',
-        path: "/login"
+        path: "/sign-in"
     },
     {
         id: 2,

@@ -9,13 +9,12 @@ function ScheduleBookForm() {
         phoneNumber: '',
         date: '',
         time: '',
-        groupLength: '',
         purpose: '',
     })
 
     const [formStep, setFormStep] = useState(1)
 
-    const { fullName, email, phoneNumber, date, time, groupLength, purpose } =
+    const { fullName, email, phoneNumber, date, time, purpose } =
         formData
 
     const handleInputChange = (e) => {
@@ -119,17 +118,6 @@ function ScheduleBookForm() {
                             name="time"
                             placeholder="Time"
                             value={time}
-                            onChange={handleInputChange}
-                            className="border border-gray-400 p-2 rounded-md outline-none bg-gray-100 text-gray-700 mb-2"
-                        />
-                    </div>
-                    <div className="flex flex-col mb-4">
-                        <input
-                            type="number"
-                            id="group-length"
-                            name="groupLength"
-                            placeholder="Number of visitor"
-                            value={groupLength}
                             onChange={handleInputChange}
                             className="border border-gray-400 p-2 rounded-md outline-none bg-gray-100 text-gray-700 mb-2"
                         />

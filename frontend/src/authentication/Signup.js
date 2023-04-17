@@ -30,7 +30,7 @@ const InputDashboard = () => {
         <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-5 sm:px-6 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
                 <h2 className="mt-6 text-center text-4xl font-bold text-gray-900">
-                    Create an Account
+                    Sign Up
                 </h2>
             </div>
 
@@ -144,7 +144,7 @@ const InputDashboard = () => {
                                 >
                                     Type
                                 </label>
-                                <input
+                                <select
                                     id="type"
                                     name="type"
                                     autoComplete="type"
@@ -156,17 +156,25 @@ const InputDashboard = () => {
                                             type: e.target.value,
                                         })
                                     }
-                                    className="block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo
-                    -500 sm:text-sm"
-                                />
+                                    className="block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                >
+                                    <option value="user">User</option>
+                                    <option value="admin">Admin</option>
+                                </select>
                             </div>
                             <div>
                                 <button
                                     type="submit"
-                                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                 >
-                                    Create Account
+                                    Sign Up
                                 </button>
+                                <a
+                                    className="block text-center text-gray-500 text-sm font-bold mb-2"
+                                    href="/sign-in"
+                                >
+                                    Already have an account? Sign in.
+                                </a>
                             </div>
                         </form>
                     </div>
