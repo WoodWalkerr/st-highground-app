@@ -25,6 +25,11 @@ class UserController {
     async updateUser(user) {
         return await userService.updateUser(user)
     }
-}
+
+    // visits 
+    async creteVisitByUserId(visit) {
+        return await userService.creteVisitByUserId(visit)
+    }
+} 
 
 module.exports = new UserController()

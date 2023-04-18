@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes, Model) => {
                 primaryKey: true,
                 autoIncrement: true
             },
-            userId: {
+            user_id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 references: {
@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes, Model) => {
         },
         {
             sequelize,
-            modelName: 'visit',
+            modelName: 'visits',
             tableName: 'visits'
         }
     )

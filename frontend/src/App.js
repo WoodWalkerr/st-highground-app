@@ -14,7 +14,6 @@ function App() {
                 <Route path="/sign-up" element={<Signup /> } />
                 <Route path="/sign-in" element={<Login /> } />
                 <Route path="/schedule-a-visit" element={<ScheduleBookForm /> } />
-                <Route path="/schedule-a-visit" element={<ScheduleBookForm /> } />
             </Routes>
         </BrowserRouter>
     )

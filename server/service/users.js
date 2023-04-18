@@ -1,3 +1,4 @@
+const users = require('../model/users');
 const userRepository = require('../repository/users')
 
 class UserService {
@@ -21,6 +22,11 @@ class UserService {
     async updateUser(id) {
         return await userRepository.updateUser(id)
     }
+    // visits 
+    async creteVisitByUserId(visit) {
+        return await userRepository.creteVisitByUserId(visit)
+    }
+      
 }
 
 module.exports = new UserService()

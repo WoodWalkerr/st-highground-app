@@ -4,7 +4,7 @@ const verifyToken = require('./utils/jwtGenerator')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const express = require('express')
-const jwt = require('jsonwebtoken')
+// const jwt = require('jsonwebtoken')
 const path = require('path')
 
 const usersController = require('./controller/users')
@@ -27,7 +27,6 @@ app.get('/api/v1/users', (req, res) => {
 
 app.post('/api/v1/users', (req, res) => {
     usersController.createUser(req.body.users).then((data) => res.json(data))
-
 })
 
 app.put('/api/v1/users', (req, res) => {
@@ -36,6 +35,11 @@ app.put('/api/v1/users', (req, res) => {
 
 app.delete('/api/v1/users/:id', (req, res) => {
     usersController.deleteUser(req.params.id).then((data) => res.json(data))
+})
+
+// visits
+app.post('/api/v1/visits/:id', (req, res) => {
+    usersController.creteVisitByUserId(req.params.user_id, req.body.visits).then((data) => res.json(data))
 })
 
 // POST endpoint with JWT authentication

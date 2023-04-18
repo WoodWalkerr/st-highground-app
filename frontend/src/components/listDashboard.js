@@ -1,35 +1,50 @@
-import React, { useEffect, useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import EditDashboard from './EditDashboard'
-import { getUsers, deleteUser } from '../services/UserServices'
+import React, { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import EditDashboard from './EditDashboard';
+import ReactPaginate from 'react-paginate';
+import { getUsers, deleteUser } from '../services/UserServices';
 
-const ListDasboard = () => {
-    const [user, setUser] = useState([])
+const ListDashboard = () => {
+  const [users, setUsers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 10;
+  const pageCount = Math.ceil(users.length / itemsPerPage);
 
-    const handleDeleteUser = async (id) => {
-        try {
-            const success = await deleteUser(id)
-            if (success) {
-                setUser((prevUsers) => prevUsers.filter((u) => u.id !== id))
-            }
-        } catch (error) {
-            console.error(error.message)
-        }
+  const handlePageClick = ({ selected }) => {
+    setCurrentPage(selected);
+  };
+
+  const startIndex = currentPage * itemsPerPage + 1;
+  const endIndex = startIndex + itemsPerPage ;
+
+  const currentData = (users || []).slice(startIndex, Math.min(endIndex, users.length));
+
+  const handleDeleteUser = async (id) => {
+    try {
+      const success = await deleteUser(id);
+      if (success) {
+        setUsers((prevUsers) => prevUsers.filter((u) => u.id !== id));
+      }
+    } catch (error) {
+      console.error(error.message);
     }
+  };
 
-    useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                const users = await getUsers()
-                setUser(users)
-            } catch (error) {
-                console.error(error.message)
-            }
-        }
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const fetchedUsers = await getUsers();
+        setUsers(fetchedUsers);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
 
-        fetchUsers()
-    }, [])
+    fetchUsers();
+  }, []);
+
+
 
     return (
         <div className="h-screen max-w-6xl md:min-w-min mx-auto bg-white px-4 py-20">
@@ -64,13 +79,13 @@ const ListDasboard = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {user.map((user, index) => (
+                    {currentData.map((user, index) => (
                         <tr
                             key={user.id}
                             className="hover:bg-gray-100 transition-colors text-xs"
                         >
                             <td className="border border-gray-500 px-6 bg-[#0a173b] text-center text-white font-light">
-                                {index + 1}
+                            {startIndex + index}
                             </td>
                             <td className="border border-gray-500 px-6 bg-[#0a173b] text-center text-white font-light">
                                 {user.name}
@@ -106,8 +121,22 @@ const ListDasboard = () => {
                     ))}
                 </tbody>
             </table>
+            <ReactPaginate
+                previousLabel={'Prev'}
+                nextLabel={'Next'}
+                pageCount={pageCount}
+                onPageChange={handlePageClick}
+                containerClassName={'pagination'}
+                pageClassName={'page-item'}
+                pageLinkClassName={'page-link'}
+                activeClassName={'active'}
+                previousClassName={'page-item'}
+                nextClassName={'page-item'}
+                previousLinkClassName={'page-link'}
+                nextLinkClassName={'page-link'}
+            />
         </div>
     )
 }
 
-export default ListDasboard
+export default ListDashboard
