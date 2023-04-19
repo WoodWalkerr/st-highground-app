@@ -14,10 +14,10 @@ class UserRepository {
         try {
             const users = await this.db.users.findAll({
                 order: [['id', 'ASC']],
-                include: {
-                    model: this.db.visits,
-                    attributes: ['id', 'date', 'time', 'purpose'], // specify the columns you want to include
-                },
+                // include: {
+                //     model: this.db.visits,
+                //     attributes: ['id', 'date', 'time', 'purpose'], // specify the columns you want to include
+                // },
             })
             return users
         } catch (error) {

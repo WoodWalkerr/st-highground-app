@@ -1,7 +1,7 @@
 const { connect } = require('../config/db')
 
 
-class UserRepository {
+class VisitRepository {
     db = {}
 
     constructor() {
@@ -11,7 +11,6 @@ class UserRepository {
     async createVisit(visits) {
         try {
           const visit = await this.db.visits.create({
-            id: 4,
             user_id: visits.user_id,
             visit_date: visits.visit_date,
             visit_time: visits.visit_time,
@@ -22,8 +21,6 @@ class UserRepository {
           console.log('Error: ', error);
         }
       }
-
-
 }
 
-module.exports = new UserRepository()
+module.exports = new VisitRepository()

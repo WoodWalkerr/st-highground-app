@@ -1,10 +1,10 @@
 // const { deleteUser } = require('../repository/users')
-const userService = require('../service/users')
+const visitService = require('../service/visits')
 
-class UserController {
-    async createVisit(visit) {
-        return await userService.createVisit(visit)
+class VisitController {
+    async createVisit(visits) {
+        return await visitService.createVisit(visits);
     }
 } 
 
-module.exports = new UserController()
+module.exports = new VisitController()

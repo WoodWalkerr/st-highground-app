@@ -8,6 +8,7 @@ const express = require('express')
 const path = require('path')
 
 const usersController = require('./controller/users')
+const visitController = require('./controller/visits')
 
 const app = express()
 const port = process.env.DB_PORT || 8000
@@ -38,19 +39,19 @@ app.delete('/api/v1/users/:id', (req, res) => {
 })
 // visits
 app.post('/api/v1/visits', (req, res) => {
-    usersController.createVisit(req.body.visits).then((data) => res.json(data))
+    visitController.createVisit(req.body.visits).then((data) => res.json(data))
 })
-app.get('/api/v1/visits', (req, res) => {
-    usersController.getAllUsers().then((data) => res.json(data))
-})
+// app.get('/api/v1/visits', (req, res) => {
+//     visitController.getAllUsers().then((data) => res.json(data))
+// })
 
-app.put('/api/v1/visits', (req, res) => {
-    usersController.updateUser(req.body.user).then((data) => res.json(data))
-})
+// app.put('/api/v1/visits', (req, res) => {
+//     visitController.updateUser(req.body.user).then((data) => res.json(data))
+// })
 
-app.delete('/api/v1/visits/:id', (req, res) => {
-    usersController.deleteUser(req.params.id).then((data) => res.json(data))
-})
+// app.delete('/api/v1/visits/:id', (req, res) => {
+//     visitController.deleteUser(req.params.id).then((data) => res.json(data))
+// })
 // POST endpoint with JWT authentication
 app.post('/api/v1/login', (req, res) => {
     usersController .getUserByEmail(req.body.email).then((data) => res.json(data))

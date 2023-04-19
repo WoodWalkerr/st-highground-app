@@ -1,9 +1,9 @@
-const userRepository = require('../repository/users')
+const visitRepository = require('../repository/visits')
 
-class UserService {
+class VisitService {
     async createVisit(visits) {
-        return await userRepository.createVisit(visits)
+        return await visitRepository.createVisit(visits)
     }
 }
 
-module.exports = new UserService()
+module.exports = new VisitService()
