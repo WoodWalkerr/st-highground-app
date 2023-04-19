@@ -38,8 +38,8 @@ app.delete('/api/v1/users/:id', (req, res) => {
 })
 
 // visits
-app.post('/api/v1/visits/:id', (req, res) => {
-    usersController.creteVisitByUserId(req.params.user_id, req.body.visits).then((data) => res.json(data))
+app.post('/api/v1/visits', (req, res) => {
+    usersController.createVisit(req.body.visits).then((data) => res.json(data))
 })
 
 // POST endpoint with JWT authentication

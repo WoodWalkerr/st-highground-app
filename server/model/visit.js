@@ -16,16 +16,16 @@ module.exports = (sequelize, DataTypes, Model) => {
                     key: 'id'
                 }
             },
-            date: {
+            visit_date: {
                 type: DataTypes.DATE,
                 allowNull: false
             },
-            time: {
-                type: DataTypes.DATE,
+            visit_time: {
+                type: DataTypes.TIME,
                 allowNull: false
             },
             purpose: {
-                type: DataTypes.DATE,
+                type: DataTypes.STRING,
                 allowNull: false
             },
         },

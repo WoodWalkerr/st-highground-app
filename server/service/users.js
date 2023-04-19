@@ -23,8 +23,8 @@ class UserService {
         return await userRepository.updateUser(id)
     }
     // visits 
-    async creteVisitByUserId(visit) {
-        return await userRepository.creteVisitByUserId(visit)
+    async createVisit(visits) {
+        return await userRepository.createVisit(visits)
     }
       
 }

@@ -27,8 +27,8 @@ class UserController {
     }
 
     // visits 
-    async creteVisitByUserId(visit) {
-        return await userService.creteVisitByUserId(visit)
+    async createVisit(visit) {
+        return await userService.createVisit(visit)
     }
 } 
 

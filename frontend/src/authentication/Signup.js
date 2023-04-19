@@ -20,7 +20,7 @@ const InputDashboard = () => {
         }
         try {
             await createUser(user)
-            window.location = '/'
+            window.location = '/list-dashboard'
         } catch (error) {
             console.error(error.message)
         }
@@ -46,13 +46,14 @@ const InputDashboard = () => {
                                     htmlFor="Username"
                                     className="block text-sm font-medium text-gray-700"
                                 >
-                                    UserName
+                                    Username
                                 </label>
                                 <input
                                     id="Username"
                                     name="Username"
                                     type="Username"
                                     autoComplete="Username"
+                                    placeholder='Username'
                                     required
                                     value={name}
                                     onChange={(e) =>
@@ -77,6 +78,7 @@ const InputDashboard = () => {
                                     name="email"
                                     type="email"
                                     autoComplete="email"
+                                    placeholder='John@gmail.com'
                                     required
                                     value={email}
                                     onChange={(e) =>
@@ -102,6 +104,7 @@ const InputDashboard = () => {
                                     type="password"
                                     autoComplete="current-password"
                                     required
+                                    placeholder='Password'
                                     value={password}
                                     onChange={(e) =>
                                         setUser({
@@ -125,6 +128,7 @@ const InputDashboard = () => {
                                     name="phone_number"
                                     type="tel"
                                     autoComplete="tel"
+                                    placeholder='+63'
                                     required
                                     value={phone_number}
                                     onChange={(e) =>

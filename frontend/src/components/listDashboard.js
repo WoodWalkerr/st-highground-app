@@ -1,50 +1,51 @@
-import React, { useEffect, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import EditDashboard from './EditDashboard';
-import ReactPaginate from 'react-paginate';
-import { getUsers, deleteUser } from '../services/UserServices';
+import React, { useEffect, useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import EditDashboard from './EditDashboard'
+import ReactPaginate from 'react-paginate'
+import { getUsers, deleteUser } from '../services/UserServices'
 
 const ListDashboard = () => {
-  const [users, setUsers] = useState([]);
-  const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 10;
-  const pageCount = Math.ceil(users.length / itemsPerPage);
+    const [users, setUsers] = useState([])
+    const [currentPage, setCurrentPage] = useState(0)
+    const itemsPerPage = 10
+    const pageCount = Math.ceil(users.length / itemsPerPage)
 
-  const handlePageClick = ({ selected }) => {
-    setCurrentPage(selected);
-  };
-
-  const startIndex = currentPage * itemsPerPage + 1;
-  const endIndex = startIndex + itemsPerPage ;
-
-  const currentData = (users || []).slice(startIndex, Math.min(endIndex, users.length));
-
-  const handleDeleteUser = async (id) => {
-    try {
-      const success = await deleteUser(id);
-      if (success) {
-        setUsers((prevUsers) => prevUsers.filter((u) => u.id !== id));
-      }
-    } catch (error) {
-      console.error(error.message);
+    const handlePageClick = ({ selected }) => {
+        setCurrentPage(selected)
     }
-  };
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const fetchedUsers = await getUsers();
-        setUsers(fetchedUsers);
-      } catch (error) {
-        console.error(error.message);
-      }
-    };
+    const startIndex = currentPage * itemsPerPage + 1
+    const endIndex = startIndex + itemsPerPage
 
-    fetchUsers();
-  }, []);
+    const currentData = (users || []).slice(
+        startIndex,
+        Math.min(endIndex, users.length)
+    )
 
+    const handleDeleteUser = async (id) => {
+        try {
+            const success = await deleteUser(id)
+            if (success) {
+                setUsers((prevUsers) => prevUsers.filter((u) => u.id !== id))
+            }
+        } catch (error) {
+            console.error(error.message)
+        }
+    }
 
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                const fetchedUsers = await getUsers()
+                setUsers(fetchedUsers)
+            } catch (error) {
+                console.error(error.message)
+            }
+        }
+
+        fetchUsers()
+    }, [])
 
     return (
         <div className="h-screen max-w-6xl md:min-w-min mx-auto bg-white px-4 py-20">
@@ -54,10 +55,10 @@ const ListDashboard = () => {
             <table className="max-w-6xl mx-auto border-collapse border border-gray-200 shadow-md rounded-md">
                 <thead>
                     <tr className="bg-[#eaf0f7]">
-                    <th className="border border-gray-300 px-6 py-4 text-md font-semibold text-gray-700">
+                        <th className="border border-gray-300 px-6 py-4 text-md font-semibold text-gray-700">
                             No.
                         </th>
-                 
+
                         <th className="border border-gray-300 px-6 py-4 text-md font-semibold text-gray-700">
                             Name
                         </th>
@@ -85,7 +86,7 @@ const ListDashboard = () => {
                             className="hover:bg-gray-100 transition-colors text-xs"
                         >
                             <td className="border border-gray-500 px-6 bg-[#0a173b] text-center text-white font-light">
-                            {startIndex + index}
+                                {startIndex + index}
                             </td>
                             <td className="border border-gray-500 px-6 bg-[#0a173b] text-center text-white font-light">
                                 {user.name}
@@ -121,20 +122,31 @@ const ListDashboard = () => {
                     ))}
                 </tbody>
             </table>
-            <ReactPaginate
-                previousLabel={'Prev'}
-                nextLabel={'Next'}
-                pageCount={pageCount}
-                onPageChange={handlePageClick}
-                containerClassName={'pagination'}
-                pageClassName={'page-item'}
-                pageLinkClassName={'page-link'}
-                activeClassName={'active'}
-                previousClassName={'page-item'}
-                nextClassName={'page-item'}
-                previousLinkClassName={'page-link'}
-                nextLinkClassName={'page-link'}
-            />
+            <div class="flex justify-center mt-4">
+                <nav class="bg-[#eaf0f7] rounded-lg shadow-md p-3">
+                    <ReactPaginate
+                        previousLabel={'Prev'}
+                        nextLabel={'Next'}
+                        pageCount={10}
+                        containerClassName={
+                            'flex flex-wrap items-center justify-center overflow-hidden'
+                        }
+                        pageClassName={
+                            'flex items-center justify-center w-8 h-8 mx-1 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transform transition duration-200 ease-in-out'
+                        }
+                        activeClassName={'text-blue-700 bg-blue-500 rounded-md'}
+                        previousClassName={
+                            'px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-l-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transform transition duration-200 ease-in-out'
+                        }
+                        nextClassName={
+                            'px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-r-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transform transition duration-200 ease-in-out'
+                        }
+                        previousLinkClassName={'page-link'}
+                        nextLinkClassName={'page-link'}
+                        onPageChange={handlePageClick}
+                    />
+                </nav>
+            </div>
         </div>
     )
 }

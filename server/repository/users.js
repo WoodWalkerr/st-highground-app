@@ -89,18 +89,28 @@ class UserRepository {
         }
     }
     
-    async creteVisitByUserId(visits) {
+    async createVisit(visits) {
         try {
-            const visit = await this.db.visits.findAll({
-                where: {
-                    user_id: visits
-                }
-            })
-            return visit
+            // Find the associated user based on the "user_id" value
+            const user = await this.db.users.findOne({
+              where: { id: visits.user_id }
+            });
+          const visit = await this.db.visits.create({
+            id: 1,
+            user_id: visits.user_id,
+            visit_date: visits.visit_date,
+            visit_time: visits.visit_time,
+            purpose: visits.purpose
+          });
+          return visit;
         } catch (error) {
-            console.log('Error: ', error)
+          console.log('Error: ', error);
         }
-    }
+      }
+      
+      
+    
+    
 }
 
 module.exports = new UserRepository()

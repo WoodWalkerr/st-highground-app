@@ -21,7 +21,7 @@ export const createUser = async (users) => {
         console.error(error.message)
     }
 }
-
+  
 export async function updateUser(userDetails) {
     const response = await fetch('/api/v1/users', {
         method: "PUT",
