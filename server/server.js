@@ -36,23 +36,28 @@ app.put('/api/v1/users', (req, res) => {
 app.delete('/api/v1/users/:id', (req, res) => {
     usersController.deleteUser(req.params.id).then((data) => res.json(data))
 })
-
 // visits
 app.post('/api/v1/visits', (req, res) => {
     usersController.createVisit(req.body.visits).then((data) => res.json(data))
 })
-
-// POST endpoint with JWT authentication
-app.post('/api/v1/login', (req, res) => {
-    usersController
-        .getUserByEmail(req.body.email)
-        .then((data) => res.json(data))
+app.get('/api/v1/visits', (req, res) => {
+    usersController.getAllUsers().then((data) => res.json(data))
 })
 
-// Login Auth.
+app.put('/api/v1/visits', (req, res) => {
+    usersController.updateUser(req.body.user).then((data) => res.json(data))
+})
+
+app.delete('/api/v1/visits/:id', (req, res) => {
+    usersController.deleteUser(req.params.id).then((data) => res.json(data))
+})
+// POST endpoint with JWT authentication
+app.post('/api/v1/login', (req, res) => {
+    usersController .getUserByEmail(req.body.email).then((data) => res.json(data))
+})
+
 app.get('/api/v1/login', verifyToken, (req, res) => {
-    usersController.getUserById(req.userId, { password: 0 })
-        .then((data) => res.json(data)) // pass the projection object as second argument
+    usersController.getUserById(req.userId, { password: 0 }).then((data) => res.json(data))
 })
 
 app.listen(port, () => {

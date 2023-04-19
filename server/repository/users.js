@@ -1,8 +1,7 @@
 const bcrypt = require('bcryptjs')
 const { connect } = require('../config/db')
-const users = require('../model/users')
-const visits = require('../model/visit')
-
+// const users = require('../model/users')
+// const visits = require('../model/visits')
 
 class UserRepository {
     db = {}
@@ -14,17 +13,17 @@ class UserRepository {
     async getAllUsers() {
         try {
             const users = await this.db.users.findAll({
-            order: [['id', 'ASC']],
-            // include: {
-            //   model: this.db.visits,
-            //   attributes: ['id', 'date', 'time', 'purpose'] // specify the columns you want to include
-            // }
-          });
-          return users;
+                order: [['id', 'ASC']],
+                include: {
+                    model: this.db.visits,
+                    attributes: ['id', 'date', 'time', 'purpose'], // specify the columns you want to include
+                },
+            })
+            return users
         } catch (error) {
-          console.log('Error: ', error);
+            console.log('Error: ', error)
         }
-      }
+    }
 
     async getUserById(id) {
         try {
@@ -35,14 +34,6 @@ class UserRepository {
             return user
         } catch (error) {
             console.log('Error: ', error)
-        }
-    }
-
-    async getUserByEmail(email, password) {
-        try {
-            
-        } catch (error) {
-            
         }
     }
 
@@ -88,30 +79,6 @@ class UserRepository {
             console.log('Error: ', error)
         }
     }
-    
-    async createVisit(visits) {
-        try {
-            // Find the associated user based on the "user_id" value
-            const user = await this.db.users.findOne({
-              where: { id: visits.user_id }
-            });
-          const visit = await this.db.visits.create({
-            id: 1,
-            user_id: visits.user_id,
-            visit_date: visits.visit_date,
-            visit_time: visits.visit_time,
-            purpose: visits.purpose
-          });
-          return visit;
-        } catch (error) {
-          console.log('Error: ', error);
-        }
-      }
-      
-      
-    
-    
 }
 
 module.exports = new UserRepository()
-

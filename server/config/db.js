@@ -35,7 +35,7 @@ const connect = () => {
         })
 
     db.users = require('../model/users')(sequelize, DataTypes, Model)
-    db.visits = require('../model/visit')(sequelize, DataTypes, Model)
+    db.visits = require('../model/visits')(sequelize, DataTypes, Model)
 
     return db
 }

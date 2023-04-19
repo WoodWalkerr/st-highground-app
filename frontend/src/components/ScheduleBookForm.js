@@ -14,8 +14,7 @@ function ScheduleBookForm() {
 
     const [formStep, setFormStep] = useState(1)
 
-    const { fullName, email, phoneNumber, date, time, purpose } =
-        formData
+    const { fullName, email, phoneNumber, date, time, purpose } = formData
 
     const handleInputChange = (e) => {
         const { name, value } = e.target
@@ -28,7 +27,7 @@ function ScheduleBookForm() {
 
     const handlePrevious = () => {
         setFormStep(formStep - 1)
-      }
+    }
 
     return (
         <div className="bg-gray-100 text-black h-screen flex flex-col justify-center items-center">
@@ -123,29 +122,33 @@ function ScheduleBookForm() {
                         />
                     </div>
                     <div className="flex flex-col mb-4">
-                        <textarea
+                        <select
                             id="purpose"
                             name="purpose"
-                            placeholder="Purpose"
                             value={purpose}
                             onChange={handleInputChange}
                             className="border border-gray-400 p-2 rounded-md outline-none bg-gray-100 text-gray-700 mb-2"
-                        />
+                        >
+                            <option value="">Select purpose</option>
+                            <option value="option1">Option 1</option>
+                            <option value="option2">Option 2</option>
+                            <option value="option3">Option 3</option>
+                        </select>
                     </div>
-                    <div className='flex justify-between'>
-                    <button
-                        type="submit"
-                        className="bg-gray-900 text-white font-bold py-2 px-4 rounded-md hover:bg-gray-700 mt-4"
-                        onClick={handlePrevious}
-                    >
-                        Back
-                    </button>
-                    <button
-                        type="submit"
-                        className="bg-gray-900 text-white font-bold py-2 px-4 rounded-md hover:bg-gray-700 mt-4"
-                    >
-                        Submit
-                    </button>
+                    <div className="flex justify-between">
+                        <button
+                            type="submit"
+                            className="bg-gray-900 text-white font-bold py-2 px-4 rounded-md hover:bg-gray-700 mt-4"
+                            onClick={handlePrevious}
+                        >
+                            Back
+                        </button>
+                        <button
+                            type="submit"
+                            className="bg-gray-900 text-white font-bold py-2 px-4 rounded-md hover:bg-gray-700 mt-4"
+                        >
+                            Submit
+                        </button>
                     </div>
                 </form>
             )}

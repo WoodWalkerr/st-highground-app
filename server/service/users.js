@@ -21,12 +21,7 @@ class UserService {
     }
     async updateUser(id) {
         return await userRepository.updateUser(id)
-    }
-    // visits 
-    async createVisit(visits) {
-        return await userRepository.createVisit(visits)
-    }
-      
+    }    
 }
 
 module.exports = new UserService()
