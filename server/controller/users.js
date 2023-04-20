@@ -25,11 +25,6 @@ class UserController {
     async updateUser(user) {
         return await userService.updateUser(user)
     }
-
-    // visits 
-    async createVisit(visit) {
-        return await userService.createVisit(visit)
-    }
 } 
 
 module.exports = new UserController()

@@ -38,7 +38,7 @@ const EditDashboard = ({ user }) => {
 
     return (
         <div>
-            <div className="flex justify-center group relative py-1 px-6">
+            <div className="flex justify-center group relative py-1 px-10">
                 <button
                     className="rounded-md text-white hover:text-blue-300"
                     onClick={toggleModal}

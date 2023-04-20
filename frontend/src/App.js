@@ -2,23 +2,34 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Dashboard from './pages/Dashboard'
 import Signup from './authentication/Signup'
 import Login from './authentication/Login'
+import ScheduleBookForm from './components/ScheduleBookForm'
 import Navbar from './common/Navbar'
 import ListDashboard from "./components/ListDashboard"
-import ScheduleBookForm from './components/ScheduleBookForm'
 
 function App() {
-    return (
-        <BrowserRouter>
-            <Navbar />
-            <Routes>
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/sign-up" element={<Signup /> } />
-                <Route path="/sign-in" element={<Login /> } />
-                <Route path="/schedule-a-visit" element={<ScheduleBookForm /> } />
-                <Route path="/list-dashboard" element={<ListDashboard /> } />
-            </Routes>
-        </BrowserRouter>
-    )
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout><Dashboard /></Layout>} />
+        <Route path="/sign-up" element={<Layout><Signup /></Layout>} />
+        <Route path="/sign-in" element={<Layout><Login /></Layout>} />
+        <Route path="/schedule-a-visit" element={<Layout><ScheduleBookForm /></Layout>} />
+        <Route path="/list-dashboard" element={<ListDashboard />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+function Layout(props) {
+  const { children } = props;
+  const path = window.location.pathname;
+  const showNavbar = ['/','/sign-up','/sign-in','/schedule-a-visit'].includes(path);
+  return (
+    <>
+      {showNavbar && <Navbar />}
+      {children}
+    </>
+  );
+}
+
+export default App;

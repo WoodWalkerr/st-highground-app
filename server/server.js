@@ -41,10 +41,14 @@ app.delete('/api/v1/users/:id', (req, res) => {
 app.post('/api/v1/visits', (req, res) => {
     visitController.createVisit(req.body.visits).then((data) => res.json(data))
 })
-// app.get('/api/v1/visits', (req, res) => {
-//     visitController.getAllUsers().then((data) => res.json(data))
-// })
 
+app.get('/api/v1/visits', (req, res) => {
+    visitController.getAllVisits().then((data) => res.json(data))
+})
+
+// app.put('/api/v1/visits', (req, res) => {
+//     visitController.updateVisit(req.body.visits).them((data) => res.json(data))
+// })
 // app.put('/api/v1/visits', (req, res) => {
 //     visitController.updateUser(req.body.user).then((data) => res.json(data))
 // })
