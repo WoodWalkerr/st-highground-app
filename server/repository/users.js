@@ -90,7 +90,7 @@ class UserRepository {
                     email: users.email,
                 },
             })
-            const matchPassword = await bcrypt.compare(password, user.password)
+            const matchPassword = bcrypt.compare(password, user.password)
 
             if (matchPassword) {
                 return generateAccessToken({ email: users.email })
