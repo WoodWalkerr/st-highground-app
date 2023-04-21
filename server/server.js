@@ -1,10 +1,9 @@
 require('dotenv').config()
 
-const verifyToken = require('./utils/jwtGenerator')
+// const verifyToken = require('./utils/jwtGenerator')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const express = require('express')
-// const jwt = require('jsonwebtoken')
 const path = require('path')
 
 const usersController = require('./controller/users')
@@ -58,12 +57,12 @@ app.get('/api/v1/visits', (req, res) => {
 // })
 // POST endpoint with JWT authentication
 app.post('/api/v1/login', (req, res) => {
-    usersController .getUserByEmail(req.body.email).then((data) => res.json(data))
+    usersController .userlogin(req.body).then((jwt) => res.json({jwt}))
 })
 
-app.get('/api/v1/login', verifyToken, (req, res) => {
-    usersController.getUserById(req.userId, { password: 0 }).then((data) => res.json(data))
-})
+// app.get('/api/v1/login', verifyToken, (req, res) => {
+//     usersController.getUserById(req.userId, { password: 0 }).then((data) => res.json(data))
+// })
 
 app.listen(port, () => {
     console.log(`Server listening on the port: ${port}`)

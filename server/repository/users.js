@@ -1,7 +1,6 @@
 const bcrypt = require('bcryptjs')
 const { connect } = require('../config/db')
-// const users = require('../model/users')
-// const visits = require('../model/visits')
+const { generateAccessToken } = require('../config/jwt')
 
 class UserRepository {
     db = {}
@@ -75,6 +74,28 @@ class UserRepository {
         try {
             const user = await this.db.users.destroy({ where: { id } })
             return user
+        } catch (error) {
+            console.log('Error: ', error)
+        }
+    }
+
+    //Login
+
+    async userlogin(users) {
+        console.log("eto yung laman", users)
+        try {
+            const password = users.password
+            const user = await this.db.users.findOne({
+                where: {
+                    email: users.email,
+                },
+            })
+            const matchPassword = await bcrypt.compare(password, user.password)
+
+            if (matchPassword) {
+                return generateAccessToken({ email: users.email })
+            }
+            return 'Credentials is invalid'
         } catch (error) {
             console.log('Error: ', error)
         }
