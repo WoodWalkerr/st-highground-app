@@ -21,6 +21,10 @@ app.get('/api/v1/users/:id', (req, res) => {
     usersController.getUserById(req.params.id).then((data) => res.json(data))
 })
 
+app.get('/api/v1/users/:email', (req, res) => {
+    usersController.getUserByEmail(req.params.email).then((data) => res.json(data))
+})
+
 app.get('/api/v1/users', (req, res) => {
     usersController.getAllUsers().then((data) => res.json(data))
 })

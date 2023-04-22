@@ -26,6 +26,7 @@ class VisitRepository {
     }
 
     async createVisit(visits) {
+      console.log("eto yung laman", visits)
         try {
           const visit = await this.db.visits.create({
             user_id: visits.user_id,

@@ -21,15 +21,14 @@ export const createUser = async (users) => {
         console.error(error.message)
     }
 }
-  
+
 export async function updateUser(userDetails) {
     const response = await fetch('/api/v1/users', {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ "user": userDetails }),
-    });
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user: userDetails }),
+    })
     return await response.json()
-    // console.log(JSON.stringify({ "user": userDetails }))
 }
 
 export async function deleteUser(id) {
@@ -38,14 +37,51 @@ export async function deleteUser(id) {
             'Are you sure you want to delete this user?'
         )
         if (confirmed) {
-            const deleteUser = await fetch(
-                `/api/v1/users/${id}`,
-                { method: 'DELETE' }
-            )
+            const deleteUser = await fetch(`/api/v1/users/${id}`, {
+                method: 'DELETE',
+            })
             return true
         }
     } catch (error) {
         console.error(error.message)
         throw error
+    }
+}
+
+export async function userLogin(users) {
+    try {
+        const response = await fetch('/api/v1/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(users),
+        })
+        console.log(response)
+        return await response.json()
+    } catch (error) {
+        console.error(error.message)
+    }
+}
+
+export async function getData(email) {
+    try {
+        const response = await fetch(`/api/v1/users/${email}`)
+        const jsonData = await response.json()
+        return jsonData
+    } catch (error) {
+        console.error(error.message)
+        throw error
+    }
+}
+
+export const createVisit = async (users) => {
+    try {
+        const response = await fetch('/api/v1/visits', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ users }),
+        })
+        return response.json()
+    } catch (error) {
+        console.error(error.message)
     }
 }

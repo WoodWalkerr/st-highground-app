@@ -82,7 +82,6 @@ class UserRepository {
     //Login
 
     async userlogin(users) {
-        console.log("eto yung laman", users)
         try {
             const password = users.password
             const user = await this.db.users.findOne({
@@ -90,12 +89,24 @@ class UserRepository {
                     email: users.email,
                 },
             })
-            const matchPassword = bcrypt.compare(password, user.password)
-
+            const matchPassword = await bcrypt.compare(password, user.password)
             if (matchPassword) {
                 return generateAccessToken({ email: users.email })
             }
-            return 'Credentials is invalid'
+            throw 'The user does not exist'
+        } catch (error) {
+            console.log('Error: ', error)
+        }
+    }
+
+    async getUserByEmail(email) {
+        try {
+            const user = await this.db.users.findOne({
+                where: {
+                    email: email.email,
+                },
+            })
+            return user
         } catch (error) {
             console.log('Error: ', error)
         }

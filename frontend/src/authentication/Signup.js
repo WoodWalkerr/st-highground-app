@@ -20,7 +20,7 @@ const InputDashboard = () => {
         }
         try {
             await createUser(user)
-            window.location = '/list-dashboard'
+            window.location = '/sign-in'
         } catch (error) {
             console.error(error.message)
         }

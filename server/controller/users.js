@@ -8,7 +8,7 @@ class UserController {
     }
 
     async getUserByEmail(user) {
-        return await userService.authenticateUser(user);
+        return await userService.getUserByEmail(user);
     }
 
     async getUserById(user) {
