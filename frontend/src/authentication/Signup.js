@@ -128,7 +128,7 @@ const InputDashboard = () => {
                                     name="phone_number"
                                     type="tel"
                                     autoComplete="tel"
-                                    placeholder='+63'
+                                    placeholder='Phone Number'
                                     required
                                     value={phone_number}
                                     onChange={(e) =>
@@ -169,7 +169,7 @@ const InputDashboard = () => {
                             <div>
                                 <button
                                     type="submit"
-                                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#093545] hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                 >
                                     Sign Up
                                 </button>

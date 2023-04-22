@@ -5,7 +5,9 @@ import { useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
     const [nav, setNav] = useState(false)
+
     const navigate = useNavigate()
+
     return (
         <div className="fixed flex items-center w-full h-20 px-4 md:px-12 bg-white text-black z-50">
             <div className="text-start mr-auto">
@@ -66,5 +68,3 @@ const Navbar = () => {
 }
 
 export default Navbar
-
-

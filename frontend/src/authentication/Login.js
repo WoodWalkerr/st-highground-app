@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { userLogin, getData } from '../services/UserServices'
+import { userLogin } from '../services/UserServices'
 import { useNavigate } from 'react-router-dom'
 // import img from '../assets/Capture.PNG'
 
 function UserLogin() {
-    const [getDataUSer, setDataUSer] = useState({})
+    // const [getDataUSer, setDataUSer] = useState({})
     const navigate = useNavigate()
 
     const INITIAL_USER_DATA = { email: '', password: '' }
@@ -16,10 +16,10 @@ function UserLogin() {
         setUserData((prev) => {
             return { ...prev, [name]: value }
         })
-        console.log(name, value)
-        setDataUSer((prev) => {
-            return { ...prev, email: value }
-        })
+        // console.log(name, value)
+        // setDataUSer((prev) => {
+        //     return { ...prev, email: value }
+        // })
     }
 
     const handleSubmit = (e) => {
@@ -28,7 +28,7 @@ function UserLogin() {
             userLogin(userData).then((res) => {
                 if (JSON.stringify(res) !== '{}') {
                     sessionStorage.setItem('jwt', res.jwt)
-                    getData(getDataUSer.email).then((res) => console.log(res))
+                    // getData(getDataUSer.email).then((res) => console.log(res))
                     navigate('/', { state: res })
                 } else {
                     console.log('User does not exist!')

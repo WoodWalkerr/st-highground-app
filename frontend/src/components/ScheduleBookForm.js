@@ -1,38 +1,39 @@
 import React, { useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser, faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faUser, faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons'
+import { createVisit } from '../services/UserServices'
 
 function ScheduleBookForm() {
     const [formData, setFormData] = useState({
-        fullName: '',
-        email: '',
-        phoneNumber: '',
-        date: '',
-        time: '',
+        // fullName: '',
+        // email: '',
+        // phoneNumber: '',
+        visit_date: '',
+        visit_time: '',
         purpose: '',
     })
 
-    const [formStep, setFormStep] = useState(1)
 
-    const { fullName, email, phoneNumber, date, time, purpose } = formData
+    const { visit_date, visit_time, purpose } = formData
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target
-        setFormData({ ...formData, [name]: value })
-    }
-
-    const handleFormSubmit = (e) => {
+    const onSubmitForm = async (e) => {
         e.preventDefault()
-    }
-
-    const handlePrevious = () => {
-        setFormStep(formStep - 1)
+        if ( !visit_date || !visit_time || !purpose) {
+            alert('Please fill in all fields')
+            return
+        }
+        try {
+            await createVisit(formData)
+            window.location = '/'
+        } catch (error) {
+            console.error(error.message)
+        }
     }
 
     return (
         <div className="bg-gray-100 text-black h-screen flex flex-col justify-center items-center">
             <h1 className="text-2xl font-bold mb-8">Schedule a Visit</h1>
-            {formStep === 1 && (
+            {/* {formStep === 1 && (
                 <form className="w-[20%]" onSubmit={() => setFormStep(2)}>
                     <div className="relative flex flex-col mb-4">
                         <div className="flex items-center border border-gray-400 p-2 rounded-md">
@@ -96,16 +97,21 @@ function ScheduleBookForm() {
                 </form>
             )}
 
-            {formStep === 2 && (
-                <form className="w-[20%]" onSubmit={handleFormSubmit}>
+            {formStep === 2 && ( */}
+                <form className="w-[20%]" onSubmit={onSubmitForm}>
                     <div className="flex flex-col mb-4">
                         <input
                             type="date"
                             id="date"
                             name="date"
                             placeholder="Date"
-                            value={date}
-                            onChange={handleInputChange}
+                            value={visit_date}
+                            onChange={(e) =>
+                                setFormData({
+                                    ...formData,
+                                    visit_date: e.target.value,
+                                })
+                            }
                             className="border border-gray-400 p-2 rounded
               -md outline-none bg-gray-100 text-gray-700 mb-2"
                         />
@@ -116,8 +122,13 @@ function ScheduleBookForm() {
                             id="time"
                             name="time"
                             placeholder="Time"
-                            value={time}
-                            onChange={handleInputChange}
+                            value={visit_time}
+                            onChange={(e) =>
+                                setFormData({
+                                    ...formData,
+                                    visit_time: e.target.value,
+                                })
+                            }
                             className="border border-gray-400 p-2 rounded-md outline-none bg-gray-100 text-gray-700 mb-2"
                         />
                     </div>
@@ -126,7 +137,12 @@ function ScheduleBookForm() {
                             id="purpose"
                             name="purpose"
                             value={purpose}
-                            onChange={handleInputChange}
+                            onChange={(e) =>
+                                setFormData({
+                                    ...formData,
+                                    purpose: e.target.value,
+                                })
+                            }
                             className="border border-gray-400 p-2 rounded-md outline-none bg-gray-100 text-gray-700 mb-2"
                         >
                             <option value="">Select purpose</option>
@@ -139,19 +155,12 @@ function ScheduleBookForm() {
                         <button
                             type="submit"
                             className="bg-gray-900 text-white font-bold py-2 px-4 rounded-md hover:bg-gray-700 mt-4"
-                            onClick={handlePrevious}
-                        >
-                            Back
-                        </button>
-                        <button
-                            type="submit"
-                            className="bg-gray-900 text-white font-bold py-2 px-4 rounded-md hover:bg-gray-700 mt-4"
                         >
                             Submit
                         </button>
                     </div>
                 </form>
-            )}
+   
         </div>
     )
 }

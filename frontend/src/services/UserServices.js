@@ -62,9 +62,9 @@ export async function userLogin(users) {
     }
 }
 
-export async function getData(email) {
+export async function getData() {
     try {
-        const response = await fetch(`/api/v1/users/${email}`)
+        const response = await fetch(`/api/v1/visits`)
         const jsonData = await response.json()
         return jsonData
     } catch (error) {
@@ -73,12 +73,12 @@ export async function getData(email) {
     }
 }
 
-export const createVisit = async (users) => {
+export const createVisit = async (visits) => {
     try {
         const response = await fetch('/api/v1/visits', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ users }),
+            body: JSON.stringify({ visits }),
         })
         return response.json()
     } catch (error) {
