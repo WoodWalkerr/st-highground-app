@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons'
-import { createVisit } from '../services/UserServices'
+import { createVisit } from '../services/VisitServices'
 
 function ScheduleBookForm() {
     const userID = localStorage.getItem('data')

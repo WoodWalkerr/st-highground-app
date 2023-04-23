@@ -1,6 +1,5 @@
 require('dotenv').config()
 
-// const verifyToken = require('./utils/jwtGenerator')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const express = require('express')
@@ -22,7 +21,9 @@ app.get('/api/v1/users/:id', (req, res) => {
 })
 
 app.get('/api/v1/users/:email', (req, res) => {
-    usersController.getUserByEmail(req.params.email).then((data) => res.json(data))
+    usersController
+        .getUserByEmail(req.params.email)
+        .then((data) => res.json(data))
 })
 
 app.get('/api/v1/users', (req, res) => {
@@ -40,7 +41,7 @@ app.put('/api/v1/users', (req, res) => {
 app.delete('/api/v1/users/:id', (req, res) => {
     usersController.deleteUser(req.params.id).then((data) => res.json(data))
 })
-// visits
+
 app.post('/api/v1/visits', (req, res) => {
     visitController.createVisit(req.body.visits).then((data) => res.json(data))
 })
@@ -49,24 +50,17 @@ app.get('/api/v1/visits', (req, res) => {
     visitController.getAllVisits().then((data) => res.json(data))
 })
 
-// app.put('/api/v1/visits', (req, res) => {
-//     visitController.updateVisit(req.body.visits).them((data) => res.json(data))
-// })
-// app.put('/api/v1/visits', (req, res) => {
-//     visitController.updateUser(req.body.user).then((data) => res.json(data))
-// })
-
-// app.delete('/api/v1/visits/:id', (req, res) => {
-//     visitController.deleteUser(req.params.id).then((data) => res.json(data))
-// })
-// POST endpoint with JWT authentication
-app.post('/api/v1/login', (req, res) => {
-    usersController .userlogin(req.body).then((data) => res.json(data))
+app.put('/api/v1/visits', (req, res) => {
+    visitController.updateVisit(req.body.visits).them((data) => res.json(data))
 })
 
-// app.get('/api/v1/login', verifyToken, (req, res) => {
-//     usersController.getUserById(req.userId, { password: 0 }).then((data) => res.json(data))
-// })
+app.delete('/api/v1/visits/:id', (req, res) => {
+    visitController.deleteUser(req.params.id).then((data) => res.json(data))
+})
+
+app.post('/api/v1/login', (req, res) => {
+    usersController.userlogin(req.body).then((data) => res.json(data))
+})
 
 app.listen(port, () => {
     console.log(`Server listening on the port: ${port}`)

@@ -5,6 +5,7 @@ import Login from './authentication/Login'
 import ScheduleBookForm from './components/ScheduleBookForm'
 import Navbar from './common/Navbar'
 import ListDashboard from "./components/ListDashboard"
+import VisitRequest from './components/VisitRequest'
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
         <Route path="/sign-in" element={<Layout><Login /></Layout>} />
         <Route path="/schedule-a-visit" element={<Layout><ScheduleBookForm /></Layout>} />
         <Route path="/list-dashboard" element={<ListDashboard />} />
+        <Route path="/visit-request" element={<VisitRequest />} />
+
       </Routes>
     </BrowserRouter>
   );

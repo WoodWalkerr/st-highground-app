@@ -4,7 +4,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { AiOutlineUser } from '../icons/icons'
 import EditDashboard from './EditDashboard'
 import ReactPaginate from 'react-paginate'
-import { getData, deleteUser } from '../services/UserServices'
+import { getAllVisits, deleteVisit } from '../services/VisitServices'
 
 const VisitRequest = () => {
     const [users, setUsers] = useState([])
@@ -26,7 +26,7 @@ const VisitRequest = () => {
 
     const handleDeclineReq = async (id) => {
         try {
-            const success = await deleteUser(id)
+            const success = await deleteVisit(id)
             if (success) {
                 setUsers((prevUsers) => prevUsers.filter((u) => u.id !== id))
             }
@@ -38,7 +38,7 @@ const VisitRequest = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const fetchedUsers = await getData()
+                const fetchedUsers = await getAllVisits()
                 setUsers(fetchedUsers)
             } catch (error) {
                 console.error(error.message)
