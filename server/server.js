@@ -61,7 +61,7 @@ app.get('/api/v1/visits', (req, res) => {
 // })
 // POST endpoint with JWT authentication
 app.post('/api/v1/login', (req, res) => {
-    usersController .userlogin(req.body).then((jwt) => res.json({jwt}))
+    usersController .userlogin(req.body).then((data) => res.json(data))
 })
 
 // app.get('/api/v1/login', verifyToken, (req, res) => {

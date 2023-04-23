@@ -4,21 +4,23 @@ import React, { useState } from 'react'
 import { createVisit } from '../services/UserServices'
 
 function ScheduleBookForm() {
+    const userID = localStorage.getItem('data')
     const [formData, setFormData] = useState({
+        
         // fullName: '',
         // email: '',
-        // phoneNumber: '',
+        user_id: JSON.parse(userID).id,
         visit_date: '',
         visit_time: '',
         purpose: '',
     })
 
-
-    const { visit_date, visit_time, purpose } = formData
+    const { user_id, visit_date, visit_time, purpose } = formData
 
     const onSubmitForm = async (e) => {
+        console.log("sdasd", formData)
         e.preventDefault()
-        if ( !visit_date || !visit_time || !purpose) {
+        if ( !user_id || !visit_date || !visit_time || !purpose) {
             alert('Please fill in all fields')
             return
         }
@@ -29,6 +31,13 @@ function ScheduleBookForm() {
             console.error(error.message)
         }
     }
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setFormData((prev) => {
+            return { ...prev, [name]: value }
+        })
+    }
+
 
     return (
         <div className="bg-gray-100 text-black h-screen flex flex-col justify-center items-center">
@@ -98,37 +107,37 @@ function ScheduleBookForm() {
             )}
 
             {formStep === 2 && ( */}
-                <form className="w-[20%]" onSubmit={onSubmitForm}>
+                <form className="w-[20%] " onSubmit={onSubmitForm}>
+                <div className="flex flex-col mb-4 ">
+                        <input
+                            type="id"
+                            id="id"
+                            name="user_id"
+                            placeholder="id"
+                            value={JSON.parse(userID).id}
+                            onChange={handleChange}
+                            className="border border-gray-400 p-2 rounded-md outline-none bg-gray-100 text-gray-700 mb-2"
+                        />
+                    </div>
                     <div className="flex flex-col mb-4">
                         <input
                             type="date"
                             id="date"
-                            name="date"
+                            name="visit_date"
                             placeholder="Date"
                             value={visit_date}
-                            onChange={(e) =>
-                                setFormData({
-                                    ...formData,
-                                    visit_date: e.target.value,
-                                })
-                            }
-                            className="border border-gray-400 p-2 rounded
-              -md outline-none bg-gray-100 text-gray-700 mb-2"
+                            onChange={handleChange}
+                            className="border border-gray-400 p-2 rounded-md outline-none bg-gray-100 text-gray-700 mb-2"
                         />
-                    </div>{' '}
+                    </div>
                     <div className="flex flex-col mb-4">
                         <input
                             type="time"
                             id="time"
-                            name="time"
+                            name="visit_time"
                             placeholder="Time"
                             value={visit_time}
-                            onChange={(e) =>
-                                setFormData({
-                                    ...formData,
-                                    visit_time: e.target.value,
-                                })
-                            }
+                            onChange={handleChange}
                             className="border border-gray-400 p-2 rounded-md outline-none bg-gray-100 text-gray-700 mb-2"
                         />
                     </div>
@@ -137,18 +146,12 @@ function ScheduleBookForm() {
                             id="purpose"
                             name="purpose"
                             value={purpose}
-                            onChange={(e) =>
-                                setFormData({
-                                    ...formData,
-                                    purpose: e.target.value,
-                                })
-                            }
+                            onChange={handleChange}
                             className="border border-gray-400 p-2 rounded-md outline-none bg-gray-100 text-gray-700 mb-2"
                         >
                             <option value="">Select purpose</option>
-                            <option value="option1">Option 1</option>
-                            <option value="option2">Option 2</option>
-                            <option value="option3">Option 3</option>
+                            <option value="Trekking">Trekking </option>
+                            <option value="Camping">Camping </option>
                         </select>
                     </div>
                     <div className="flex justify-between">

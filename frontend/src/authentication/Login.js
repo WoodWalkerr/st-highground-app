@@ -27,8 +27,12 @@ function UserLogin() {
         try {
             userLogin(userData).then((res) => {
                 if (JSON.stringify(res) !== '{}') {
-                    sessionStorage.setItem('jwt', res.jwt)
+                    sessionStorage.setItem('jwt', res[1].jwt)
+                    localStorage.setItem('data', JSON.stringify(res[0]))
+
+                   const secret = localStorage.getItem('data')
                     // getData(getDataUSer.email).then((res) => console.log(res))
+                    console.log("secreto para bibo", JSON.parse(secret))
                     navigate('/', { state: res })
                 } else {
                     console.log('User does not exist!')

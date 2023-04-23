@@ -91,7 +91,11 @@ class UserRepository {
             })
             const matchPassword = await bcrypt.compare(password, user.password)
             if (matchPassword) {
-                return generateAccessToken({ email: users.email })
+                const jwt = generateAccessToken({ email: users.email })
+                if (jwt) {
+                    const mix = [user, { jwt: jwt }]
+                    return mix
+                }
             }
             throw 'The user does not exist'
         } catch (error) {
