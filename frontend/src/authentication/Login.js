@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import { userLogin } from '../services/UserLoginServices'
 import { useNavigate } from 'react-router-dom'
-// import img from '../assets/Capture.PNG'
 
 function UserLogin() {
-    // const [getDataUSer, setDataUSer] = useState({})
     const navigate = useNavigate()
 
     const INITIAL_USER_DATA = { email: '', password: '' }
@@ -16,10 +14,7 @@ function UserLogin() {
         setUserData((prev) => {
             return { ...prev, [name]: value }
         })
-        // console.log(name, value)
-        // setDataUSer((prev) => {
-        //     return { ...prev, email: value }
-        // })
+
     }
 
     const handleSubmit = (e) => {

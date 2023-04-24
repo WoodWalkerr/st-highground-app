@@ -93,8 +93,8 @@ class UserRepository {
             if (matchPassword) {
                 const jwt = generateAccessToken({ email: users.email })
                 if (jwt) {
-                    const mix = [user, { jwt: jwt }]
-                    return mix
+                    const getUser = [user, { jwt: jwt }]
+                    return getUser
                 }
             }
             throw 'The user does not exist'

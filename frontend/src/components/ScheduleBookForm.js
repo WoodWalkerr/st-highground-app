@@ -2,9 +2,12 @@ import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons'
 import { createVisit } from '../services/VisitServices'
+import { useNavigate } from 'react-router-dom'
+import Modal from '../modal/UsersModal'
 
 function ScheduleBookForm() {
     const userID = localStorage.getItem('data')
+    const [showModal, setShowModal] = useState(false)
     const [formStep, setFormStep] = useState(1)
     const [formData, setFormData] = useState({
         Fullname: JSON.parse(userID).name,
@@ -26,8 +29,9 @@ function ScheduleBookForm() {
         purpose,
     } = formData
 
+    const navigate = useNavigate()
+
     const onSubmitForm = async (e) => {
-        console.log('sdasd', formData)
         e.preventDefault()
         if (
             !Fullname ||
@@ -43,7 +47,8 @@ function ScheduleBookForm() {
         }
         try {
             await createVisit(formData)
-            window.location = '/'
+            setShowModal(true)
+            setTimeout(() => navigate('/'), 10000)
         } catch (error) {
             console.error(error.message)
         }
@@ -124,7 +129,6 @@ function ScheduleBookForm() {
                     </div>
                 </form>
             )}
-
             {formStep === 2 && (
                 <form className="w-[20%] " onSubmit={onSubmitForm}>
                     <div className="flex flex-col mb-4 hidden">
@@ -173,24 +177,27 @@ function ScheduleBookForm() {
                             <option value="Camping">Camping </option>
                         </select>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex items-center justify-between mb-4">
                         <button
+                            onClick={handlePrevious}
+                            className="bg-gray-900 text-white active:bg-blue-600 font-bold text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        >
+                            Previous
+                        </button>
+                        <button
+                            onClick={onSubmitForm}
+                            className="bg-gray-900 text-white active:bg-blue-600 font-bold text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                             type="submit"
-                            className="bg-gray-900 text-white font-bold py-2 px-4 rounded-md hover:bg-gray-700 mt-4"
                         >
                             Submit
                         </button>
                     </div>
-                    <div className="flex justify-between">
-                        <button
-                            type="submit"
-                            className="bg-gray-900 text-white font-bold py-2 px-4 rounded-md hover:bg-gray-700 mt-4"
-                            onClick={handlePrevious}
-                        >
-                            Back
-                        </button>
-                    </div>
                 </form>
+            )}
+            {showModal && (
+                <div>
+                    <Modal />
+                </div>
             )}
         </div>
     )

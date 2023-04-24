@@ -28,7 +28,7 @@ export async function deleteVisit(id) {
             'Are you sure you want to delete this user?'
         )
         if (confirmed) {
-            const deleteUser = await fetch(`/api/v1/users/${id}`, {
+            const deleteUser = await fetch(`/api/v1/visits/${id}`, {
                 method: 'DELETE',
             })
             return true
@@ -38,3 +38,15 @@ export async function deleteVisit(id) {
         throw error
     }
 }
+
+// requests.js
+export async function updateRequestStatus (requestId, status) {
+    const response = await fetch(`/api/v1/visits/${requestId}`, {
+      method: 'PUT',
+      body: JSON.stringify({ status }),
+      headers: { 'Content-Type': 'application/json' },
+    })
+    return await response.json()
+
+  };
+  

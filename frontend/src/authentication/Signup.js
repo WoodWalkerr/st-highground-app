@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import { createUser } from '../services/UserServices'
+import { useNavigate } from 'react-router-dom'
+
 
 const InputDashboard = () => {
+    const navigate = useNavigate()
     const [user, setUser] = useState({
         name: '',
         email: '',
@@ -173,12 +176,13 @@ const InputDashboard = () => {
                                 >
                                     Sign Up
                                 </button>
-                                <a
-                                    className="block text-center text-gray-500 text-sm font-bold mb-2"
-                                    href="/sign-in"
-                                >
-                                    Already have an account? Sign in.
-                                </a>
+                                <div className="block text-center text-gray-500 text-sm font-bold mb-2">
+                                    Already have an account?
+                                    <button className='text-[#093545]'
+                                        onClick={() => navigate('/sign-in')}
+                                    >Sign in.
+                                    </button>
+                                </div>
                             </div>
                         </form>
                     </div>

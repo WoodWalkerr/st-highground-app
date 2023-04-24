@@ -37,23 +37,21 @@ class VisitRepository {
         }
     }
 
-    //   async updateVisit(visits) {
-    //     let data ={}
-
-    //     try {
-    //         data = await this.db.visits.update(
-    //             { ...visits},
-    //             {
-    //                 where: {
-    //                     id: visits.id,
-    //                 },
-    //             }
-    //         )
-    //     } catch (error) {
-    //         console.log("Error:", error)
-    //     }
-    //     return data
-    //   }
+    async updateVisit(visitId, newStatus) {
+      try {
+        const [numUpdated, updatedVisit] = await this.db.visits.update(
+          { status: newStatus },
+          { where: { id: visitId }, returning: true }
+        );
+        if (numUpdated === 0) {
+          throw new Error(`Visit with ID ${visitId} not found`);
+        }
+        return updatedVisit;
+      } catch (error) {
+        console.log("Error:", error);
+        throw error;
+      }
+    }
 }
 
 module.exports = new VisitRepository()
