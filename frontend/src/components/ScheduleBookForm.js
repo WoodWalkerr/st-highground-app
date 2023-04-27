@@ -39,10 +39,10 @@ function ScheduleBookForm() {
     }
 
     return (
-        <div className="bg-gray-100 text-black h-screen flex flex-col justify-center items-center">
-            <div className='bg-gray-400 rounded-lg'>
-                <div className="w-[20%] flex flex-row mx-3">
-                    <span className="flex justify-center items-center text-md text-center mx-5">
+        <div className=" text-black flex flex-col justify-center max-w-lg items-center pt-10">
+            <div className="bg-gray-400 bg-opacity-60 rounded-lg">
+                <div className="w-[20%] pt-4 flex flex-row mx-3">
+                    <span className="flex justify-center items-center text-white font-semibold text-md text-center mx-5">
                         Schedule a Visit
                     </span>{' '}
                     <input
@@ -51,46 +51,47 @@ function ScheduleBookForm() {
                         name="user_id"
                         value={JSON.parse(userID).id}
                     />
-                    <div className="flex flex-col mb-4 mx-3">
-                        <label htmlFor="date">Date</label>
+                    <div className="flex flex-col mb-4 mx-3 ml-6">
+                        <label className='pb-2 text-white' htmlFor="date">Date</label>
                         <input
                             type="date"
                             id="date"
                             name="visit_date"
                             value={visit_date}
                             onChange={handleChange}
-                            className="border border-gray-400 p-2 rounded-md outline-none bg-gray-100 text-gray-700 mb-2"
+                            min={new Date().toISOString().split('T')[0]}
+                            className="border border-gray-400 p-2 rounded-md  outline-none bg-gray-100 text-gray-700 mb-2"
                         />
                     </div>
-                    <div className="flex flex-col mb-4 mx-3">
-                        <label htmlFor="time">Time</label>
+                    <div className="flex flex-col mb-4 mx-3 ml-6">
+                        <label className='pb-2 text-white' htmlFor="time">Time</label>
                         <input
                             type="time"
                             id="time"
                             name="visit_time"
                             value={visit_time}
                             onChange={handleChange}
-                            className="border border-gray-400 p-2 rounded-md outline-none bg-gray-100 text-gray-700 mb-2"
+                            className="border border-gray-400 p-2 rounded-md  outline-none bg-gray-100 text-gray-700 mb-2"
                         />
                     </div>
-                    <div className="flex flex-col mb-4 mx-3">
-                        <label htmlFor="purpose">Purpose</label>
+                    <div className="flex flex-col mb-4 mx-3 ml-6">
+                        <label className='pb-2 text-white' htmlFor="purpose">Purpose</label>
                         <select
                             id="purpose"
                             name="purpose"
                             value={purpose}
                             onChange={handleChange}
-                            className="border border-gray-400 p-2 rounded-md outline-none bg-gray-100 text-gray-700 mb-2"
+                            className="border border-gray-400 p-2 rounded-md  outline-none bg-gray-100 text-gray-700 mb-2"
                         >
                             <option value="">Select purpose</option>
                             <option value="Trekking">Trekking</option>
                             <option value="Camping">Camping</option>
                         </select>
                     </div>
-                    <div className="flex items-center justify-between mb-4 mx-3">
+                    <div className="flex items-center justify-between mx-5">
                         <button
                             onClick={onSubmitForm}
-                            className="bg-gray-900 text-white active:bg-blue-600 font-bold text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                            className="bg-[#66B266] hover:bg-[#66B266] text-white font-bold text-sm px-8 py-3 p mt-1 rounded-[10px] shadow hover:shadow-lg outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
                             type="submit"
                         >
                             Submit

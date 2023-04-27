@@ -10,14 +10,13 @@ const InputDashboard = () => {
         email: '',
         password: '',
         phone_number: '',
-        type: '',
     })
 
-    const { name, email, password, phone_number, type } = user
+    const { name, email, password, phone_number } = user
 
     const onSubmitForm = async (e) => {
         e.preventDefault()
-        if (!name || !email || !password || !phone_number || !type) {
+        if (!name || !email || !password || !phone_number ) {
             alert('Please fill in all fields')
             return
         }
@@ -142,32 +141,6 @@ const InputDashboard = () => {
                                     }
                                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 />
-                            </div>
-
-                            <div>
-                                <label
-                                    htmlFor="type"
-                                    className="block text-sm font-medium text-gray-700"
-                                >
-                                    Type
-                                </label>
-                                <select
-                                    id="type"
-                                    name="type"
-                                    autoComplete="type"
-                                    required
-                                    value={type}
-                                    onChange={(e) =>
-                                        setUser({
-                                            ...user,
-                                            type: e.target.value,
-                                        })
-                                    }
-                                    className="block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                >
-                                    <option value="user">User</option>
-                                    <option value="admin">Admin</option>
-                                </select>
                             </div>
                             <div>
                                 <button

@@ -4,19 +4,14 @@ import { useNavigate } from 'react-router-dom'
 
 function UserLogin() {
     const navigate = useNavigate()
-
     const INITIAL_USER_DATA = { email: '', password: '' }
-
     const [userData, setUserData] = useState(INITIAL_USER_DATA)
-
     const handleChange = (e) => {
         const { name, value } = e.target
         setUserData((prev) => {
             return { ...prev, [name]: value }
         })
-
     }
-
     const handleSubmit = (e) => {
         e.preventDefault()
         try {
@@ -25,12 +20,10 @@ function UserLogin() {
                     sessionStorage.setItem('jwt', res[1].jwt)
                     localStorage.setItem('data', JSON.stringify(res[0]))
 
-                    const userData = JSON.parse(localStorage.getItem('data'))
-                    if (userData.type === 'admin') {
-                        navigate('/list-dashboard')
-                    } else {
-                        navigate('/')
-                    }
+                   const secret = localStorage.getItem('data')
+                    // getData(getDataUSer.email).then((res) => console.log(res))
+                    console.log("secreto para bibo", JSON.parse(secret))
+                    navigate('/', { state: res })
                 } else {
                     console.log('User does not exist!')
                 }
@@ -39,7 +32,6 @@ function UserLogin() {
             console.log('Error: ', error)
         }
     }
-
     return (
         <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-5 sm:px-6 lg:px-8">
             <div className="bg-gray-100 py-20">
@@ -100,5 +92,4 @@ function UserLogin() {
         </div>
     )
 }
-
 export default UserLogin

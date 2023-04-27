@@ -69,10 +69,10 @@ const Navbar = () => {
             ) : (
                 <ul className="list-none flex justify-between items-center">
                     <li className="px-3 cursor-pointer font-medium tracking-wider hover:scale-100 hover:text-gray-700">
-                        <button onClick={handleLogin}>Sign in</button>
+                        <button className='uppercase text-sm' onClick={handleLogin}>Sign in</button>
                     </li>
                     <li className="px-3 cursor-pointer font-medium tracking-wider hover:scale-100 hover:text-gray-700">
-                        <button onClick={handleSignup}>Sign up</button>
+                        <button className='uppercase text-sm' onClick={handleSignup}>Sign up</button>
                     </li>
                 </ul>
             )}
