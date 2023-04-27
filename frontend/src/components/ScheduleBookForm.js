@@ -7,7 +7,7 @@ function ScheduleBookForm() {
     const userID = localStorage.getItem('data')
     const [showModal, setShowModal] = useState(false)
     const [formData, setFormData] = useState({
-        user_id: JSON.parse(userID).id,
+        user_id: userID ? JSON.parse(userID).id : '',
         visit_date: '',
         visit_time: '',
         purpose: '',
@@ -26,7 +26,7 @@ function ScheduleBookForm() {
         try {
             await createVisit(formData)
             setShowModal(true)
-            setTimeout(() => navigate('/'), 10000)
+            navigate('/')
         } catch (error) {
             console.error(error.message)
         }
@@ -40,19 +40,26 @@ function ScheduleBookForm() {
 
     return (
         <div className=" text-black flex flex-col justify-center max-w-lg items-center pt-10">
-            <div className="bg-gray-400 bg-opacity-60 rounded-lg">
+            <div className="bg-gray-400 bg-opacity-40 rounded-lg">
                 <div className="w-[20%] pt-4 flex flex-row mx-3">
                     <span className="flex justify-center items-center text-white font-semibold text-md text-center mx-5">
                         Schedule a Visit
                     </span>{' '}
-                    <input
-                        type="hidden"
-                        id="id"
-                        name="user_id"
-                        value={JSON.parse(userID).id}
-                    />
+                    <div className="mb-4 mx-3 ml-6 hidden">
+                        <label className="pb-2 text-white" htmlFor="id">
+                            Date
+                        </label>
+                        <input
+                            type="id"
+                            id="id"
+                            name="id"
+                            value={userID ? JSON.parse(userID).id : ''}
+                        />
+                    </div>
                     <div className="flex flex-col mb-4 mx-3 ml-6">
-                        <label className='pb-2 text-white' htmlFor="date">Date</label>
+                        <label className="pb-2 text-white" htmlFor="date">
+                            Date
+                        </label>
                         <input
                             type="date"
                             id="date"
@@ -64,7 +71,9 @@ function ScheduleBookForm() {
                         />
                     </div>
                     <div className="flex flex-col mb-4 mx-3 ml-6">
-                        <label className='pb-2 text-white' htmlFor="time">Time</label>
+                        <label className="pb-2 text-white" htmlFor="time">
+                            Time
+                        </label>
                         <input
                             type="time"
                             id="time"
@@ -75,7 +84,9 @@ function ScheduleBookForm() {
                         />
                     </div>
                     <div className="flex flex-col mb-4 mx-3 ml-6">
-                        <label className='pb-2 text-white' htmlFor="purpose">Purpose</label>
+                        <label className="pb-2 text-white" htmlFor="purpose">
+                            Purpose
+                        </label>
                         <select
                             id="purpose"
                             name="purpose"

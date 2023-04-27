@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { userLogin } from '../services/UserLoginServices'
 import { useNavigate } from 'react-router-dom'
-
 function UserLogin() {
     const navigate = useNavigate()
     const INITIAL_USER_DATA = { email: '', password: '' }

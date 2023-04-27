@@ -30,8 +30,9 @@ class VisitRepository {
                     visit_date: visits.visit_date,
                 },
             })
-
+            console.log("eto ang original na visit count", visitCount)
             if (visitCount >= 5) {
+            
                 throw new Error('Maximum visit limit reached for this date')
             }
             console.log("ops tama na", visitCount)
