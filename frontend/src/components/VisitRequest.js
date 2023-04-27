@@ -48,7 +48,7 @@ const VisitRequest = () => {
         fetchUsers()
     }, [])
     return (
-        <div>
+        <div className='flex flex-col justify-center items-center h-screen'>
             <table className="max-w-6xl shadow-md overflow-hidden rounded-[20px] bg-[#093545] table-auto">
                 <thead>
                     <tr>

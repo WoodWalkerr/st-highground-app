@@ -4,7 +4,7 @@ import { navigation } from '../data/navbarLinks'
 import { useNavigate } from 'react-router-dom'
 import { BiLogOutCircle } from '../icons/icons'
 
-const Navbar = () => {
+const AdminNavbar = () => {
     const [nav, setNav] = useState(false)
     const [loggedIn, setLoggedIn] = useState(false)
     const userID = localStorage.getItem('data')
@@ -35,20 +35,11 @@ const Navbar = () => {
     }
 
     return (
-        <div className="fixed flex items-center w-full h-20 px-4 md:px-12 bg-white text-black z-3">
-            <div className="text-start mr-auto">
-                <button
-                    className="text-2xl ml-3 font-extrabold py-6 text-black bg-clip-text"
-                    onClick={() => navigate('/')}
-                >
-                    HIGHGROUND.
-                </button>
-            </div>
-
+        <div className="flex justify-end items-end px-4 md:px-12 bg-white text-black z-50">
             {loggedIn ? (
-                <ul className="list-none">
+                <ul className="list-none ">
                     <li className="flex justify-between items-center px-3 cursor-pointer font-medium tracking-wider hover:scale-100 hover:text-gray-700">
-                        <span className="my-4 mr-5 text-sm leading-relaxed capitalize font-semibold">
+                        <span className="my-4 mr-5 text-lg leading-relaxed capitalize font-semibold">
                             {JSON.parse(userID).name}
                         </span>
                         <button
@@ -153,4 +144,4 @@ const Navbar = () => {
     )
 }
 
-export default Navbar
+export default AdminNavbar

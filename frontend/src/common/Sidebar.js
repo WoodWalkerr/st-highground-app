@@ -6,9 +6,11 @@ import {
     HiMenuAlt2,
     IoMdClose,
 } from '../icons/icons'
+import { useNavigate } from 'react-router-dom'
 
 const Sidebar = () => {
     const [isOpen, setIsOpen] = useState(false)
+    const navigate = useNavigate()
 
     const handleToggle = () => {
         setIsOpen(!isOpen)
@@ -37,30 +39,28 @@ const Sidebar = () => {
                     </button>
                 </div>
                 <nav className={`md:block ${isOpen ? '' : 'hidden'}`}>
-                    <a
-                        href="#"
-                        className="flex items-center text-black hover:text-white pl-4 hover:bg-[#093545] rounded-full py-3"
+                    <button
+                        className="flex items-center w-full text-black hover:text-white pl-4 hover:bg-[#093545] rounded-full py-3"
                     >
                         <MdOutlineDashboardCustomize
                             size={20}
                             className="mr-3"
                         />
                         Dashboard
-                    </a>
-                    <a
-                        href="#"
-                        className="flex items-center text-black hover:text-white pl-4 hover:bg-[#093545] rounded-full py-3"
+                    </button>
+                    <button
+                        className="flex items-center w-full text-black hover:text-white pl-4 hover:bg-[#093545] rounded-full py-3"
+                        onClick={() => navigate('/visit-request')}
                     >
                         <AiOutlineUser size={20} className="mr-3" />
                         Visit Request
-                    </a>
-                    <a
-                        href="#"
-                        className="flex items-center text-black hover:text-white pl-4 hover:bg-[#093545] rounded-full py-3"
+                    </button>
+                    <button
+                        className="flex items-center w-full text-black hover:text-white pl-4 hover:bg-[#093545] rounded-full py-3"
                     >
                         <BiLogOutCircle size={20} className="mr-3" />
                         Logout
-                    </a>
+                    </button>
                 </nav>
             </div>
         </>

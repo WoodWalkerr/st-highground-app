@@ -25,10 +25,12 @@ function UserLogin() {
                     sessionStorage.setItem('jwt', res[1].jwt)
                     localStorage.setItem('data', JSON.stringify(res[0]))
 
-                   const secret = localStorage.getItem('data')
-                    // getData(getDataUSer.email).then((res) => console.log(res))
-                    console.log("secreto para bibo", JSON.parse(secret))
-                    navigate('/', { state: res })
+                    const userData = JSON.parse(localStorage.getItem('data'))
+                    if (userData.type === 'admin') {
+                        navigate('/list-dashboard')
+                    } else {
+                        navigate('/')
+                    }
                 } else {
                     console.log('User does not exist!')
                 }

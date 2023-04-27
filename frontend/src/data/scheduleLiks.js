@@ -6,7 +6,7 @@ export const navigation = [
     },
     {
         id: 2,
-        link: 'View Records',
+        link: 'Scheduled Visits',
         path: "/schedule-a-visit"
     },
 ]
