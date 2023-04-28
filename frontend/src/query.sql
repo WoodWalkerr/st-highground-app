@@ -1,4 +1,4 @@
-SELECT visits.*, users.name, users.email
+SELECT visits.*, users.name, users.*
 FROM visits
 INNER JOIN users ON visits.user_id = users.id;
 

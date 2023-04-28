@@ -1,5 +1,7 @@
 const { connect } = require('../config/db')
 const visits = require('../model/visits')
+const moment = require('moment-timezone')
+const { Op } = require('sequelize')
 
 class VisitRepository {
     db = {}
@@ -25,6 +27,7 @@ class VisitRepository {
 
     async createVisit(visits) {
         try {
+
             const visitCount = await this.db.visits.count({
                 where: {
                     visit_date: visits.visit_date,
@@ -32,7 +35,8 @@ class VisitRepository {
             })
             console.log("eto ang original na visit count", visitCount)
             if (visitCount >= 5) {
-            
+                console.log("ops tama na", visitCount)
+
                 throw new Error('Maximum visit limit reached for this date')
             }
             console.log("ops tama na", visitCount)
@@ -51,21 +55,21 @@ class VisitRepository {
         }
     }
 
-    async updateVisit(visitId, newStatus) {
-        try {
-            const [numUpdated, updatedVisit] = await this.db.visits.update(
-                { status: newStatus },
-                { where: { id: visitId }, returning: true }
-            )
-            if (numUpdated === 0) {
-                throw new Error(`Visit with ID ${visitId} not found`)
-            }
-            return updatedVisit
-        } catch (error) {
-            console.log('Error:', error)
-            throw error
-        }
-    }
+    // async updateVisit(visitId, newStatus) {
+    //     try {
+    //         const [numUpdated, updatedVisit] = await this.db.visits.update(
+    //             { status: newStatus },
+    //             { where: { id: visitId }, returning: true }
+    //         )
+    //         if (numUpdated === 0) {
+    //             throw new Error(`Visit with ID ${visitId} not found`)
+    //         }
+    //         return updatedVisit
+    //     } catch (error) {
+    //         console.log('Error:', error)
+    //         throw error
+    //     }
+    // }
 }
 
 module.exports = new VisitRepository()

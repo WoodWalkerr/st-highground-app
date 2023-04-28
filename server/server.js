@@ -41,7 +41,6 @@ app.put('/api/v1/users', (req, res) => {
 app.delete('/api/v1/users/:id', (req, res) => {
     usersController.deleteUser(req.params.id).then((data) => res.json(data))
 })
-
 app.post('/api/v1/visits', (req, res) => {
     visitController.createVisit(req.body.visits).then((data) => res.json(data))
 })
