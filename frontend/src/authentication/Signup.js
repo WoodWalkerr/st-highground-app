@@ -28,10 +28,10 @@ const InputDashboard = () => {
     }
 
     return (
-        <div className=" flex justify-center items-center min-h-screen bg-gray-100 flex flex-col justify-center py-5 sm:px-6 lg:px-8">
+        <div className=" flex flex-col justify-center items-center min-h-screen bg-gray-100 py-5 sm:px-6 lg:px-8">
             <div className="bg-white flex justify-center items-center max-w-xs py-5 px-4 border border-gray-400 rounded-md shadow sm:rounded-lg sm:px-10">
                 <form className="space-y-4 " onSubmit={onSubmitForm}>
-                    <h2 className="text-2xl text-center font-bold mb-5">
+                    <h2 className="text-xl text-start font-bold mb-5">
                         Sign Up
                     </h2>
                     <div>
@@ -112,7 +112,7 @@ const InputDashboard = () => {
                     <div>
                         <button
                             type="submit"
-                            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#093545] hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text- font-medium text-white bg-[#4CAF50] hover:bg-[#4CAF50] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
                             Sign Up
                         </button>

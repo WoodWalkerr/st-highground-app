@@ -1,10 +1,11 @@
 import React from 'react'
-import { navigation } from '../data/scheduleLiks'
-import { useNavigate } from 'react-router-dom'
+// import { navigation } from '../data/scheduleLiks'
+// import { useNavigate } from 'react-router-dom'
 import ScheduleBookForm from './ScheduleBookForm'
 
 function Splash() {
-    const navigate = useNavigate()
+    
+    // const navigate = useNavigate()
 
     return (
         <div
@@ -16,13 +17,13 @@ function Splash() {
             }}
         >
             <div className="flex flex-col text-white mt-12 pt-20">
-                <h1 className="text-6xl font-bold text-center mb-8">
+                <h1 className="text-4xl flex flex-col font-bold text-center mb-8">
                     WELCOME TO HIGHGROUND
-                    <h2 className="text-3xl font-normal text-gray-100 mt-5">
+                    <span className="text-2xl font-normal text-gray-100 mt-5">
                         Take a hike, book a site
-                    </h2>
+                    </span>
                 </h1>
-                <div className="flex justify-center">
+                {/* <div className="flex justify-center">
                     {navigation.map(({ id, link, path }) => (
                         <ul className="list-none" key={id}>
                             <li className="px-3 flex flex-col cursor-pointer font-medium tracking-wider hover:scale-100 hover:text-gray-700">
@@ -36,7 +37,7 @@ function Splash() {
                             </li>
                         </ul>
                     ))}
-                </div>
+                </div> */}
                 <div className='flex justify-center items-center pt-12'>
                 <ScheduleBookForm />
             </div>

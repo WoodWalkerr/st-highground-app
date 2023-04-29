@@ -16,7 +16,12 @@ export const createVisit = async (visits) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ visits }),
         })
-        return response.json()
+
+        const responseData = await response.json()
+
+        console.log('Response data: ', responseData)
+
+        return responseData
     } catch (error) {
         console.error(error.message)
     }
@@ -40,13 +45,11 @@ export async function deleteVisit(id) {
 }
 
 // requests.js
-export async function updateRequestStatus (requestId, status) {
+export async function updateRequestStatus(requestId, status) {
     const response = await fetch(`/api/v1/visits/${requestId}`, {
-      method: 'PUT',
-      body: JSON.stringify({ status }),
-      headers: { 'Content-Type': 'application/json' },
+        method: 'PUT',
+        body: JSON.stringify({ status }),
+        headers: { 'Content-Type': 'application/json' },
     })
     return await response.json()
-
-  };
-  
+}

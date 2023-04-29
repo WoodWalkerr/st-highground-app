@@ -10,6 +10,7 @@ const connect = () => {
     const sequelize = new Sequelize(database, userName, password, {
         host: hostName,
         dialect: 'postgres',
+        timezone: 'Asia/Manila',
         pool: {
             max: 10,
             min: 0,
