@@ -5,7 +5,9 @@ import { MdOutlineDashboardCustomize } from 'react-icons/md';
 import { HiMenuAlt2 } from 'react-icons/hi';
 import { IoMdClose } from 'react-icons/io';
 import { BiHappy } from 'react-icons/bi';
+import { FaUserCircle } from 'react-icons/fa';
 
 
 
-export { BiLogOutCircle, AiOutlineUser, MdOutlineDashboardCustomize, HiMenuAlt2, IoMdClose, AiOutlineUnorderedList, BiHappy, AiOutlineEye, AiOutlineEyeInvisible};
+
+export { FaUserCircle, BiLogOutCircle, AiOutlineUser, MdOutlineDashboardCustomize, HiMenuAlt2, IoMdClose, AiOutlineUnorderedList, BiHappy, AiOutlineEye, AiOutlineEyeInvisible};

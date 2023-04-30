@@ -1,5 +1,5 @@
 import React from 'react'
-import cards from '../data/cardsData'
+import { cards}  from '../data/cardsData'
 
 const CampingAndTrekkingGuide  = () => {
     return (
@@ -12,7 +12,6 @@ const CampingAndTrekkingGuide  = () => {
                 Philippines with our guide.
             </p>
 
-            {/* Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 my-8">
                 {cards.map(({ title, content, image }) => (
                     <div className="bg-white rounded-lg shadow-md p-6">
@@ -27,7 +26,6 @@ const CampingAndTrekkingGuide  = () => {
                 ))}
             </div>
 
-            {/* Lake Relaxation */}
             <div className="my-8">
                 <div className="bg-white rounded-lg shadow-md p-6">
                     <h2 className="text-2xl font-bold mb-4">Lake Relaxation</h2>

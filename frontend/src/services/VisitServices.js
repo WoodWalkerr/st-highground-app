@@ -8,6 +8,18 @@ export async function getAllVisits() {
         throw error
     }
 }
+export async function getVisitsForUserAndDate(userId, date) {
+    try {
+      const visits = await getAllVisits()
+      const filteredVisits = visits.filter(
+        visit => visit.user_id === userId && visit.visit_date === date
+      )
+      return filteredVisits
+    } catch (error) {
+      console.error(error)
+      return []
+    }
+  }
 
 export const createVisit = async (visits) => {
     try {

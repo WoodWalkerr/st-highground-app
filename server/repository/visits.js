@@ -41,7 +41,7 @@ class VisitRepository {
           const MAX_VISITS_PER_DAY = 2;
       
           if (visitCount >= MAX_VISITS_PER_DAY) {
-            throw new Error(`Sorry, the maximum number of visits (${MAX_VISITS_PER_DAY}) has already been reached for ${visits.visit_date}. Please choose another date.`);
+            return (`Sorry, the maximum number of visits (${MAX_VISITS_PER_DAY}) has already been reached for ${visits.visit_date}. Please choose another date.`);
           }
       
           const visit = await this.db.visits.create({

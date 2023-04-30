@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import { navigation } from '../data/navbarLinks'
 import { useNavigate } from 'react-router-dom'
-import { BiLogOutCircle } from '../icons/icons'
+import { FaUserCircle } from '../icons/icons'
 
 const Navbar = () => {
     const [nav, setNav] = useState(false)
@@ -89,9 +89,9 @@ const Navbar = () => {
                         <ul className="list-none flex justify-between items-center">
                             <li className="px-3 cursor-pointer font-medium tracking-wider hover:scale-100 hover:text-gray-700">
                                 <button
-                                    className="uppercase text-sm"
+                                    className="uppercase text-sm flex justify-center items-center"
                                     onClick={handleLogin}
-                                >
+                                > <FaUserCircle size={20} className='mr-2'/>
                                     Sign in
                                 </button>
                             </li>

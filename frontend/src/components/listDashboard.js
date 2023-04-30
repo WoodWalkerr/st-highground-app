@@ -108,9 +108,6 @@ const ListDashboard = () => {
                                     <th className="py-10 text-sm font-light text-gray-300">
                                         Phone Number
                                     </th>
-                                    <th className="py-10 text-sm font-light text-gray-300">
-                                        Type
-                                    </th>
                                     <th
                                         colSpan={2}
                                         className=" px-10 py-4 text-sm font-light text-gray-300"
@@ -137,14 +134,10 @@ const ListDashboard = () => {
                                         <td className="px-6 bg-[#093545] text-center text-white font-light whitespace-nowrap">
                                             {user.phone_number}
                                         </td>
-                                        <td className="px-6 bg-[#093545] text-center text-white font-light whitespace-nowrap">
-                                            {user.type}
-                                        </td>
-
                                         <td className="bg-[#093545] text-center">
                                             <EditDashboard user={user} />
                                         </td>
-                                        <td className="bg-[#093545] text-center relative">
+                                        <td className="text-center relative">
                                             <td className="flex justify-center group relative py-2 px-10">
                                                 <button
                                                     className="text-white hover:text-red-500"

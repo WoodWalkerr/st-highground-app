@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { createVisit } from '../services/VisitServices'
+import { createVisit, getVisitsForUserAndDate } from '../services/VisitServices'
 import Modal from '../modal/UsersModal'
 
 function ScheduleBookForm() {
@@ -27,6 +27,14 @@ function ScheduleBookForm() {
             alert('Booking is only available between 6am and 5pm')
             return
         }
+        
+        const MAX_VISITS_PER_DAY = 2;
+        const visits = await getVisitsForUserAndDate(user_id, visit_date);
+        if (visits.length >= MAX_VISITS_PER_DAY) {
+          alert(`Sorry, the maximum number of visits has already been reached for this day. Please choose another date.`);
+          return;
+        }
+
         try {
             await createVisit(formData)
             setShowModal(true)
@@ -34,7 +42,7 @@ function ScheduleBookForm() {
             alert(error.message)
         }
     }
-    
+
     const handleChange = (e) => {
         const { name, value } = e.target
         setFormData((prev) => {
@@ -61,7 +69,10 @@ function ScheduleBookForm() {
                         />
                     </div>
                     <div className="flex flex-col mb-4 mx-3 ml-6">
-                        <label className="pb-2 text-xs text-white" htmlFor="date">
+                        <label
+                            className="pb-2 text-xs text-white"
+                            htmlFor="date"
+                        >
                             Date
                         </label>
                         <input
@@ -75,7 +86,10 @@ function ScheduleBookForm() {
                         />
                     </div>
                     <div className="flex flex-col mb-4 mx-3 ml-6">
-                        <label className="pb-2 text-xs text-white" htmlFor="time">
+                        <label
+                            className="pb-2 text-xs text-white"
+                            htmlFor="time"
+                        >
                             Time
                         </label>
                         <input
@@ -88,7 +102,10 @@ function ScheduleBookForm() {
                         />
                     </div>
                     <div className="flex flex-col mb-4 mx-3 ml-6">
-                        <label className="pb-2 text-xs text-white" htmlFor="purpose">
+                        <label
+                            className="pb-2 text-xs text-white"
+                            htmlFor="purpose"
+                        >
                             Purpose
                         </label>
                         <select
@@ -98,12 +115,13 @@ function ScheduleBookForm() {
                             onChange={handleChange}
                             className="border border-gray-400 p-2 rounded-md  outline-none bg-gray-100 text-gray-700 mb-2"
                         >
-                            <option className='text-xs'>Select purpose</option>
+                            <option className="text-xs">Select purpose</option>
                             <option value="Trekking">Trekking</option>
                             <option value="Camping">Camping</option>
                         </select>
                     </div>
                     <div className="flex items-center justify-between mx-5">
+                        {/* {alertMessage & <div> {alertMessage} </div>} */}
                         <button
                             onClick={onSubmitForm}
                             className="bg-[#4CAF50] hover:bg-[#66B266] text-white font-bold text-sm px-8 py-2 mb-2 rounded-[10px] shadow hover:shadow-lg outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"

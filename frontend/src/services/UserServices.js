@@ -26,7 +26,7 @@ export async function updateUser(userDetails) {
     const response = await fetch('/api/v1/users', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user: userDetails }),
+        body: JSON.stringify({ users: userDetails }),
     })
     return await response.json()
 }
