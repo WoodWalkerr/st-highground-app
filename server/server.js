@@ -50,6 +50,7 @@ app.get('/api/v1/visits', (req, res) => {
 })
 
 app.put('/api/v1/visits', (req, res) => {
+    console.log("laman nya", req.body.visits)
     visitController.updateVisit(req.body.visits).then((data) => res.json(data))
 })
 

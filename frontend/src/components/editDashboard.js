@@ -9,8 +9,7 @@ const EditDashboard = ({ user }) => {
         name: user?.name || '',
         email: user?.email || '',
         password: user?.password || '',
-        phoneNumber: user?.phoneNumber || '',
-        type: user?.type || '',
+        phone_number: user?.phone_number || '',
     })
 
     const handleChange = (e) => {
@@ -21,13 +20,14 @@ const EditDashboard = ({ user }) => {
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
         try {
-          await updateUser(userDetails);
+            await updateUser(userDetails)
+            window.location.href = '/list-dashboard'
         } catch (error) {
-          console.error(error.message);
+            console.error(error.message)
         }
-      };
+    }
     
       useEffect(() => {
         const saveChanges = async () => {
@@ -51,7 +51,7 @@ return (
 <div>
     <div className="flex justify-center group relative py-1 px-10">
         <button
-            className="rounded-md text-white hover:text-blue-300"
+            className="rounded-md text-gray-500 hover:text-text-gray-700"
             onClick={toggleModal}
         >
             <FontAwesomeIcon icon={faEdit} />
@@ -110,11 +110,11 @@ return (
                                     Phone Number
                                 </label>
                                 <input
-                                    name="phoneNumber"
+                                    name="phone_number"
                                     type="tel"
                                     placeholder="Phone Number"
                                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                    value={userDetails.phoneNumber}
+                                    value={userDetails.phone_number}
                                     onChange={handleChange}
                                 />
                             </div>

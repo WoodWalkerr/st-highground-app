@@ -1,13 +1,13 @@
 export async function getAllVisits() {
     try {
-        const response = await fetch(`/api/v1/visits`)
-        const jsonData = await response.json()
-        return jsonData
+      const response = await fetch('/api/v1/visits');
+      const data = await response.json();
+      return data;
     } catch (error) {
-        console.error(error.message)
-        throw error
+      console.error(error.message);
     }
-}
+  }
+
 export async function getVisitsForUserAndDate(userId, date) {
     try {
         const visits = await getAllVisits()
@@ -55,17 +55,21 @@ export async function deleteVisit(id) {
         throw error
     }
 }
-
-export async function updateVisitStatus(status) {
+export async function updateVisitStatus(user_id, status) {
     try {
-        const response = await fetch(`/api/v1/visits`, {
-            method: 'PUT',
-            body: JSON.stringify({ status }),
-            headers: { 'Content-Type': 'application/json' },
-        })
-        return await response.json()
+      const response = await fetch('/api/v1/visits', {
+        method: 'PUT',
+        body: JSON.stringify({ user_id, status }),
+        headers: { 'Content-Type': 'application/json' },
+      });
+  
+      return await response.json();
     } catch (error) {
-        console.error(error.message)
-        throw error
+      console.error(error.message);
     }
-}
+  }
+  
+
+  
+
+  

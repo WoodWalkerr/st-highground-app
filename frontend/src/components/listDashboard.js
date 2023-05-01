@@ -51,66 +51,66 @@ const ListDashboard = () => {
     }, [])
 
     return (
-        <div className="flex h-screen">
+        <div className="flex h-screen bg-gray-100">
             <Sidebar />
             <div className="flex-1">
-            <div className="flex items-center flex-col justify-between mb-4 ">
+            <div className="flex items-center flex-col justify-between mb-4 bg-gray-100 ">
                             <AdminNavbar />
                     </div>
-                <div className="p-4 ml-0 md:ml-64">
+                <div className="p-4 ml-0 md:ml-64 bg-gray-100 ">
                   
                     <div className="grid grid-cols-3 gap-2 px-20 py-10">
-                        <div className="flex items-center justify-center h-[200px] w-[200px] bg-[#093545] rounded-[20px]">
-                            <p className="text-sm text-gray-400">
+                        <div className="flex items-center justify-center h-[200px] w-[200px] bg-white shadow-md shadow-bottom rounded-[20px]">
+                            <p className="text-sm text-gray-500">
                                 Visitor Expected
                             </p>
                         </div>
 
-                        <div className="flex items-center justify-center h-[200px] w-[200px] bg-[#093545] rounded-[20px]">
-                            <p className="text-sm text-gray-400">
+                        <div className="flex items-center justify-center h-[200px] w-[200px] bg-white shadow-md shadow-bottom rounded-[20px]">
+                            <p className="text-sm text-gray-500">
                                 Default visitor
                             </p>
                         </div>
 
-                        <div className="flex items-center justify-center h-[200px] w-[200px] bg-[#093545] rounded-[20px]">
-                            <p className="text-sm text-gray-400">
+                        <div className="flex items-center justify-center h-[200px] w-[200px] bg-white shadow-md shadow-bottom rounded-[20px]">
+                            <p className="text-sm text-gray-500">
                                 Pending Visits
                             </p>
                         </div>
                     </div>
 
                     <div className="flex items-center flex-col justify-center h-screen mb-4 border-t-2 border-gray-200 pr-[55px]">
-                        <table className="max-w-6xl shadow-md overflow-hidden rounded-[20px] bg-[#093545] table-auto">
+                        <table className="max-w-6xl shadow-md overflow-hidden rounded-[20px] bg-white shadow-b-md table-auto">
                             <thead>
                                 <tr>
                                     <th
                                         colSpan={11}
-                                        className="text-start pl-10 pb-4 pt-7 text-sm font-light text-gray-300 flex justify-around"
+                                        className="text-start pl-10 pb-4 pt-7 text-md font-semibold text-gray-600  flex justify-around"
                                     >
                                         List Dashboard
                                     </th>
                                 </tr>
-                                <tr className=" bg-[#093545]">
-                                    <th className="py-10 text-sm font-light text-gray-300">
+                                <tr className=" bg-white font-semibold text-gray-600">
+                                    <th className="py-10 text-sm ">
                                         No.
                                     </th>
 
-                                    <th className="py-10 text-sm font-light flex justify-center items-center text-gray-300">
+                                    <th className="py-10 text-sm flex justify-center items-center ">
                                         <AiOutlineUser
                                             size={15}
                                             className="mr-3"
                                         />
                                         Name
                                     </th>
-                                    <th className="py-10 text-sm font-light text-gray-300">
+                                    <th className="py-10 text-sm ">
                                         Email
                                     </th>
-                                    <th className="py-10 text-sm font-light text-gray-300">
+                                    <th className="py-10 text-sm ">
                                         Phone Number
                                     </th>
                                     <th
                                         colSpan={2}
-                                        className=" px-10 py-4 text-sm font-light text-gray-300"
+                                        className=" px-10 py-4 text-sm "
                                     >
                                         Actions
                                     </th>
@@ -120,27 +120,27 @@ const ListDashboard = () => {
                                 {currentData.map((user, index) => (
                                     <tr
                                         key={user.id}
-                                        className="hover:bg-gray-100 transition-colors text-xs"
+                                        className="hover:bg-white transition-colors text-xs"
                                     >
-                                        <td className="px-6 bg-[#093545] text-center text-white font-light whitespace-nowrap">
+                                        <td className="px-6 bg-white text-center text-gray-500 font-light whitespace-nowrap">
                                             {startIndex + index}
                                         </td>
-                                        <td className="px-6 bg-[#093545] text-center text-white font-light whitespace-nowrap">
+                                        <td className="px-6 bg-white text-center text-gray-500 font-light whitespace-nowrap">
                                             {user.name}
                                         </td>
-                                        <td className="px-6 bg-[#093545] text-center text-white font-light whitespace-nowrap">
+                                        <td className="px-6 bg-white text-center text-gray-500 font-light whitespace-nowrap">
                                             {user.email}
                                         </td>
-                                        <td className="px-6 bg-[#093545] text-center text-white font-light whitespace-nowrap">
+                                        <td className="px-6 bg-white text-center text-gray-500 font-light whitespace-nowrap">
                                             {user.phone_number}
                                         </td>
-                                        <td className="bg-[#093545] text-center">
+                                        <td className="bg-white text-center">
                                             <EditDashboard user={user} />
                                         </td>
                                         <td className="text-center relative">
                                             <td className="flex justify-center group relative py-2 px-10">
                                                 <button
-                                                    className="text-white hover:text-red-500"
+                                                    className="text-gray-500 hover:text-red-500"
                                                     onClick={() =>
                                                         handleDeleteUser(
                                                             user.id
@@ -161,7 +161,7 @@ const ListDashboard = () => {
                             </tbody>
                         </table>
                         <div class="flex justify-center mt-4">
-                            <nav class="bg-gray-100 rounded-lg shadow-md p-3">
+                            <nav class="bg-white rounded-lg shadow-md p-3">
                                 <ReactPaginate
                                     previousLabel={'<'}
                                     nextLabel={'>'}

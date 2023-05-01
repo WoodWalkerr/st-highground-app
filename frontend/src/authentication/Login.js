@@ -46,7 +46,7 @@ function UserLogin() {
             <div class="bg-gray-100 py-20">
                 <div class="mx-auto max-w-xs shadow-lg rounded-lg">
                     <div class="p-6 rounded-lg">
-                        <h2 class="text-2xl text-center font-bold mb-5">
+                        <h2 class="text-2xl text-start font-bold mb-5">
                             Sign In
                         </h2>
                         <form onSubmit={handleSubmit}>
