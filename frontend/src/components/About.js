@@ -1,15 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../assets/lake-2.jpg';
+import logo from '../assets/lake.jpg';
 
 const About = () => {
   return (
-    <div className="bg-green-100 h-screen">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex flex-col md:flex-row">
+    <div className="bg-white h-screen flex justify-center items-center">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12  ">
+        <div className="flex flex-col justify-center items-center md:flex-row">
           <div className="md:w-1/2">
             <h1 className="text-4xl font-bold mb-4">
-              About Our Nature Environment Booking App
+              What is <span className='text-[#4CAF50]'>HIGHGROUND?</span>
             </h1>
             <p className="text-gray-600 leading-relaxed mb-8">
               Our app is designed to make it easy for you to book nature experiences
@@ -26,11 +26,11 @@ const About = () => {
               Contact Us
             </Link>
           </div>
-          <div className="md:w-1/2">
+          <div className="md:w-1/2 flex justify-center items-center ">
             <img
               src={logo}
               alt="Nature Environment Booking App Logo"
-              className="h-64 mx-auto md:mx-0"
+              className="h-[300px] mx-auto md:mx-0 shadow-lg shadow-bottom"
             />
           </div>
         </div>

@@ -134,7 +134,7 @@ const InputDashboard = () => {
                             <div>
                                 <button
                                     type="submit"
-                                    className="w-full bg-[#4CAF50] hover:bg-gray-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                    className="w-full bg-green-500 hover:bg-green-600 transition duration-200 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                                 >
                                     Sign Up
                                 </button>

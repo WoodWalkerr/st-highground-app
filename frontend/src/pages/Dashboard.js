@@ -2,6 +2,7 @@ import React from "react"
 import Splash from "../components/Splash"
 import About from "../components/About";
 import CampingGuide from "../components/CampingAndTrekkingGuide ";
+import Footer from '../common/Footer'
 
 function Dashboard() {
   return (
@@ -9,6 +10,7 @@ function Dashboard() {
       <Splash />
       <About />
       <CampingGuide />
+      <Footer />
     </div>
   );
 }
