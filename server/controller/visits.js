@@ -8,9 +8,9 @@ class VisitController {
     async getAllVisits(visits) {
         return await visitService.getAllVisits(visits)
     }
-    // async updateVisit(visits) {
-    //     return await visitService.updateVisit(visits)
-    // }
+    async updateVisit(visits) {
+        return await visitService.updateVisit(visits)
+    }
 } 
 
 module.exports = new VisitController()

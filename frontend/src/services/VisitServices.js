@@ -10,16 +10,16 @@ export async function getAllVisits() {
 }
 export async function getVisitsForUserAndDate(userId, date) {
     try {
-      const visits = await getAllVisits()
-      const filteredVisits = visits.filter(
-        visit => visit.user_id === userId && visit.visit_date === date
-      )
-      return filteredVisits
+        const visits = await getAllVisits()
+        const filteredVisits = visits.filter(
+            (visit) => visit.user_id === userId && visit.visit_date === date
+        )
+        return filteredVisits
     } catch (error) {
-      console.error(error)
-      return []
+        console.error(error)
+        return []
     }
-  }
+}
 
 export const createVisit = async (visits) => {
     try {
@@ -56,12 +56,16 @@ export async function deleteVisit(id) {
     }
 }
 
-// requests.js
-export async function updateRequestStatus(requestId, status) {
-    const response = await fetch(`/api/v1/visits/${requestId}`, {
-        method: 'PUT',
-        body: JSON.stringify({ status }),
-        headers: { 'Content-Type': 'application/json' },
-    })
-    return await response.json()
+export async function updateVisitStatus(status) {
+    try {
+        const response = await fetch(`/api/v1/visits`, {
+            method: 'PUT',
+            body: JSON.stringify({ status }),
+            headers: { 'Content-Type': 'application/json' },
+        })
+        return await response.json()
+    } catch (error) {
+        console.error(error.message)
+        throw error
+    }
 }

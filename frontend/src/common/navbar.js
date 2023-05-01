@@ -57,7 +57,7 @@ const Navbar = () => {
             <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center">
                     <button
-                        className={`text-2xl ml-3 font-extrabold py-6 bg-clip-text ${navbarClass}`}
+                        className={`text-lg ml-3 font-extrabold py-6 bg-clip-text ${navbarClass}`}
                         onClick={() => navigate('/')}
                     >
                         HIGHGROUND.

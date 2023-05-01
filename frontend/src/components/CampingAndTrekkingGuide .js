@@ -1,7 +1,8 @@
 import React from 'react'
-import { cards}  from '../data/cardsData'
+import { cards } from '../data/cardsData'
 
-const CampingAndTrekkingGuide  = () => {
+
+const CampingAndTrekkingGuide = () => {
     return (
         <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8">
             <h1 className="text-4xl font-bold text-center mt-6">
@@ -12,40 +13,23 @@ const CampingAndTrekkingGuide  = () => {
                 Philippines with our guide.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 my-8">
+            <div className="flex flex-wrap -mx-4 my-8">
                 {cards.map(({ title, content, image }) => (
-                    <div className="bg-white rounded-lg shadow-md p-6">
-                        <h2 className="text-2xl font-bold mb-4">{title}</h2>
-                        <p className="text-lg">{content}</p>
-                        <img
-                            src={image}
-                            alt={title}
-                            className="mt-6 rounded-lg shadow-md"
-                        />
+                    <div className="w-full sm:w-1/2 lg:w-1/3 p-4">
+                        <div className="bg-white rounded-lg shadow-md p-6 h-full flex flex-col">
+                            <h2 className="text-2xl font-bold mb-4">{title}</h2>
+                            <p className="text-sm flex-grow">{content}</p>
+                            <img
+                                src={image}
+                                alt={title}
+                                className="mt-6 rounded-lg shadow-md transition-all duration-300 ease-in-out transform hover:scale-110"
+                            />
+                        </div>
                     </div>
                 ))}
-            </div>
-
-            <div className="my-8">
-                <div className="bg-white rounded-lg shadow-md p-6">
-                    <h2 className="text-2xl font-bold mb-4">Lake Relaxation</h2>
-                    <p className="text-lg">
-                        After your camping and trekking adventure, head over to
-                        the nearby lake for some relaxation and fun. The lake is
-                        located in the heart of Pagadian City and is easily
-                        accessible by car or public transportation. There are
-                        also several resorts and accommodations available in the
-                        area.
-                    </p>
-                    <img
-                        src="../assets/img_7425.webp"
-                        alt="Lake Relaxation"
-                        className="mt-6 rounded-lg shadow-md"
-                    />
-                </div>
             </div>
         </div>
     )
 }
 
-export default CampingAndTrekkingGuide 
+export default CampingAndTrekkingGuide

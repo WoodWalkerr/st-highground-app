@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { AiOutlineUser } from '../icons/icons'
-import EditDashboard from './EditDashboard'
 import ReactPaginate from 'react-paginate'
 import { getAllVisits, deleteVisit } from '../services/VisitServices'
+import VisitStatus from './VisitStatus'
 
-const VisitRequest = () => {
+const VisitList = () => {
     const [users, setUsers] = useState([])
     const [currentPage, setCurrentPage] = useState(0)
     const itemsPerPage = 10
@@ -24,7 +24,7 @@ const VisitRequest = () => {
         Math.min(endIndex, users.length)
     )
 
-    const handleDeclineReq = async (id) => {
+    const handleDeleteRequest = async (id) => {
         try {
             const success = await deleteVisit(id)
             if (success) {
@@ -47,8 +47,9 @@ const VisitRequest = () => {
 
         fetchUsers()
     }, [])
+
     return (
-        <div className='flex flex-col justify-center items-center h-screen'>
+        <div className="flex flex-col justify-center items-center h-screen">
             <table className="max-w-6xl shadow-md overflow-hidden rounded-[20px] bg-[#093545] table-auto">
                 <thead>
                     <tr>
@@ -59,7 +60,7 @@ const VisitRequest = () => {
                             Visit Request
                         </th>
                     </tr>
-                    <tr className=" bg-[#093545]">
+                    <tr className="bg-[#093545]">
                         <th className="py-10 text-sm font-light text-gray-300">
                             No.
                         </th>
@@ -77,47 +78,49 @@ const VisitRequest = () => {
                         <th className="py-10 text-sm font-light text-gray-300">
                             Purpose
                         </th>
+                        <th className="py-10 text-sm font-light text-gray-300">
+                            status
+                        </th>
+                        <th className="py-10 text-sm font-light text-gray-300">
+                            status
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {currentData.map((user, index) => (
+                    {currentData.map((visits, index) => (
                         <tr
-                            key={user.id}
+                            key={visits.id}
                             className="hover:bg-gray-100 transition-colors text-xs"
                         >
                             <td className="px-6 bg-[#093545] text-center text-white font-light whitespace-nowrap">
                                 {startIndex + index}
                             </td>
                             <td className="px-6 bg-[#093545] text-center text-white font-light whitespace-nowrap">
-                                {user.user_id}
+                                {visits.user_id}
                             </td>
                             <td className="px-6 bg-[#093545] text-center text-white font-light whitespace-nowrap">
-                                {user.visit_date}
+                                {visits.visit_date}
                             </td>
                             <td className="px-6 bg-[#093545] text-center text-white font-light whitespace-nowrap">
-                                {user.visit_time}
+                                {visits.visit_time}
                             </td>
                             <td className="px-6 bg-[#093545] text-center text-white font-light whitespace-nowrap">
-                                {user.purpose}
+                                {visits.purpose}
                             </td>
+                            <td className="px-6 bg-[#093545] text-center text-white font-light whitespace-nowrap">
+                                {visits.status}
+                            </td>
+                            <td className="px-6 bg-[#093545] text-center text-white font-light whitespace-nowrap">
+                            <VisitStatus visitId={visits.id} initialStatus={visits.status} />
 
-                            <td className="bg-[#093545] text-center">
-                                <EditDashboard user={user} />
                             </td>
-                            <td className="bg-[#093545] text-center relative">
-                                <td className="flex justify-center group relative py-2 px-10">
-                                    <button
-                                        className="text-white hover:text-red-500"
-                                        onClick={() =>
-                                            handleDeclineReq(user.id)
-                                        }
-                                    >
-                                        <FontAwesomeIcon icon={faTrash} />
-                                        <span className="absolute -top-10 left-1/2 transform -translate-x-1/2 scale-0 rounded bg-gray-300 p-2 text-xs text-black group-hover:scale-100">
-                                            Delete
-                                        </span>
-                                    </button>
-                                </td>
+                            <td className="px-6 bg-[#093545] text-center text-white font-light whitespace-nowrap">
+                                <button
+                                    className="text-red-600 hover:text-red-900"
+                                    onClick={() => handleDeleteRequest(visits.id)}
+                                >
+                                    <FontAwesomeIcon icon={faTrash} />
+                                </button>
                             </td>
                         </tr>
                     ))}
@@ -152,4 +155,4 @@ const VisitRequest = () => {
     )
 }
 
-export default VisitRequest
+export default VisitList

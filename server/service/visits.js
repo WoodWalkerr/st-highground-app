@@ -8,9 +8,9 @@ class VisitService {
     async getAllVisits(visits) {
         return await visitRepository.getAllVisits(visits)
     }
-    // async updateVisit(visits) {
-    //     return await visitRepository.updateVisit(visits)
-    // }
+    async updateVisit(visits) {
+        return await visitRepository.updateVisit(visits)
+    }
 }
 
 module.exports = new VisitService()

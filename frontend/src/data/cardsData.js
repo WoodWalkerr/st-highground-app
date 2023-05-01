@@ -1,6 +1,6 @@
 import img1 from '../assets/camping.jpg';
-import img2 from '../assets/bonefire.jpg';
-import img3 from '../assets/lake.jpg';
+import img2 from '../assets/campinggear1.jpg';
+import img3 from '../assets/safetytips.jpg';
 
 export const cards = [
   {

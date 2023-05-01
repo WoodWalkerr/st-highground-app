@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import logo from '../assets/lake-2.jpg';
+import logo from '../assets/lake-2.jpg';
 
 const About = () => {
   return (
@@ -28,7 +28,7 @@ const About = () => {
           </div>
           <div className="md:w-1/2">
             <img
-              src='../assets/lake-2.jpg'
+              src={logo}
               alt="Nature Environment Booking App Logo"
               className="h-64 mx-auto md:mx-0"
             />

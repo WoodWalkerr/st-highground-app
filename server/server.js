@@ -50,7 +50,7 @@ app.get('/api/v1/visits', (req, res) => {
 })
 
 app.put('/api/v1/visits', (req, res) => {
-    visitController.updateVisit(req.body.visits).them((data) => res.json(data))
+    visitController.updateVisit(req.body.visits).then((data) => res.json(data))
 })
 
 app.delete('/api/v1/visits/:id', (req, res) => {
