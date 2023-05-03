@@ -19,7 +19,7 @@ const VisitListItem = ({ visit }) => {
   };
 
   return (
-    <div className="flex justify-between px-4 py-2 border-b border-gray-300">
+    <div className="flex justify-between px-4 py-2">
       <div className="flex">
         <button
           onClick={() => handleAccept(visit.user_id)}

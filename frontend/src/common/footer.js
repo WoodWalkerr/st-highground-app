@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className="bg-gray-100 dark:bg-gray-800 py-12">
       <div className="container mx-auto flex flex-col justify-center items-center">
         <p className="text-center text-black dark:text-white">
-          © 2023 Copyright Melven Bagolaque
+          © 2023 Copyright HIGHGROUND.
         </p>
         <div className="flex mt-4">
           <a

@@ -6,7 +6,7 @@ import EditDashboard from './EditDashboard'
 import ReactPaginate from 'react-paginate'
 import { getUsers, deleteUser } from '../services/UserServices'
 import Sidebar from '../common/Sidebar'
-import AdminNavbar from '../common/AdminNavbar'
+// import AdminNavbar from '../common/AdminNavbar'
 
 const ListDashboard = () => {
     const [users, setUsers] = useState([])
@@ -54,9 +54,9 @@ const ListDashboard = () => {
         <div className="flex h-screen bg-gray-100">
             <Sidebar />
             <div className="flex-1">
-            <div className="flex items-center flex-col justify-between mb-4 bg-gray-100 ">
+            {/* <div className="flex items-center flex-col justify-between mb-4 bg-gray-100 ">
                             <AdminNavbar />
-                    </div>
+                    </div> */}
                 <div className="p-4 ml-0 md:ml-64 bg-gray-100 ">
                   
                     <div className="grid grid-cols-3 gap-2 px-20 py-10">

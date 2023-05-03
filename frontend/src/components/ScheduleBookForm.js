@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { createVisit, getVisitsForUserAndDate } from '../services/VisitServices'
 import Modal from '../modal/UsersModal'
 
 function ScheduleBookForm() {
     const userID = localStorage.getItem('data')
     const [showModal, setShowModal] = useState(false)
+    const [availableVisits, setAvailableVisits] = useState(0)
+    const [dateClicked, setDateClicked] = useState(false)
+
     const [formData, setFormData] = useState({
         user_id: userID ? JSON.parse(userID).id : '',
         visit_date: '',
@@ -13,6 +16,19 @@ function ScheduleBookForm() {
     })
 
     const { user_id, visit_date, visit_time, purpose } = formData
+
+    const MAX_VISITS_PER_DAY = 3
+
+    useEffect(() => {
+        const fetchAvailableVisits = async () => {
+            const visits = await getVisitsForUserAndDate(user_id, visit_date)
+            const count = MAX_VISITS_PER_DAY - visits.length
+            setAvailableVisits(count)
+        }
+        if (visit_date) {
+            fetchAvailableVisits()
+        }
+    }, [user_id, visit_date])
 
     const onSubmitForm = async (e) => {
         e.preventDefault()
@@ -27,12 +43,16 @@ function ScheduleBookForm() {
             alert('Booking is only available between 6am and 5pm')
             return
         }
-        
-        const MAX_VISITS_PER_DAY = 2;
-        const visits = await getVisitsForUserAndDate(user_id, visit_date);
-        if (visits.length >= MAX_VISITS_PER_DAY) {
-          alert(`Sorry, the maximum number of visits has already been reached for this day. Please choose another date.`);
-          return;
+
+        if (availableVisits <= 0) {
+            alert(
+                `Sorry, the maximum number of visits has already been reached for this day. Please choose another date.`
+            )
+            return
+        } else if (availableVisits === 1) {
+            alert(
+                `There is only one slot available for this day. Please book your visit as soon as possible`
+            )
         }
 
         try {
@@ -73,16 +93,22 @@ function ScheduleBookForm() {
                             className="pb-2 text-xs text-white"
                             htmlFor="date"
                         >
-                            Date
+                            Date{' '}
+                            <span className="text-black bg-white px-2 rounded-full">
+                                {availableVisits > 0
+                                    ? `${availableVisits} visits available`
+                                    : 'visits available 0'}
+                            </span>
                         </label>
                         <input
+                            className="py-2 px-3 rounded-lg bg-white"
                             type="date"
                             id="date"
                             name="visit_date"
                             value={visit_date}
                             onChange={handleChange}
-                            min={new Date().toISOString().split('T')[0]}
-                            className="border border-gray-400 p-2 rounded-md  outline-none bg-gray-100 text-gray-700 mb-2"
+                            min={new Date().toISOString().slice(0, 10)}
+                            onClick={() => setDateClicked(true)}
                         />
                     </div>
                     <div className="flex flex-col mb-4 mx-3 ml-6">
@@ -121,6 +147,7 @@ function ScheduleBookForm() {
                         </select>
                     </div>
                     <div className="flex items-center justify-between mx-5">
+                        {/* {alertMessage & <div> {alertMessage} </div>} */}
                         <button
                             onClick={onSubmitForm}
                             className="bg-[#4CAF50] hover:bg-green-600 transition duration-200 text-white font-bold text-sm px-8 py-2 mb-2 rounded-[10px] shadow hover:shadow-lg outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"

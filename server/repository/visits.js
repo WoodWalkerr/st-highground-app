@@ -38,7 +38,7 @@ class VisitRepository {
                 },
             })
 
-            const MAX_VISITS_PER_DAY = 2
+            const MAX_VISITS_PER_DAY = 3
 
             if (visitCount >= MAX_VISITS_PER_DAY) {
                 return `Sorry, the maximum number of visits (${MAX_VISITS_PER_DAY}) has already been reached for ${visits.visit_date}. Please choose another date.`

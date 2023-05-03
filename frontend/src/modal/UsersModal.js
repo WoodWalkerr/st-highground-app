@@ -1,15 +1,12 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { BiHappy } from 'react-icons/bi'
 
 function Modal() {
     const userID = localStorage.getItem('data')
     const [showModal, setShowModal] = useState(true)
-    const navigate = useNavigate()
 
     const handleOkClick = () => {
         setShowModal(false)
-        navigate('/')
     }
 
     return (

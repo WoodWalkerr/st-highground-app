@@ -6,38 +6,38 @@ module.exports = (sequelize, DataTypes, Model) => {
             id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
-                autoIncrement: true
+                autoIncrement: true,
             },
             user_id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 references: {
                     model: 'users',
-                    key: 'id'
-                }
+                    key: 'id',
+                },
             },
             visit_date: {
                 type: DataTypes.DATE,
-                allowNull: false
+                allowNull: false,
             },
             visit_time: {
                 type: DataTypes.TIME,
-                allowNull: false
+                allowNull: false,
             },
             purpose: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
             },
             status: {
                 type: DataTypes.ENUM('pending', 'accepted', 'declined'),
                 allowNull: true,
-                defaultValue: 'pending'
-              }
+                defaultValue: 'pending',
+            },
         },
         {
             sequelize,
             modelName: 'visits',
-            tableName: 'visits'
+            tableName: 'visits',
         }
     )
 
