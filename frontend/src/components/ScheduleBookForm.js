@@ -94,11 +94,14 @@ function ScheduleBookForm() {
                             htmlFor="date"
                         >
                             Date{' '}
+                            {dateClicked && (
+
                             <span className="text-black bg-white px-2 rounded-full">
                                 {availableVisits > 0
                                     ? `${availableVisits} visits available`
                                     : 'visits available 0'}
                             </span>
+                            )}
                         </label>
                         <input
                             className="py-2 px-3 rounded-lg bg-white"

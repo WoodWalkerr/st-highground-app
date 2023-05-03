@@ -59,7 +59,7 @@ export async function updateVisitStatus(user_id, status) {
     try {
       const response = await fetch('/api/v1/visits', {
         method: 'PUT',
-        body: JSON.stringify({ user_id, status }),
+        body: JSON.stringify({ visits: { user_id, status } }),
         headers: { 'Content-Type': 'application/json' },
       });
   

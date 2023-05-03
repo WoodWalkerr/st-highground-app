@@ -49,6 +49,7 @@ class VisitRepository {
                 visit_date: visits.visit_date,
                 visit_time: visits.visit_time,
                 purpose: visits.purpose,
+                status: visits.status,
             })
 
             return visit
@@ -58,23 +59,57 @@ class VisitRepository {
         }
     }
 
-    async updateVisit(visits) {
-      let data = {}
+    // async createPendingOrder(order) {
+      
+    //     const { order_items, ...newOrder } = order;
 
-      try {
-          data = await this.db.visits.update(
-              { ...visits },
-              {
-                  where: {
-                      user_id: visits.user_id,
-                  },
-              }
-          )
-      } catch (error) {
-          console.log('Error: ', error)
-      }
-      return data
-  }
+    //     try {
+    //         const createdOrder = await this.db.orders.create(newOrder)
+            
+    //         if (createdOrder) {
+
+    //             const createdOrderItem = []
+
+    //             for (let i = 0; i <= order_items.length - 1; i++) {
+    //                 order_items[i].order_id = createdOrder.dataValues.order_id
+    //                 createdOrderItem[0] = await this.db.order_items.create(order_items[i])
+    //             }
+
+    //             return createdOrderItem
+                
+    //         } else {
+    //             console.log("No record was created!")
+    //         }
+
+    //         return true
+
+    //     } catch (error) {
+    //         console.log('Error: ', error)
+    //     }
+    // }
+
+    async updateVisit(visits) {
+        console.log('visits:', visits)
+    
+        let data = {}
+    
+        try {
+            data = await this.db.visits.update(
+                { ...visits },
+                {
+                    where: {
+                        user_id: visits.user_id,
+                    },
+                }
+            )
+        } catch (error) {
+            console.log('Error: ', error)
+        }
+    
+        return data
+    }
+    
+      
 
     async deleteVisit(visitId) {
         try {
