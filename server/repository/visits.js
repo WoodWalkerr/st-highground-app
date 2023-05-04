@@ -1,7 +1,6 @@
 const { connect } = require('../config/db')
-const visits = require('../model/visits')
-const moment = require('moment-timezone')
 const { Op } = require('sequelize')
+const nodemailer = require('nodemailer');
 
 class VisitRepository {
     db = {}
@@ -59,40 +58,44 @@ class VisitRepository {
         }
     }
 
-    // async createPendingOrder(order) {
+    async sendVisitAcceptedEmail(visits) {
+        try {
+          const visit = await this.db.visits.getVisitById(visits);
+          if (visit.status !== 'accepted') {
+            return('Visit status must be accepted to send email');
+          }
+          const user = await this.db.users.getUserById(visit.user_id);
+          const email = user.email;
+          const transporter = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 587,
+            auth: {
+              user: 'highground2023@outlook.com',
+              pass: 'melven051998',
+            },
+          });
+          const mailOptions = {
+            from: 'highground2023@outlook.com',
+            to: email,
+            subject: 'Visit Accepted',
+            text: `Your visit on ${visit.visit_date} at ${visit.visit_time} for ${visit.purpose} has been accepted.`,
+          };
+          const info = await transporter.sendMail(mailOptions);
+          console.log(`Email sent: ${info.messageId}`);
+          const notification = await this.db.notification.createNotification(user.user_id, email);
+          return notification;
+        } catch (error) {
+          console.error(error);
+          throw error;
+        }
+      }
       
-    //     const { order_items, ...newOrder } = order;
-
-    //     try {
-    //         const createdOrder = await this.db.orders.create(newOrder)
-            
-    //         if (createdOrder) {
-
-    //             const createdOrderItem = []
-
-    //             for (let i = 0; i <= order_items.length - 1; i++) {
-    //                 order_items[i].order_id = createdOrder.dataValues.order_id
-    //                 createdOrderItem[0] = await this.db.order_items.create(order_items[i])
-    //             }
-
-    //             return createdOrderItem
-                
-    //         } else {
-    //             console.log("No record was created!")
-    //         }
-
-    //         return true
-
-    //     } catch (error) {
-    //         console.log('Error: ', error)
-    //     }
-    // }
 
     async updateVisit(visits) {
         console.log('visits:', visits)
-    
+
         let data = {}
-    
+
         try {
             data = await this.db.visits.update(
                 { ...visits },
@@ -105,11 +108,9 @@ class VisitRepository {
         } catch (error) {
             console.log('Error: ', error)
         }
-    
+
         return data
     }
-    
-      
 
     async deleteVisit(visitId) {
         try {

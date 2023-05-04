@@ -40,7 +40,8 @@ const Sidebar = () => {
                 </div>
                 <nav className={`md:block ${isOpen ? '' : 'hidden'}`}>
                     <button
-                        className="flex items-center w-full text-black hover:text-white pl-4 hover:bg-[#093545] rounded-full py-3"
+                        onClick={() => navigate('/list-dashboard')}
+                        className="flex items-center w-full text-black active:bg-[#093545] active:text-white focus-within:bg-[#093545] focus-within:text-white hover:text-white pl-4 hover:bg-[#093545] rounded-full py-3"
                     >
                         <MdOutlineDashboardCustomize
                             size={20}
@@ -49,14 +50,15 @@ const Sidebar = () => {
                         Dashboard
                     </button>
                     <button
-                        className="flex items-center w-full text-black hover:text-white pl-4 hover:bg-[#093545] rounded-full py-3"
+                        className="flex items-center w-full text-black active:bg-[#093545] active:text-white focus-within:bg-[#093545] focus-within:text-white hover:text-white pl-4 hover:bg-[#093545] rounded-full py-3"
                         onClick={() => navigate('/visit-request')}
                     >
                         <AiOutlineUser size={20} className="mr-3" />
                         Visit Request
                     </button>
                     <button
-                        className="flex items-center w-full text-black hover:text-white pl-4 hover:bg-[#093545] rounded-full py-3"
+                        onClick={() => navigate('/visit-request')}
+                        className="flex items-center w-full text-black active:bg-[#093545] active:text-white focus-within:bg-[#093545] focus-within:text-white hover:text-white pl-4 hover:bg-[#093545] rounded-full py-3"
                     >
                         <BiLogOutCircle size={20} className="mr-3" />
                         Logout

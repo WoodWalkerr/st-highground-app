@@ -7,6 +7,7 @@ const path = require('path')
 
 const usersController = require('./controller/users')
 const visitController = require('./controller/visits')
+const notificationController = require('./controller/notification')
 
 const app = express()
 const port = process.env.DB_PORT || 8000
@@ -50,7 +51,7 @@ app.get('/api/v1/visits', (req, res) => {
 })
 
 app.put('/api/v1/visits', (req, res) => {
-    console.log("laman nya", req.body.visits)
+    console.log('laman nya', req.body.visits)
     visitController.updateVisit(req.body.visits).then((data) => res.json(data))
 })
 
@@ -60,6 +61,19 @@ app.delete('/api/v1/visits/:id', (req, res) => {
 
 app.post('/api/v1/login', (req, res) => {
     usersController.userlogin(req.body).then((data) => res.json(data))
+})
+// New endpoint to send email notification
+app.post('/api/v1/visits', (req, res) => {
+    visitController
+        .sendVisitAcceptedEmail(req.body.visits)
+        .then((notification) => res.json(notification))
+})
+
+app.post('/api/v1/notifications', (req, res) => {
+    console.log("here", req.body.notification)
+    notificationController
+        .createNotification(req.body.notification)
+        .then((notification) => res.json(notification))
 })
 
 app.listen(port, () => {

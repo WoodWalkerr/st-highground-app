@@ -78,10 +78,9 @@ const Navbar = () => {
                                 >
                                     {' '}
                                     Sign out
-                                    {/* <BiLogOutCircle size={20} className="mr-3" /> */}
-                                    {/* <span className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 scale-0 rounded bg-gray-100 p-2 text-xs text-gray-600 group-hover:scale-100">
+                                    <span className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 scale-0 rounded bg-gray-100 p-2 text-xs text-gray-600 group-hover:scale-100">
                                 Sign out
-                            </span> */}
+                            </span>
                                 </button>{' '}
                             </li>
                         </ul>

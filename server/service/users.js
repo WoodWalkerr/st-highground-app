@@ -8,10 +8,7 @@ class UserService {
     async getUserById(id) {
         return await userRepository.getUserById(id)
     }
-
-    async getUserByEmail(user) {
-        return await userRepository.getUserByEmail(user);
-    }
+    
     async createUser(user) {
         return await userRepository.createUser(user)
     }

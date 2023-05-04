@@ -37,8 +37,8 @@ function ScheduleBookForm() {
             return
         }
         const selectedTime = new Date(`${visit_date}T${visit_time}`)
-        const openingTime = new Date(`${visit_date}T06:00:00`)
-        const closingTime = new Date(`${visit_date}T17:00:00`)
+        const openingTime = new Date(`${visit_date}T06:00`)
+        const closingTime = new Date(`${visit_date}T17:00`)
         if (selectedTime < openingTime || selectedTime > closingTime) {
             alert('Booking is only available between 6am and 5pm')
             return
@@ -153,7 +153,7 @@ function ScheduleBookForm() {
                         {/* {alertMessage & <div> {alertMessage} </div>} */}
                         <button
                             onClick={onSubmitForm}
-                            className="bg-[#4CAF50] hover:bg-green-600 transition duration-200 text-white font-bold text-sm px-8 py-2 mb-2 rounded-[10px] shadow hover:shadow-lg outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                            className="bg-[#4CAF50] hover:bg-green-600 text-white font-bold text-sm px-8 py-2 mb-2 rounded-[10px] shadow hover:shadow-lg outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
                             type="submit"
                         >
                             Submit

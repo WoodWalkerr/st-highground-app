@@ -8,18 +8,22 @@ module.exports = (sequelize, DataTypes, Model) => {
                 primaryKey: true,
                 autoIncrement: true
             },
-            email : {
-                type: DataTypes.STRING,
+            user_id: {
+                type: DataTypes.INTEGER,
                 allowNull: false,
                 references: {
                     model: 'users',
-                    key: 'id'
-                }
+                    key: 'id',
+                },
+            },
+            email : {
+                type: DataTypes.STRING,
+                allowNull: false,
             },
         },
         {
             sequelize,
-            modelName: 'notification',
+            modelName: 'Notification',
             tableName: 'notification'
         }
     )

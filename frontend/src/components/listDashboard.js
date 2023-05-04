@@ -54,11 +54,10 @@ const ListDashboard = () => {
         <div className="flex h-screen bg-gray-100">
             <Sidebar />
             <div className="flex-1">
-            {/* <div className="flex items-center flex-col justify-between mb-4 bg-gray-100 ">
+                {/* <div className="flex items-center flex-col justify-between mb-4 bg-gray-100 ">
                             <AdminNavbar />
                     </div> */}
                 <div className="p-4 ml-0 md:ml-64 bg-gray-100 ">
-                  
                     <div className="grid grid-cols-3 gap-2 px-20 py-10">
                         <div className="flex items-center justify-center h-[200px] w-[200px] bg-white shadow-md shadow-bottom rounded-[20px]">
                             <p className="text-sm text-gray-500">
@@ -91,20 +90,12 @@ const ListDashboard = () => {
                                     </th>
                                 </tr>
                                 <tr className=" bg-white font-semibold text-gray-600">
-                                    <th className="py-10 text-sm ">
-                                        No.
-                                    </th>
+                                    <th className="py-10 text-sm ">No.</th>
 
                                     <th className="py-10 text-sm flex justify-center items-center ">
-                                        <AiOutlineUser
-                                            size={15}
-                                            className="mr-3"
-                                        />
                                         Name
                                     </th>
-                                    <th className="py-10 text-sm ">
-                                        Email
-                                    </th>
+                                    <th className="py-10 text-sm ">Email</th>
                                     <th className="py-10 text-sm ">
                                         Phone Number
                                     </th>
@@ -125,7 +116,11 @@ const ListDashboard = () => {
                                         <td className="px-6 bg-white text-center text-gray-500 font-light whitespace-nowrap">
                                             {startIndex + index}
                                         </td>
-                                        <td className="px-6 bg-white text-center text-gray-500 font-light whitespace-nowrap">
+                                        <td className="px-6 bg-white flex justify-start items-center text-center text-gray-500 font-light whitespace-nowrap">
+                                            <AiOutlineUser
+                                                size={15}
+                                                className="mr-3"
+                                            />
                                             {user.name}
                                         </td>
                                         <td className="px-6 bg-white text-center text-gray-500 font-light whitespace-nowrap">
@@ -159,34 +154,46 @@ const ListDashboard = () => {
                                     </tr>
                                 ))}
                             </tbody>
+                            <tr>
+                                <td colSpan={6}>
+                                    <div className="flex justify-center pb-5">
+                                        <nav className="flex mt-4">
+                                            <ul className="flex pl-0 list-none rounded">
+                                                <ReactPaginate
+                                                    previousLabel={'<'}
+                                                    nextLabel={'>'}
+                                                    pageCount={10}
+                                                    containerClassName={
+                                                        'flex flex-wrap items-center justify-center overflow-hidden'
+                                                    }
+                                                    pageClassName={
+                                                        'flex items-center justify-center w-6 h-6 mx-1 text-xs font-medium text-gray-400  hover:bg-gray-200 transition duration-200 ease-in-out'
+                                                    }
+                                                    activeClassName={
+                                                        'text-gray-100 '
+                                                    }
+                                                    previousClassName={
+                                                        'px-3 py-2 text-xs font-medium text-gray-400  hover:bg-gray-200 transition duration-200 ease-in-out'
+                                                    }
+                                                    nextClassName={
+                                                        'px-3 py-2 text-xs font-medium text-gray-400 hover:bg-gray-200 transition duration-200 ease-in-out'
+                                                    }
+                                                    previousLinkClassName={
+                                                        'page-link'
+                                                    }
+                                                    nextLinkClassName={
+                                                        'page-link'
+                                                    }
+                                                    onPageChange={
+                                                        handlePageClick
+                                                    }
+                                                />
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </td>
+                            </tr>
                         </table>
-                        <div class="flex justify-center mt-4">
-                            <nav class="bg-white rounded-lg shadow-md p-3">
-                                <ReactPaginate
-                                    previousLabel={'<'}
-                                    nextLabel={'>'}
-                                    pageCount={10}
-                                    containerClassName={
-                                        'flex flex-wrap items-center justify-center overflow-hidden'
-                                    }
-                                    pageClassName={
-                                        'flex items-center justify-center w-8 h-8 mx-1 text-sm font-medium text-gray-700 bg-white border rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-200 ease-in-out'
-                                    }
-                                    activeClassName={
-                                        'text-blue-700 bg-blue-500 rounded-md'
-                                    }
-                                    previousClassName={
-                                        'px-4 py-2 text-sm font-medium text-gray-700 bg-white border rounded-l-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-200 ease-in-out'
-                                    }
-                                    nextClassName={
-                                        'px-4 py-2 text-sm font-medium text-gray-700 bg-white border rounded-r-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-200 ease-in-out'
-                                    }
-                                    previousLinkClassName={'page-link'}
-                                    nextLinkClassName={'page-link'}
-                                    onPageChange={handlePageClick}
-                                />
-                            </nav>
-                        </div>
                     </div>
                 </div>
             </div>
