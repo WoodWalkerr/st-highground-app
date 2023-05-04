@@ -1,8 +1,14 @@
 const pendingRequestRepository = require('../repository/pendingRequest')
 
 class PendingRequestServices {
-    async createNotification(user_id, email) {
-        return await pendingRequestRepository.createNotification(user_id, email)
+    // async getPendingReq(id) {
+    //     return await pendingRequestRepository.getPendingReq(id)
+    // }
+    async getAllPendingReq() {
+        return await pendingRequestRepository.getAllPendingReq()
+    }
+    async deletePendingReq(id) {
+        return await pendingRequestRepository.deletePendingReq(id)
     }
 }
 

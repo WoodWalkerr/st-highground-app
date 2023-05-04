@@ -40,6 +40,10 @@ module.exports = (sequelize, DataTypes, Model) => {
             tableName: 'visits',
         }
     )
+    Visit.belongsTo(sequelize.models.users, {
+        foreignKey: 'user_id',
+        as: 'user',
+    })
 
     return Visit
 }

@@ -1,9 +1,15 @@
 const visitorLogRepository = require('../repository/visitorLog')
 
-class visitorLogServices {
-    async createNotification(user_id, email) {
-        return await visitorLogRepository.createNotification(user_id, email)
+class VisitorLogServices {
+    async getLogById(id) {
+        return await visitorLogRepository.getLogById(id)
+    }
+    async getAllLogs(visitlogs) {
+        return await visitorLogRepository.getAllLogs(visitlogs)
+    }
+    async deleteLog(id) {
+        return await visitorLogRepository.deleteLog(id)
     }
 }
 
-module.exports = new visitorLogServices()
+module.exports = new VisitorLogServices()
