@@ -6,12 +6,16 @@ import EditDashboard from './EditDashboard'
 import ReactPaginate from 'react-paginate'
 import { getUsers, deleteUser } from '../services/UserServices'
 import Sidebar from '../common/Sidebar'
+import ExpectedVisitor from './ExpectedVisitor'
+import DefaultVisitor from './DefaultVisitor'
+import PendingVisit from './DefaultVisitor'
+
 // import AdminNavbar from '../common/AdminNavbar'
 
 const ListDashboard = () => {
     const [users, setUsers] = useState([])
     const [currentPage, setCurrentPage] = useState(0)
-    const itemsPerPage = 10
+    const itemsPerPage = 5
     const pageCount = Math.ceil(users.length / itemsPerPage)
 
     const handlePageClick = ({ selected }) => {
@@ -59,23 +63,11 @@ const ListDashboard = () => {
                     </div> */}
                 <div className="p-4 ml-0 md:ml-64 bg-gray-100 ">
                     <div className="grid grid-cols-3 gap-2 px-20 py-10">
-                        <div className="flex items-center justify-center h-[200px] w-[200px] bg-white shadow-md shadow-bottom rounded-[20px]">
-                            <p className="text-sm text-gray-500">
-                                Visitor Expected
-                            </p>
-                        </div>
+                        <ExpectedVisitor />
 
-                        <div className="flex items-center justify-center h-[200px] w-[200px] bg-white shadow-md shadow-bottom rounded-[20px]">
-                            <p className="text-sm text-gray-500">
-                                Default visitor
-                            </p>
-                        </div>
+                       <DefaultVisitor />
 
-                        <div className="flex items-center justify-center h-[200px] w-[200px] bg-white shadow-md shadow-bottom rounded-[20px]">
-                            <p className="text-sm text-gray-500">
-                                Pending Visits
-                            </p>
-                        </div>
+                        <PendingVisit />
                     </div>
 
                     <div className="flex items-center flex-col justify-center h-screen mb-4 border-t-2 border-gray-200 pr-[55px]">
@@ -90,7 +82,7 @@ const ListDashboard = () => {
                                     </th>
                                 </tr>
                                 <tr className=" bg-white font-semibold text-gray-600">
-                                    <th className="py-10 text-sm ">No.</th>
+                                    <th className="py-10 text-sm ">#</th>
 
                                     <th className="py-10 text-sm flex justify-center items-center ">
                                         Name
@@ -116,7 +108,7 @@ const ListDashboard = () => {
                                         <td className="px-6 bg-white text-center text-gray-500 font-light whitespace-nowrap">
                                             {startIndex + index}
                                         </td>
-                                        <td className="px-6 bg-white flex justify-start items-center text-center text-gray-500 font-light whitespace-nowrap">
+                                        <td className="px-6 py-3 bg-white flex justify-start items-center text-center text-gray-500 font-light whitespace-nowrap">
                                             <AiOutlineUser
                                                 size={15}
                                                 className="mr-3"
