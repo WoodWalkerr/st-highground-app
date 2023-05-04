@@ -1,11 +1,17 @@
-import React from 'react'
-// import { navigation } from '../data/scheduleLiks'
-// import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
 import ScheduleBookForm from './ScheduleBookForm'
 
 function Splash() {
-    
-    // const navigate = useNavigate()
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+    useEffect(() => {
+        const token = localStorage.getItem('data')
+        if (token) {
+            setIsLoggedIn(true)
+        } else {
+            setIsLoggedIn(false)
+        }
+    }, [])
 
     return (
         <div
@@ -23,11 +29,18 @@ function Splash() {
                         Take a hike, book a site
                     </span>
                 </h1>
-                <div className='flex justify-center items-center pt-12 mt-12'>
-                <ScheduleBookForm />
+             
+                <div className="flex flex-col justify-center items-center mt-12">
+                {isLoggedIn && (
+                    <div className="flex justify-center items-center">
+                        <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg">
+                            Scheduled Visits
+                        </button>
+                    </div>
+                )}
+                    <ScheduleBookForm />
+                </div>
             </div>
-            </div>
-            
         </div>
     )
 }
