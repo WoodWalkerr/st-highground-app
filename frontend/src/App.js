@@ -6,6 +6,8 @@ import ScheduleBookForm from './components/ScheduleBookForm'
 import Navbar from './common/Navbar'
 import ListDashboard from "./components/ListDashboard"
 import VisitList from './components/VisitList'
+import Usertable from './components/UserTable'
+
 
 function App() {
   return (
@@ -17,7 +19,7 @@ function App() {
         <Route path="/schedule-a-visit" element={<Layout><ScheduleBookForm /></Layout>} />
         <Route path="/list-dashboard" element={<ListDashboard />} />
         <Route path="/visit-request" element={<VisitList />} />
-
+        <Route path="/user-table" element={<Usertable />} />
       </Routes>
     </BrowserRouter>
   );

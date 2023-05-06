@@ -71,7 +71,7 @@ function ScheduleBookForm() {
     }
 
     return (
-        <div className=" text-black flex flex-col justify-center max-w-lg items-center pt-10">
+        <div className=" text-black flex flex-col justify-center max-w-lg items-center">
             <div className="bg-gray-400 bg-opacity-40 rounded-lg">
                 <div className="w-[20%] pt-4 flex flex-row mx-3">
                     <span className="flex justify-center items-center text-white font-semibold text-md text-center mx-5 uppercase">

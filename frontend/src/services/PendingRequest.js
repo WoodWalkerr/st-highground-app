@@ -7,17 +7,24 @@ export async function getAllPendingReq() {
         console.error(error.message)
     }
 }
-
-export async function getPendingReq(userId) {
+export const getPendingReq = async (userID) => {
     try {
-        const response = await fetch(`/api/v1/pending-request/${userId}`)
-        const jsonData = await response.json()
-        return jsonData
+      const response = await fetch(`/api/v1/pending-request/${userID}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
+      return data;
     } catch (error) {
-        console.error(error.message)
-        throw error
+      console.error(error);
+      return [];
     }
-}
+  };
+  
+  
+
 
 export async function deletePendingReq(userId) {
     try {
@@ -25,7 +32,7 @@ export async function deletePendingReq(userId) {
             'Are you sure you want to delete this user?'
         )
         if (confirmed) {
-            const deleteUser = await fetch(`/api/v1/pending-request/:id/${userId}`, {
+            const deleteUser = await fetch(`/api/v1/pending-request/${userId}`, {
                 method: 'DELETE',
             })
             return true

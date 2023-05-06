@@ -14,6 +14,7 @@ const VisitList = () => {
     const [currentPage, setCurrentPage] = useState(0)
     const [users, setUsers] = useState([])
     // const userID = localStorage.getItem('data')
+    const expectedVisitsCount = visits.filter((visit) => visit.status === 'accepted').length
 
     const itemsPerPage = 5
     const pageCount = Math.ceil(visits.length / itemsPerPage)
@@ -55,7 +56,7 @@ const VisitList = () => {
                     </div> */}
                 <div className="p-4 ml-0 md:ml-64 bg-gray-100 ">
                     <div className="grid grid-cols-3 gap-2 px-20 py-10">
-                        <ExpectedVisitor />
+                    <ExpectedVisitor expectedVisitsCount={expectedVisitsCount} />
 
                         <DefaultVisitor />
 
