@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import ScheduleBookForm from './ScheduleBookForm'
-import { useNavigate } from 'react-router-dom'
+import UserTable from './UserTable'
 
 function Splash() {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
-    const navigate = useNavigate()
+    const [showModal, setShowModal] = useState(false)
 
     useEffect(() => {
         const token = localStorage.getItem('data')
@@ -14,6 +14,10 @@ function Splash() {
             setIsLoggedIn(false)
         }
     }, [])
+
+    const handlePendingRequestsClick = () => {
+        setShowModal(true)
+    }
 
     return (
         <div
@@ -35,8 +39,9 @@ function Splash() {
                 <div className="flex flex-col justify-center items-center mt-12">
                     {isLoggedIn && (
                         <div className="flex justify-center items-center">
-                            <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg"
-                            onClick={() => navigate('/user-table')}
+                            <button
+                                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg"
+                                onClick={handlePendingRequestsClick}
                             >
                                 Scheduled Visits
                             </button>
@@ -45,8 +50,13 @@ function Splash() {
                 </div>
 
                 <div className="flex flex-col justify-center items-center mt-12">
-                    <ScheduleBookForm />
+                    {<ScheduleBookForm />}
                 </div>
+                {showModal && (
+                <div>
+                    <UserTable />
+                </div>
+            )}
             </div>
         </div>
     )
