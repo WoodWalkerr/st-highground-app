@@ -66,7 +66,6 @@ app.post('/api/v1/visits', (req, res) => {
 })
 
 app.post('/api/v1/notifications', (req, res) => {
-    console.log('here', req.body.notification)
     notificationController
         .createNotification(req.body.notification)
         .then((notification) => res.json(notification))
@@ -93,11 +92,12 @@ app.delete('/api/v1/visitor-log/:id', (req, res) => {
     usersController.deleteLog(req.params.id).then((data) => res.json(data))
 })
 // pending request endpoints
-// app.get('/api/v1/pending-request/:id', (req, res) => {
-//     pendingRequestController
-//         .getAllPendingReq(req.params.id)
-//         .then((data) => res.json(data))
-// })
+app.get('/api/v1/pending-request/:user_id', (req, res) => {
+    pendingRequestController
+        .getPendingReq(req.params.user_id)
+        .then((data) => res.json(data))
+})
+
 app.get('/api/v1/pending-request', (req, res) => {
     pendingRequestController
         .getAllPendingReq()

@@ -22,4 +22,3 @@ function generateAccessToken(email) {
 }
 
 module.exports = {authenticateToken, generateAccessToken}
-

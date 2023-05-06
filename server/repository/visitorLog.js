@@ -20,7 +20,7 @@ class visitorLogRepository {
             console.log('Error: ', error)
         }
     }
-    async getAllLogs(userId) {
+    async getPendingReq(userId) {
         try {
           const visits = await this.db.visit.findAll({
             where: {

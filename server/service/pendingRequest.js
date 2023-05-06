@@ -1,9 +1,9 @@
 const pendingRequestRepository = require('../repository/pendingRequest')
 
 class PendingRequestServices {
-    // async getPendingReq(id) {
-    //     return await pendingRequestRepository.getPendingReq(id)
-    // }
+    async getPendingReq(userID) {
+        return await pendingRequestRepository.getPendingReq(userID)
+    }
     async getAllPendingReq() {
         return await pendingRequestRepository.getAllPendingReq()
     }

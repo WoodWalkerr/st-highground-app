@@ -29,6 +29,30 @@ class PendingRequestRepository {
             console.log('Error: ', error)
         }
     }
+    async getPendingReq(userID) {
+        try {
+            const visits = await this.db.visits.findAll({
+                where: {
+                    user_id: userID,
+                    status: 'pending',
+                },
+                order: [
+                    ['visit_date', 'ASC'],
+                    ['visit_time', 'ASC'],
+                ],
+                include: [
+                    {
+                        model: this.db.users,
+                        as: 'user',
+                        attributes: ['name'],
+                    },
+                ],
+            })
+            return visits
+        } catch (error) {
+            console.log('Error: ', error)
+        }
+    }
 
     async deletePendingReq(id) {
         try {
