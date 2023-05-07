@@ -1,23 +1,27 @@
-import React, { useState, useEffect } from 'react'
-import ScheduleBookForm from './ScheduleBookForm'
-import UserTable from './UserTable'
+import React, { useState, useEffect } from 'react';
+import ScheduleBookForm from './ScheduleBookForm';
+import Tabs from '../common/Tabs';
 
 function Splash() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
-    const [showModal, setShowModal] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
-    useEffect(() => {
-        const token = localStorage.getItem('data')
-        if (token) {
-            setIsLoggedIn(true)
-        } else {
-            setIsLoggedIn(false)
-        }
-    }, [])
-
-    const handlePendingRequestsClick = () => {
-        setShowModal(true)
+  useEffect(() => {
+    const token = localStorage.getItem('data');
+    if (token) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
     }
+  }, []);
+
+  const handlePendingRequestsClick = () => {
+    setShowModal(true);
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false);
+  };
 
     return (
         <div
@@ -53,13 +57,13 @@ function Splash() {
                     {<ScheduleBookForm />}
                 </div>
                 {showModal && (
-                <div>
-                    <UserTable />
-                </div>
-            )}
+                    <div>
+                        <Tabs onClose={handleModalClose} />
+                    </div>
+                )}
             </div>
         </div>
     )
 }
 
-export default Splash
+export default Splash;
