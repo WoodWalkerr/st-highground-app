@@ -10,6 +10,8 @@ const visitController = require('./controller/visits')
 const notificationController = require('./controller/notification')
 const visitorLogController = require('./controller/visitorLog')
 const pendingRequestController = require('./controller/pendingRequest')
+const acceptedRequestController = require('./controller/acceptedRequest')
+
 
 const app = express()
 const port = process.env.DB_PORT || 8000
@@ -47,7 +49,6 @@ app.get('/api/v1/visits', (req, res) => {
 })
 
 app.put('/api/v1/visits', (req, res) => {
-    console.log('laman nya', req.body.visits)
     visitController.updateVisit(req.body.visits).then((data) => res.json(data))
 })
 
@@ -97,6 +98,13 @@ app.get('/api/v1/pending-request/:user_id', (req, res) => {
         .getPendingReq(req.params.user_id)
         .then((data) => res.json(data))
 })
+
+app.get('/api/v1/accepted-request/:user_id', (req, res) => {
+    acceptedRequestController
+        .getAcceptedReq(req.params.user_id)
+        .then((data) => res.json(data))
+})
+
 
 app.get('/api/v1/pending-request', (req, res) => {
     pendingRequestController

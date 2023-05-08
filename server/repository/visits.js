@@ -28,14 +28,15 @@ class VisitRepository {
         try {
             const visitCount = await this.db.visits.count({
                 where: {
-                    visit_date: {
-                        [Op.between]: [
-                            new Date(visits.visit_date + 'T00:00:00.000Z'),
-                            new Date(visits.visit_date + 'T23:59:59.999Z'),
-                        ],
-                    },
+                  user_id: visits.user_id,
+                  visit_date: {
+                    [Op.between]: [
+                      new Date(visits.visit_date + 'T00:00:00.000Z'),
+                      new Date(visits.visit_date + 'T23:59:59.999Z'),
+                    ],
+                  },
                 },
-            })
+              });
 
             const MAX_VISITS_PER_DAY = 3
 

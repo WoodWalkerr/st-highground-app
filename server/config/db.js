@@ -39,6 +39,7 @@ const connect = () => {
     db.visits = require('../model/visits')(sequelize, DataTypes, Model)
     db.notification = require('../model/notification')(sequelize, DataTypes, Model)
     db.pendingRequest = require('../model/pendingRequest')(sequelize, DataTypes, Model)
+    db.acceptedRequest = require('../model/acceptedRequest')(sequelize, DataTypes, Model)
     db.visitorLog = require('../model/visitorLog')(sequelize, DataTypes, Model)
 
     return db
