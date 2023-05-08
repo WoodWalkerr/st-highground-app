@@ -7,8 +7,8 @@ import ReactPaginate from 'react-paginate'
 import { getUsers, deleteUser } from '../services/UserServices'
 import Sidebar from '../common/Sidebar'
 import ExpectedVisitor from './ExpectedVisitor'
-import DefaultVisitor from './DefaultVisitor'
-import PendingVisit from './DefaultVisitor'
+// import DefaultVisitor from './DefaultVisitor'
+import PendingVisit from './PendingVisit'
 
 // import AdminNavbar from '../common/AdminNavbar'
 
@@ -65,7 +65,7 @@ const ListDashboard = () => {
                     <div className="grid grid-cols-3 gap-2 px-20 py-10">
                         <ExpectedVisitor />
 
-                        <DefaultVisitor />
+                        {/* <DefaultVisitor /> */}
 
                         <PendingVisit />
                     </div>

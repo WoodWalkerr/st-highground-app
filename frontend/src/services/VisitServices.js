@@ -1,25 +1,27 @@
-export async function getAllVisits() {
+export async function getAllVisits(userId) {
     try {
-      const response = await fetch('/api/v1/visits');
+      const response = await fetch(`/api/v1/visits?user_id=${userId}`);
       const data = await response.json();
       return data;
     } catch (error) {
       console.error(error.message);
     }
   }
+  
 
-export async function getVisitsForUserAndDate(userId, date) {
+  export async function getVisitsForUserAndDate(userId, date) {
     try {
-        const visits = await getAllVisits()
-        const filteredVisits = visits.filter(
-            (visit) => visit.user_id === userId && visit.visit_date === date
-        )
-        return filteredVisits
+      const visits = await getAllVisits(userId);
+      const filteredVisits = visits.filter(
+        (visit) => visit.visit_date === date
+      );
+      return filteredVisits;
     } catch (error) {
-        console.error(error)
-        return []
+      console.error(error);
+      return [];
     }
-}
+  }
+  
 
 export const createVisit = async (visits) => {
     try {

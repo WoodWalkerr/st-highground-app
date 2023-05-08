@@ -44,7 +44,7 @@ function Splash() {
                     {isLoggedIn && (
                         <div className="flex justify-center items-center">
                             <button
-                                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg"
+                                className="bg-[#4CAF50] hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg"
                                 onClick={handlePendingRequestsClick}
                             >
                                 Scheduled Visits
