@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {
-    BiLogOutCircle,
+    FiLogOut,
     AiOutlineUser,
     MdOutlineDashboardCustomize,
     HiMenuAlt2,
@@ -22,7 +22,7 @@ const Sidebar = () => {
                 <div className="flex flex-col items-center">
                     <h1 className="text-2xl font-bold py-5">HIGHGROUND</h1>
 
-                    <div className="flex flex-col justify-center items-center">
+                    <div className="flex flex-col justify-center items-center pb-10 pt-5">
                         <div className="flex flex-col w-12 h-12 bg-gray-300 rounded-full pb-10">
                             <div className="flex flex-col justify-center items-center">
                             </div>
@@ -48,33 +48,42 @@ const Sidebar = () => {
                     </button>
                 </div>
 
-                <div className="h-screen py-10">
+                <div className="h-screen pt-12 ">
                     <nav
-                        className={`md:block mt-auto ${isOpen ? '' : 'hidden'}`}
+                        className={`md:block mt-auto ml-5 ${isOpen ? '' : 'hidden'}`}
                     >
                         <button
-                            onClick={() => navigate('/list-dashboard')}
-                            className="flex items-center w-full text-black active:bg-[#093545] active:text-white focus-within:bg-[#093545] focus-within:text-white hover:text-white pl-4 hover:bg-[#093545] rounded-full py-3"
+                            className="flex items-center w-full py-2 text-black"
+                            onClick={() => navigate('/visit-request')}
+
                         >
+                            <div className='rounded-md'>
                             <MdOutlineDashboardCustomize
-                                size={20}
-                                className="mr-3"
+                                size={15}
+                                className="mx-2 my-2 active:bg-[#093545] focus-within:bg-[#093545] rounded-lg"
                             />
+                            </div>
                             Dashboard
                         </button>
                         <button
-                            className="flex items-center w-full text-black active:bg-[#093545] active:text-white focus-within:bg-[#093545] focus-within:text-white hover:text-white pl-4 hover:bg-[#093545] rounded-full py-3"
-                            onClick={() => navigate('/visit-request')}
+                            className="flex items-center w-full py-2 text-black"
+                            onClick={() => navigate('/list-dashboard')}
+
                         >
-                            <AiOutlineUser size={20} className="mr-3" />
-                            Visit Request
+                            <div className='rounded-md'>
+                            <AiOutlineUser
+                                size={15}
+                                className="mx-2 my-2 active:bg-[#093545] focus-within:bg-[#093545] rounded-lg"
+                            />
+                            </div>
+                            List Dashboard
                         </button>
                         <div className="mt-auto">
                             <button
-                                onClick={() => navigate('/visit-request')}
-                                className="flex items-center w-full text-black active:bg-[#093545] active:text-white focus-within:bg-[#093545] focus-within:text-white hover:text-white pl-4 hover:bg-[#093545] rounded-full py-3"
+                                onClick={() => navigate('/')}
+                                className="flex items-center w-full py-2 text-black"
                             >
-                                <BiLogOutCircle size={20} className="mr-3" />
+                                <FiLogOut size={15} className="mx-2 my-2" />
                                 Logout
                             </button>
                         </div>

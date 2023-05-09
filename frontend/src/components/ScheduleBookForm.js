@@ -77,7 +77,7 @@ function ScheduleBookForm() {
                     <span className="flex justify-center items-center text-white font-semibold text-md text-center mx-5 uppercase">
                         Schedule a Visit
                     </span>{' '}
-                    <div className="mb-4 mx-3 ml-6 hidden">
+                    {/* <div className="mb-4 mx-3 ml-6 hidden">
                         <label className="pb-2 text-white" htmlFor="id">
                             ID
                         </label>
@@ -87,7 +87,7 @@ function ScheduleBookForm() {
                             name="id"
                             value={userID ? JSON.parse(userID).id : ''}
                         />
-                    </div>
+                    </div> */}
                     <div className="flex flex-col mb-4 mx-3 ml-6">
                         <label
                             className="pb-2 text-xs text-white"
@@ -96,7 +96,7 @@ function ScheduleBookForm() {
                             Date{' '}
                             {dateClicked && (
 
-                            <span className="text-black bg-white px-2 rounded-full">
+                            <span className="text-black bg-gray-200 px-2 rounded-full">
                                 {availableVisits > 0
                                     ? `${availableVisits} visits available`
                                     : 'visits available 0'}
@@ -104,7 +104,8 @@ function ScheduleBookForm() {
                             )}
                         </label>
                         <input
-                            className="py-2 px-3 rounded-lg bg-white"
+                            className="py-2 px-3 rounded-lg bg-gray-200"
+                            
                             type="date"
                             id="date"
                             name="visit_date"
@@ -127,7 +128,7 @@ function ScheduleBookForm() {
                             name="visit_time"
                             value={visit_time}
                             onChange={handleChange}
-                            className="border border-gray-400 p-2 rounded-md  outline-none bg-gray-100 text-gray-700 mb-2"
+                            className="border border-gray-400 p-2 rounded-md  outline-none bg-gray-200 text-gray-700 mb-2"
                         />
                     </div>
                     <div className="flex flex-col mb-4 mx-3 ml-6">
@@ -142,7 +143,7 @@ function ScheduleBookForm() {
                             name="purpose"
                             value={purpose}
                             onChange={handleChange}
-                            className="border border-gray-400 p-2 rounded-md  outline-none bg-gray-100 text-gray-700 mb-2"
+                            className="border border-gray-400 p-2 rounded-md  outline-none bg-gray-200 text-gray-700 mb-2"
                         >
                             <option className="text-xs">Select purpose</option>
                             <option value="Trekking">Trekking</option>
@@ -153,7 +154,7 @@ function ScheduleBookForm() {
                         {/* {alertMessage & <div> {alertMessage} </div>} */}
                         <button
                             onClick={onSubmitForm}
-                            className="bg-[#4CAF50] hover:bg-green-600 text-white font-bold text-sm px-8 py-2 mb-2 rounded-[10px] shadow hover:shadow-lg outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                            className="bg-blue-500 hover:bg-blue-600 text-white font-bold text-sm px-8 py-2 mb-2 rounded-[10px] shadow hover:shadow-lg outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
                             type="submit"
                         >
                             Submit

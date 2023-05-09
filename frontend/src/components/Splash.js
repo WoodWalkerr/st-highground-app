@@ -25,9 +25,9 @@ function Splash() {
 
     return (
         <div
-            className="flex justify-center items-center bg-white w-full mx-auto p-5 py-20"
+            className="flex justify-center items-center bg-white max-w-full mx-auto p-5 py-20"
             style={{
-                background: `url(${require('../assets/lake-2.jpg')}) center no-repeat`,
+                background: `url(${require('../assets/background.jpeg')}) center no-repeat`,
                 backgroundSize: 'cover',
                 height: '100vh',
             }}
@@ -44,7 +44,7 @@ function Splash() {
                     {isLoggedIn && (
                         <div className="flex justify-center items-center">
                             <button
-                                className="bg-[#4CAF50] hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg"
+                                className="border-2 text-white font-semibold hover:bg-gray-200 hover:text-black py-2 px-4 rounded-lg"
                                 onClick={handlePendingRequestsClick}
                             >
                                 Scheduled Visits

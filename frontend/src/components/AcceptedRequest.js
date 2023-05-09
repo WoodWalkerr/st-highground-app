@@ -26,7 +26,7 @@ function AcceptedRequests() {
   }
 
   if (acceptedRequest.length === 0) {
-    return <div>You have no pending requests.</div>;
+    return <div className='text-center text-black my-8'>There are currently no accepted requests associated with your account.</div>;
   }
 
   return (

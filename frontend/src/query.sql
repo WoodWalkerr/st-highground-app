@@ -5,7 +5,7 @@ INNER JOIN users ON visits.user_id = users.id;
 
 
 DELETE FROM visits
-WHERE purpose = 'Trekking';
+WHERE purpose = 'text-xs';
 
 
 

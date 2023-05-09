@@ -26,7 +26,7 @@ function PendingRequests() {
   }
 
   if (pendingRequests.length === 0) {
-    return <div>You have no pending requests.</div>;
+    return <div className='text-center text-black my-8'>You have no pending visits.</div>;
   }
 
   return (

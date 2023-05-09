@@ -1,6 +1,7 @@
 const { connect } = require('../config/db')
 const { Op } = require('sequelize')
-const nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer')
+const smtpTransport = require('nodemailer-smtp-transport')
 
 class VisitRepository {
     db = {}
@@ -28,15 +29,15 @@ class VisitRepository {
         try {
             const visitCount = await this.db.visits.count({
                 where: {
-                  user_id: visits.user_id,
-                  visit_date: {
-                    [Op.between]: [
-                      new Date(visits.visit_date + 'T00:00:00.000Z'),
-                      new Date(visits.visit_date + 'T23:59:59.999Z'),
-                    ],
-                  },
+                    user_id: visits.user_id,
+                    visit_date: {
+                        [Op.between]: [
+                            new Date(visits.visit_date + 'T00:00:00.000Z'),
+                            new Date(visits.visit_date + 'T23:59:59.999Z'),
+                        ],
+                    },
                 },
-              });
+            })
 
             const MAX_VISITS_PER_DAY = 3
 
@@ -60,37 +61,44 @@ class VisitRepository {
     }
 
     async sendVisitAcceptedEmail(visits) {
+        console.log('herrrreeee', visits)
         try {
-          const visit = await this.db.visits.getVisitById(visits);
-          if (visit.status !== 'accepted') {
-            return('Visit status must be accepted to send email');
-          }
-          const user = await this.db.users.getUserById(visit.user_id);
-          const email = user.email;
-          const transporter = nodemailer.createTransport({
-            host: 'smtp.gmail.com',
-            port: 587,
-            auth: {
-              user: 'highground2023@outlook.com',
-              pass: 'melven051998',
-            },
-          });
-          const mailOptions = {
-            from: 'highground2023@outlook.com',
-            to: email,
-            subject: 'Visit Accepted',
-            text: `Your visit on ${visit.visit_date} at ${visit.visit_time} for ${visit.purpose} has been accepted.`,
-          };
-          const info = await transporter.sendMail(mailOptions);
-          console.log(`Email sent: ${info.messageId}`);
-          const notification = await this.db.notification.createNotification(user.user_id, email);
-          return notification;
+            const visit = await this.db.visits.findOne(visits)
+            if (visit.status !== 'accepted') {
+                return 'Visit status must be accepted to send email'
+            }
+            const user = await this.db.users.findByPk(visit.user_id)
+            const email = user.email
+            const transporter = nodemailer.createTransport({
+                service: "gmail",
+                host: "smtp-gmail.com",
+                secure: false,
+                auth: {
+                    user: 'melvsbagolaque@gmail.com',
+                    pass: process.env.EMAIL_PASS,
+                },
+                tls: {
+                  rejectUnauthorized: false,
+                },
+            })
+            const mailOptions = {
+                from: 'melvsbagolaque@gmail.com',
+                to: email,
+                subject: 'Visit Accepted',
+                text: `Your visit on ${visit.visit_date} at ${visit.visit_time} for ${visit.purpose} has been accepted.`,
+            }
+            const info = await transporter.sendMail(mailOptions)
+            console.log(`Email sent: ${info.messageId}`)
+            const notification = await this.db.notification.findOne(
+                user.user_id,
+                email
+            )
+            return notification
         } catch (error) {
-          console.error(error);
-          throw error;
+            console.error(error)
+            throw error
         }
-      }
-      
+    }
 
     async updateVisit(visits) {
         console.log('visits:', visits)

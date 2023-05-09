@@ -1,4 +1,4 @@
-import { BiLogOutCircle } from 'react-icons/bi';
+import { BiLogOutCircle, BiUserVoice } from 'react-icons/bi';
 import { AiOutlineUser } from 'react-icons/ai';
 import { AiOutlineUnorderedList, AiOutlineEye, AiOutlineEyeInvisible, AiFillCheckCircle, AiFillCloseCircle } from 'react-icons/ai';
 import { MdOutlineDashboardCustomize } from 'react-icons/md';
@@ -7,7 +7,8 @@ import { IoMdClose } from 'react-icons/io';
 import { BiHappy } from 'react-icons/bi';
 import { FaUserCircle } from 'react-icons/fa';
 import { TbUsers } from 'react-icons/tb';
+import { FiLogOut } from 'react-icons/fi';
 
 
 
-export {TbUsers, AiFillCloseCircle, AiFillCheckCircle, FaUserCircle, BiLogOutCircle, AiOutlineUser, MdOutlineDashboardCustomize, HiMenuAlt2, IoMdClose, AiOutlineUnorderedList, BiHappy, AiOutlineEye, AiOutlineEyeInvisible};
+export {FiLogOut, BiUserVoice, TbUsers, AiFillCloseCircle, AiFillCheckCircle, FaUserCircle, BiLogOutCircle, AiOutlineUser, MdOutlineDashboardCustomize, HiMenuAlt2, IoMdClose, AiOutlineUnorderedList, BiHappy, AiOutlineEye, AiOutlineEyeInvisible};

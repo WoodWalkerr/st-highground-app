@@ -33,7 +33,7 @@ const VisitListItem = ({ visit }) => {
                     >
                         <AiFillCheckCircle size={20} />
                         <span className="absolute top-full left-1/2 border border-green-500 transform -translate-x-1/2 -translate-y-2 scale-0 rounded bg-gray-100 p-2 text-xs text-gray-600 group-hover:scale-100">
-                        Decline
+                        Accept
                     </span>
                     </button>
                     <button
@@ -42,7 +42,7 @@ const VisitListItem = ({ visit }) => {
                     >
                         <AiFillCloseCircle size={20} />
                         <span className="absolute top-full left-1/2 border border-red-500 transform -translate-x-1/2 -translate-y-2 scale-0 rounded bg-gray-100 p-2 text-xs text-gray-600 group-hover:scale-100">
-                        Accept
+                        Decline
                     </span>
                     </button>
                 </>

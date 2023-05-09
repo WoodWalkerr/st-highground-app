@@ -60,10 +60,11 @@ app.post('/api/v1/login', (req, res) => {
     usersController.userlogin(req.body).then((data) => res.json(data))
 })
 // New endpoint to send email notification
-app.post('/api/v1/visits', (req, res) => {
+app.post('/api/v1/email-notification', (req, res) => {
+    console.log("hereeee", req.body.visits)
     visitController
         .sendVisitAcceptedEmail(req.body.visits)
-        .then((notification) => res.json(notification))
+        .then((data) => res.json(data))
 })
 
 app.post('/api/v1/notifications', (req, res) => {
