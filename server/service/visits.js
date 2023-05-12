@@ -4,6 +4,9 @@ class VisitService {
     async createVisit(visits) {
         return await visitRepository.createVisit(visits)
     }
+    // async searchVisitsByUserName(visits) {
+    //     return await visitRepository.searchVisitsByUserName(visits)
+    // }
     async getAllVisits(visits) {
         return await visitRepository.getAllVisits(visits)
     }

@@ -6,6 +6,10 @@ class UserController {
         return await userService.getAllUsers(user)
     }
 
+    async searchUsersByName(name) {
+        return await userService.searchUsersByName(name)
+    }
+
     async getUserById(user) {
         return await userService.getUserById(user)
     }

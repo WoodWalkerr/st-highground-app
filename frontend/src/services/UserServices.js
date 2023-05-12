@@ -9,6 +9,18 @@ export async function getUsers() {
     }
 }
 
+export async function searchUsersByName(name) {
+    try {
+      const response = await fetch(`/api/v1/users/${encodeURIComponent(name)}`);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching search results:', error);
+      throw new Error('Internal server error');
+    }
+  }
+  
+
 export const createUser = async (users) => {
     try {
         const response = await fetch('/api/v1/users', {

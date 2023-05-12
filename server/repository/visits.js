@@ -25,6 +25,16 @@ class VisitRepository {
         }
     }
 
+    // async searchVisitsByUserName (visits) {
+    //     try {
+    //       const visits = await this.db.visits.findAll(visits);
+    //       res.json(visits);
+    //     } catch (error) {
+    //       console.error('Error searching visits:', error);
+    //       res.status(500).json({ error: 'Internal server error' });
+    //     }
+    //   };
+
     async createVisit(visits) {
         try {
             const visitCount = await this.db.visits.count({
@@ -61,20 +71,27 @@ class VisitRepository {
     }
 
     async sendVisitAcceptedEmail(visits) {
-        console.log('herrrreeee', visits)
         try {
-            const visit = await this.db.visits.findOne(visits)
+            const visit = await this.db.visits.findOne({
+                where: {
+                    user_id: visits.user_id
+                }
+            });
             if (visit.status !== 'accepted') {
                 return 'Visit status must be accepted to send email'
             }
-            const user = await this.db.users.findByPk(visit.user_id)
+            const user = await this.db.users.findByPk(visit.user_id, {
+                where: {
+                  id: visit.user_id
+                }
+              });
             const email = user.email
             const transporter = nodemailer.createTransport({
                 service: "gmail",
                 host: "smtp-gmail.com",
                 secure: false,
                 auth: {
-                    user: 'melvsbagolaque@gmail.com',
+                    user: process.env.EMAIL,
                     pass: process.env.EMAIL_PASS,
                 },
                 tls: {
@@ -89,10 +106,13 @@ class VisitRepository {
             }
             const info = await transporter.sendMail(mailOptions)
             console.log(`Email sent: ${info.messageId}`)
-            const notification = await this.db.notification.findOne(
-                user.user_id,
-                email
-            )
+            const notification = await this.db.notification.findOne({
+                where: {
+                  user_id: user.id, // Use `user.id` instead of `user.user_id`
+                  email: email
+                } 
+              });
+
             return notification
         } catch (error) {
             console.error(error)
@@ -101,8 +121,6 @@ class VisitRepository {
     }
 
     async updateVisit(visits) {
-        console.log('visits:', visits)
-
         let data = {}
 
         try {

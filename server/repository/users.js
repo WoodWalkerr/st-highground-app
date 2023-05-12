@@ -1,6 +1,8 @@
 const bcrypt = require('bcryptjs')
 const { connect } = require('../config/db')
 const { generateAccessToken } = require('../config/jwt')
+const { Op } = require('sequelize')
+
 
 class UserRepository {
     db = {}
@@ -23,6 +25,22 @@ class UserRepository {
             console.log('Error: ', error)
         }
     }
+
+    async searchUsersByName (name) {
+        try {
+          const users = await this.db.users.findAll({
+            where: {
+                name: {
+                  [Op.iLike]: `%${name}%`, // Case-insensitive search
+                },
+              },
+            });
+            return users;
+        } catch (error) {
+          console.error('Error searching visits:', error);
+          throw new Error('Internal server error');
+        }
+      };
 
     async getUserById(id) {
         try {
@@ -80,7 +98,6 @@ class UserRepository {
     }
 
     //Login
-
     async userlogin(users) {
         try {
             const password = users.password

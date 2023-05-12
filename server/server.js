@@ -21,8 +21,10 @@ app.use(cors())
 app.use(express.json())
 app.use(bodyParser.json())
 
-app.get('/api/v1/users/:id', (req, res) => {
-    usersController.getUserById(req.params.id).then((data) => res.json(data))
+
+app.get('/api/v1/users/:name', (req, res) => {
+    console.log("heree", req.params.name)
+    usersController.searchUsersByName(req.params.name).then((data) => res.json(data))
 })
 
 app.get('/api/v1/users', (req, res) => {
@@ -40,10 +42,14 @@ app.put('/api/v1/users', (req, res) => {
 app.delete('/api/v1/users/:id', (req, res) => {
     usersController.deleteUser(req.params.id).then((data) => res.json(data))
 })
+
 app.post('/api/v1/visits', (req, res) => {
     visitController.createVisit(req.body.visits).then((data) => res.json(data))
 })
 
+app.get('/api/visits/search', (req, res) => {
+    visitController.searchVisitsByUserName().then((data) => res.json(data))
+})
 app.get('/api/v1/visits', (req, res) => {
     visitController.getAllVisits().then((data) => res.json(data))
 })
@@ -61,7 +67,6 @@ app.post('/api/v1/login', (req, res) => {
 })
 // New endpoint to send email notification
 app.post('/api/v1/email-notification', (req, res) => {
-    console.log("hereeee", req.body.visits)
     visitController
         .sendVisitAcceptedEmail(req.body.visits)
         .then((data) => res.json(data))
@@ -74,6 +79,7 @@ app.post('/api/v1/notifications', (req, res) => {
 })
 
 // visitor log endpoints
+
 app.get('/api/v1/visitor-log/:id', (req, res) => {
     visitorLogController
         .getLogById(req.params.id)

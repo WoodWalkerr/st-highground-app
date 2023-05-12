@@ -5,6 +5,9 @@ class VisitController {
     async createVisit(visits) {
         return await visitService.createVisit(visits)
     }
+    // async searchVisitsByUserName(visits) {
+    //     return await visitService.searchVisitsByUserName(visits)
+    // }
     async getAllVisits(visits) {
         return await visitService.getAllVisits(visits)
     }
