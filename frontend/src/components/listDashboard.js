@@ -1,78 +1,76 @@
-import React, { useEffect, useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import { AiOutlineUser } from '../icons/icons'
-import EditDashboard from './EditDashboard'
-import ReactPaginate from 'react-paginate'
-import { getUsers, deleteUser } from '../services/UserServices'
-import Sidebar from '../common/Sidebar'
-import ExpectedVisitor from './ExpectedVisitor'
-import PendingVisit from './PendingVisit'
-import SearchList from '../searchbox/SearchBox'
-
-// import AdminNavbar from '../common/AdminNavbar'
+import React, { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { AiOutlineUser } from '../icons/icons';
+import EditDashboard from './EditDashboard';
+import ReactPaginate from 'react-paginate';
+import { getUsers, deleteUser, searchUsersByName } from '../services/UserServices';
+import Sidebar from '../common/Sidebar';
+import SearchList from '../searchbox/SearchBox';
 
 const ListDashboard = () => {
-    const [users, setUsers] = useState([])
-    const [currentPage, setCurrentPage] = useState(0)
-    const [isLoading, setIsLoading] = useState(false);
+  const [users, setUsers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
 
-    const itemsPerPage = 5
-    const pageCount = Math.ceil(users.length / itemsPerPage)
+  const itemsPerPage = 5;
+  const pageCount = Math.ceil(users.length / itemsPerPage);
 
-    const handlePageClick = ({ selected }) => {
-        setCurrentPage(selected)
+  const handlePageClick = ({ selected }) => {
+    setCurrentPage(selected);
+  };
+
+  const startIndex = currentPage * itemsPerPage + 1;
+  const endIndex = startIndex + itemsPerPage;
+
+  const currentData = (users || []).slice(startIndex, Math.min(endIndex, users.length));
+
+  const handleDeleteUser = async (id) => {
+    try {
+      const success = await deleteUser(id);
+      if (success) {
+        setUsers((prevUsers) => prevUsers.filter((u) => u.id !== id));
+      }
+    } catch (error) {
+      console.error(error.message);
     }
+  };
 
-    const startIndex = currentPage * itemsPerPage + 1
-    const endIndex = startIndex + itemsPerPage
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const fetchedUsers = await getUsers();
+        setUsers(fetchedUsers);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
 
-    const currentData = (users || []).slice(
-        startIndex,
-        Math.min(endIndex, users.length)
-    )
+    fetchUsers();
+  }, []);
 
-    const handleDeleteUser = async (id) => {
-        try {
-            const success = await deleteUser(id)
-            if (success) {
-                setUsers((prevUsers) => prevUsers.filter((u) => u.id !== id))
-            }
-        } catch (error) {
-            console.error(error.message)
-        }
+  const handleSearch = async (name) => {
+    try {
+      const data = await searchUsersByName(name);
+      setUsers(data);
+    } catch (error) {
+      console.error('Error fetching search results:', error);
     }
+  };
 
-    useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                const fetchedUsers = await getUsers()
-                setUsers(fetchedUsers)
-            } catch (error) {
-                console.error(error.message)
-            }
-        }
-
-        fetchUsers()
-    }, [])
-
-    return (
-        <div className="flex h-screen bg-gray-100">
-            <Sidebar />
-            <div className="flex-1">
-                {/* <div className="flex items-center flex-col justify-between mb-4 bg-gray-100 ">
-                            <AdminNavbar />
-                    </div> */}
-                <div className="p-4 ml-0 md:ml-64 bg-gray-100 ">
-                    <div className="flex items-center flex-col justify-center h-screen mb-4 border-t-2 border-gray-200 pr-[55px]">
-                        <table className="max-w-6xl shadow-md overflow-hidden rounded-[20px] bg-white shadow-b-md table-auto">
-                            <thead>
-                                <tr>
-                                    <td colSpan={6}>
-                                        <div className="text-start flex flex-wrap justify-between pl-10 pb-4 pt-7 text-md font-semibold text-gray-600">
-                                            List Dashboard
-                                        <SearchList />
-                                        
+  
+  return (
+    <div className="flex h-screen bg-gray-100">
+      <Sidebar />
+      <div className="flex-1">
+        <div className="p-4 ml-0 md:ml-64 bg-gray-100 ">
+          <div className="flex items-center flex-col justify-center h-screen mb-4 border-t-2 border-gray-200 pr-[55px]">
+            <table className="max-w-6xl shadow-md overflow-hidden rounded-[20px] bg-white shadow-b-md table-auto">
+              <thead>
+                <tr>
+                  <td colSpan={6}>
+                    <div className="text-start flex flex-wrap justify-between pl-10 pb-4 pt-7 text-md font-semibold text-gray-600">
+                      List Dashboard
+                      <SearchList onSearch={handleSearch} />                                      
                                         </div>
                                     </td>
                                 </tr>

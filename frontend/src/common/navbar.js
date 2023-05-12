@@ -11,12 +11,7 @@ const Navbar = () => {
     const userID = localStorage.getItem('data')
     const navigate = useNavigate()
 
-    const handleLogout = () => {
-        sessionStorage.removeItem('jwt')
-        localStorage.removeItem('data')
-        setLoggedIn(false)
-        navigate('/')
-    }
+
 
     const handleLogin = () => {
         navigate('/sign-in')
@@ -28,7 +23,13 @@ const Navbar = () => {
 
     const jwt = sessionStorage.getItem('jwt')
     const userData = JSON.parse(localStorage.getItem('data'))
-
+    
+    const handleLogout = () => {
+        sessionStorage.removeItem('jwt')
+        localStorage.removeItem('data')
+        setLoggedIn(false)
+        navigate('/')
+    }
     useEffect(() => {
         const handleScroll = () => {
             setScrollPosition(window.pageYOffset)

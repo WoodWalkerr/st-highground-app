@@ -6,14 +6,22 @@ function Splash() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
+  
   useEffect(() => {
+    const isFirstRun = localStorage.getItem('data');
+    if (!isFirstRun) {
+        localStorage.clear();
+        localStorage.setItem('data', true);
+    }
+
     const token = localStorage.getItem('data');
     if (token) {
-      setIsLoggedIn(true);
+        setIsLoggedIn(true);
     } else {
-      setIsLoggedIn(false);
+        setIsLoggedIn(false);
     }
-  }, []);
+}, []);
+
 
   const handlePendingRequestsClick = () => {
     setShowModal(true);

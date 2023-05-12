@@ -7,12 +7,13 @@ import ActiveRequest from '../components/AcceptedRequest'
 
 const Tabs = ({ onClose }) => {
     const [activeTab, setActiveTab] = useState('Pending')
-    const tabs = ['Pending', 'Accepted', 'Completed']
+    const tabs = ['Pending', 'Accepted']
     const navigate = useNavigate()
 
     const handleClose = () => {
         onClose(navigate('/'))
     }
+
 
     return (
         <div className="fixed inset-0 z-50 overflow-auto bg-gray-500 bg-opacity-75 flex">
@@ -49,9 +50,6 @@ const Tabs = ({ onClose }) => {
                     />
                     {activeTab === 'Pending' && <PendingRequest />}
                     {activeTab === 'Accepted' && <ActiveRequest />}
-                    {activeTab === 'Completed' && (
-                        <div>Content for Completed</div>
-                    )}
                 </div>
             </div>
         </div>

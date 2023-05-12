@@ -145,7 +145,7 @@ function ScheduleBookForm() {
                             onChange={handleChange}
                             className="border border-gray-400 p-2 rounded-md  outline-none bg-gray-200 text-gray-700 mb-2"
                         >
-                            <option className="text-xs">Select purpose</option>
+                            <option className="Select Purpose">Select purpose</option>
                             <option value="Trekking">Trekking</option>
                             <option value="Camping">Camping</option>
                         </select>
