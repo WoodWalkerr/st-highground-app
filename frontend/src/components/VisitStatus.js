@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
-import { updateVisitStatus } from '../services/VisitServices'
+import {
+    updateVisitStatus,
+    sendEmailNotification,
+} from '../services/VisitServices'
 import { AiFillCheckCircle, AiFillCloseCircle } from '../icons/icons'
 
 const VisitListItem = ({ visit }) => {
@@ -9,6 +12,8 @@ const VisitListItem = ({ visit }) => {
         try {
             await updateVisitStatus(user_id, 'accepted')
             setStatus('accepted')
+
+            await sendEmailNotification(visit)
         } catch (error) {
             console.error(error.message)
         }
@@ -18,6 +23,8 @@ const VisitListItem = ({ visit }) => {
         try {
             await updateVisitStatus(user_id, 'declined')
             setStatus('declined')
+
+            await sendEmailNotification(visit)
         } catch (error) {
             console.error(error.message)
         }
@@ -33,8 +40,8 @@ const VisitListItem = ({ visit }) => {
                     >
                         <AiFillCheckCircle size={20} />
                         <span className="absolute top-full left-1/2 border border-green-500 transform -translate-x-1/2 -translate-y-2 scale-0 rounded bg-gray-100 p-2 text-xs text-gray-600 group-hover:scale-100">
-                        Accept
-                    </span>
+                            Accept
+                        </span>
                     </button>
                     <button
                         className="px-5 py-1 text-gray-500 hover:text-red-500 group relative z-50 "
@@ -42,8 +49,8 @@ const VisitListItem = ({ visit }) => {
                     >
                         <AiFillCloseCircle size={20} />
                         <span className="absolute top-full left-1/2 border border-red-500 transform -translate-x-1/2 -translate-y-2 scale-0 rounded bg-gray-100 p-2 text-xs text-gray-600 group-hover:scale-100">
-                        Decline
-                    </span>
+                            Decline
+                        </span>
                     </button>
                 </>
             )}

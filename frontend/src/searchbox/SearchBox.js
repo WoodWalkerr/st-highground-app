@@ -21,7 +21,7 @@ function SearchList({ onSearch }) {
   };
 
   return (
-    <div>
+    <div >
       <label htmlFor="table-search" className="sr-only">
         Search
       </label>

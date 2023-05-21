@@ -15,13 +15,13 @@ const acceptedRequestController = require('./controller/acceptedRequest')
 
 const app = express()
 const port = process.env.DB_PORT || 8000
-
+//middleware
 app.use(express.static(path.join(__dirname, './ui/build/')))
 app.use(cors())
 app.use(express.json())
 app.use(bodyParser.json())
 
-
+//routing
 app.get('/api/v1/users/:name', (req, res) => {
     console.log("heree", req.params.name)
     usersController.searchUsersByName(req.params.name).then((data) => res.json(data))

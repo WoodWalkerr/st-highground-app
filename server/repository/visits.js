@@ -60,7 +60,7 @@ class VisitRepository {
                 visit_date: visits.visit_date,
                 visit_time: visits.visit_time,
                 purpose: visits.purpose,
-                status: visits.status,
+                visit: visits.visit
             })
 
             return visit
@@ -108,7 +108,7 @@ class VisitRepository {
             console.log(`Email sent: ${info.messageId}`)
             const notification = await this.db.notification.findOne({
                 where: {
-                  user_id: user.id, // Use `user.id` instead of `user.user_id`
+                  user_id: user.id,
                   email: email
                 } 
               });

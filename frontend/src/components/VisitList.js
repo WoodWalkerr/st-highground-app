@@ -11,47 +11,50 @@ import PendingVisit from './PendingVisit'
 import DeclinedVisits from './DeclinedVisits'
 
 const VisitList = () => {
-    const [visits, setVisits] = useState([])
-    const [currentPage, setCurrentPage] = useState(0)
-    const [users, setUsers] = useState([])
-    // const userID = localStorage.getItem('data')
-    const expectedVisitsCount = visits.filter(
-        (visit) => visit.status === 'accepted'
-    ).length
-    const pendingCounts = visits.filter(
-        (visit) => visit.status === 'pending'
-    ).length
-
-    const itemsPerPage = 5
-    const pageCount = Math.ceil(visits.length / itemsPerPage)
-
+    const [visits, setVisits] = useState([]);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [users, setUsers] = useState([]);
+    const [isLoading, setIsLoading] = useState(true); // add a loading state
+  
+    const expectedVisitsCount = visits.filter((visit) => visit.status === "accepted")
+      .length;
+    const pendingCounts = visits.filter((visit) => visit.status === "pending").length;
+  
+    const itemsPerPage = 5;
+    const pageCount = Math.ceil(visits.length / itemsPerPage);
+  
     const handlePageClick = ({ selected }) => {
-        setCurrentPage(selected)
-    }
-
-    const startIndex = currentPage * itemsPerPage + 1
-    const endIndex = startIndex + itemsPerPage
-
+      setCurrentPage(selected);
+    };
+  
+    const startIndex = currentPage * itemsPerPage + 1;
+    const endIndex = startIndex + itemsPerPage;
+  
     const currentData = (visits || []).slice(
-        startIndex,
-        Math.min(endIndex, visits.length)
-    )
-
+      startIndex,
+      Math.min(endIndex, visits.length)
+    );
+  
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const data = await getAllVisits()
-                setVisits(data)
-
-                // fetch the list of users and store it in the users state variable
-                const usersData = await getUsers()
-                setUsers(usersData)
-            } catch (error) {
-                console.error(error.message)
-            }
+      const fetchData = async () => {
+        try {
+          const data = await getAllVisits();
+          setVisits(data);
+  
+          // fetch the list of users and store it in the users state variable
+          const usersData = await getUsers();
+          setUsers(usersData);
+          setIsLoading(false); // set loading to false once data is fetched
+        } catch (error) {
+          console.error(error.message);
         }
-        fetchData()
-    }, [])
+      };
+      fetchData();
+    }, []);
+  
+    if (isLoading) {
+      return <div>Loading...</div>; // show loading message while data is being fetched
+    }
 
     return (
         <div className="flex h-screen bg-gray-100">
