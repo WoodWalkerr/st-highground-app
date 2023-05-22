@@ -23,7 +23,6 @@ app.use(bodyParser.json())
 
 //routing
 app.get('/api/v1/users/:name', (req, res) => {
-    console.log("heree", req.params.name)
     usersController.searchUsersByName(req.params.name).then((data) => res.json(data))
 })
 

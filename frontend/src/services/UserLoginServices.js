@@ -1,4 +1,5 @@
 export async function userLogin(users) {
+    console.log("eto yun", users)
     try {
         const response = await fetch('/api/v1/login', {
             method: 'POST',
