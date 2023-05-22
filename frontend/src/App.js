@@ -6,6 +6,7 @@ import ScheduleBookForm from './components/ScheduleBookForm'
 import Navbar from './common/Navbar'
 import ListDashboard from "./components/ListDashboard"
 import VisitList from './components/VisitList'
+import AdminLogin from './authentication/AdminLogin'
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<Layout><Dashboard /></Layout>} />
         <Route path="/sign-up" element={<Layout><Signup /></Layout>} />
         <Route path="/sign-in" element={<Layout><Login /></Layout>} />
+        <Route path="/admin-login" element={<Layout><AdminLogin /></Layout>} />
         <Route path="/schedule-a-visit" element={<Layout><ScheduleBookForm /></Layout>} />
         <Route path="/list-dashboard" element={<ListDashboard />} />
         <Route path="/visit-request" element={<VisitList />} />

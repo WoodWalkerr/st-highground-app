@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { searchUsersByName } from '../services/UserServices';
 
-function SearchList({ onSearch }) {
+function SearchList({ onSearch, setSearchResults, searchResults }) {
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+  // const [searchResults, setSearchResults] = useState([]);
 
   const handleSearch = async () => {
     try {

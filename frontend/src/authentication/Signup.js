@@ -17,13 +17,14 @@ const InputDashboard = () => {
         email: '',
         password: '',
         phone_number: '',
+        role_id : 1
     })
 
-    const { name, email, password, phone_number } = user
+    const { name, email, password, phone_number, role_id } = user
 
     const onSubmitForm = async (e) => {
         e.preventDefault()
-        if (!name || !email || !password || !phone_number) {
+        if (!name || !email || !password || !phone_number || !role_id) {
             alert('Please fill in all fields')
             return
         }

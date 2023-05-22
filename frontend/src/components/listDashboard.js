@@ -6,7 +6,7 @@ import EditDashboard from './EditDashboard';
 import ReactPaginate from 'react-paginate';
 import { getUsers, deleteUser, searchUsersByName } from '../services/UserServices';
 import Sidebar from '../common/Sidebar';
-import SearchList from '../searchbox/SearchBox';
+// import SearchList from '../searchbox/SearchBox';
 
 const ListDashboard = () => {
   const [users, setUsers] = useState([]);
@@ -70,7 +70,7 @@ const ListDashboard = () => {
                   <td colSpan={6}>
                     <div className="text-start flex flex-wrap justify-between pl-10 pb-4 pt-7 text-md font-semibold text-gray-600">
                       List Dashboard
-                      <SearchList onSearch={handleSearch} />                                      
+                      {/* <SearchList onSearch={handleSearch} />                                       */}
                                         </div>
                                     </td>
                                 </tr>

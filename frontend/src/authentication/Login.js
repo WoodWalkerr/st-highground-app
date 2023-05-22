@@ -1,34 +1,54 @@
 import React, { useState } from 'react'
-import { userLogin } from '../services/UserLoginServices'
 import { useNavigate } from 'react-router-dom'
+import { userLogin } from '../services/UserLoginServices'
 import { AiOutlineEye, AiOutlineEyeInvisible } from '../icons/icons'
 
-function UserLogin() {
-    const navigate = useNavigate()
-    const initialUserData = { email: '', password: '' }
-    const [userData, setUserData] = useState(initialUserData)
+function AdminLogin({ setIsAdmin, setIsAuthorized}) {
+    const [user, setUser] = useState({ email: '', password: '' })
     const [showPassword, setShowPassword] = useState(false)
+
+    const navigate = useNavigate()
 
     const handleChange = (e) => {
         const { name, value } = e.target
-        setUserData((prev) => {
+        setUser((prev) => {
             return { ...prev, [name]: value }
         })
+        console.log(name, value)
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
         try {
-            userLogin(userData).then((res) => {
-                if (JSON.stringify(res) !== '{}') {
-                    sessionStorage.setItem('jwt', res[1].jwt)
-                    localStorage.setItem('data', JSON.stringify(res[0]))
+            userLogin(user).then((res) => {
+                if (JSON.stringify(res) !== '{}' && res !== undefined) {
+                    console.log(res)
 
-                    const secret = localStorage.getItem('data')
-                    console.log('secreto para bibo', JSON.parse(secret))
-                    navigate('/', { state: res })
+                    if (res[1].role_id !== 1) {
+                        alert('Not an user account')
+                        console.log(res[1].role_id)
+                        navigate('/sign-up')
+                    } else {
+                        // Assigning Default Values Upon Login
+                        sessionStorage.setItem('jwt', res[0].jwt)
+                        sessionStorage.setItem('userRole', res[0].userRole)
+                        localStorage.setItem('data', JSON.stringify(res[1]))
+
+                        const data = localStorage.getItem('data')
+                        if (data) {
+                            console.log('Fetch Data: ', JSON.parse(data))
+                        }
+                        alert('Login Successfully! Noice Hahahah')
+                        navigate('/', { state: res })
+                        sessionStorage.getItem('userRole') === '1'
+                            ? setIsAdmin(true)
+                            : setIsAdmin(false)
+                        setIsAuthorized(true)
+                        // window.location.reload(false)
+                    }
                 } else {
-                    console.log('User does not exist!')
+                    console.log('User/Password does not exist!')
+                    alert("User/Password doesn't exist!")
                 }
             })
         } catch (error) {
@@ -40,7 +60,6 @@ function UserLogin() {
         e.preventDefault()
         setShowPassword(!showPassword)
     }
-
     return (
         <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-5 sm:px-6 lg:px-8">
             <div className="bg-gray-100 py-20">
@@ -108,4 +127,5 @@ function UserLogin() {
         </div>
     )
 }
-export default UserLogin
+
+export default AdminLogin

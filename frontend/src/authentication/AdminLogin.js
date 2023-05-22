@@ -1,106 +1,133 @@
-// import React, { useState } from 'react'
-// import { useNavigate } from 'react-router-dom'
-// import { loginUser } from '../../services/UserService'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { userLogin } from '../services/UserLoginServices'
+import { AiOutlineEye, AiOutlineEyeInvisible } from '../icons/icons'
 
-// function Login( { setIsAdmin, setIsAuthorized, setIsNavigationOut } ) {
+function AdminLogin({ setIsAdmin, setIsAuthorized}) {
+    const [adminData, setAdminData] = useState({ email: '', password: '' })
+    const [showPassword, setShowPassword] = useState(false)
 
-// const [adminData, setAdminData] = useState( {email: "", password: ""} )
-// const navigate = useNavigate()
-// setIsNavigationOut(true)
+    const navigate = useNavigate()
 
-// const handleChange = e => {
-//     const { name, value } = e.target
-//     setAdminData( prev => {
-//         return { ...prev, [name]: value}
-//     })
-//     console.log(name, value)
-// } 
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setAdminData((prev) => {
+            return { ...prev, [name]: value }
+        })
+        console.log(name, value)
+    }
 
-// const handleSubmit = e => {
-//     e.preventDefault()
-//     try {
-//         loginUser(adminData).then((res)=>{
-//             if (JSON.stringify(res) !== '{}' && res !== undefined) {
-//                 console.log(res)
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        try {
+            userLogin(adminData).then((res) => {
+                console.log("eto si admin", res)
 
-//                 if (res[1].role_id !== 2) {
-//                     alert("Not an admin account")
-//                     console.log(res[1].role_id)
-//                     navigate('/admin')    
-//                 } else {
-//                     // Assigning Default Values Upon Login
-//                     sessionStorage.setItem("jwt", res[0].jwt)
-//                     sessionStorage.setItem("userRole", res[0].userRole)
-//                     localStorage.setItem("data", JSON.stringify(res[1]))
-    
-//                     const data = localStorage.getItem("data")
-//                     if (data) {
-//                         console.log("Fetch Data: ", JSON.parse(data))
-//                     }
-//                     alert('Login Successfully! Noice Hahahah')
-//                     sessionStorage.getItem("userRole") === '2' ? setIsAdmin(true) : setIsAdmin(false)
-//                     setIsAuthorized(true)
-//                     navigate('/', { state: res })
-//                     // window.location.reload(false)
-//                 }
-                
-//             }
-//             else {
-//                 console.log("User/Password does not exist!")
-//                 alert('User/Password doesn\'t exist!')
-//             }
-//         })
-        
-//     } catch (error) {
-//         console.log("Error: ", error)
-//     }
-// }
+                if (JSON.stringify(res) !== '{}' && res !== undefined) {
+                    console.log(res)
 
-//   return (
-//         <>
-//          <div
-//         className="fixed top-0 flex justify-end items-center background w-screen -z-10"
-//         style={{
-//         filter: 'brightness(40%)',
-//         backgroundImage: `url(${require('../../assets/img/watery2.webp')})`,
-//         backgroundRepeat: 'no-repeat',
-//         backgroundSize: 'cover',
-//         height: '100vh',
-//       }}
-//         ></div>
-//         <section className="w-[98vw] flex justify-end z-10">
-//             <div className="w-[98vw] flex flex-cols items-center justify-end px-6 py-8 mx-auto md:h-screen lg:py-0 mr-20">
-//                 <div className="w-[380px] z-10 bg-white h-[380px] mb-27 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-//                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-//                         <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-//                             Login
-//                         </h1>
-//                         <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
-//                             <div className="flex">
-//                                 <div className="flex justify-center items-center bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-l-lg w-12">
-//                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 inline text-slate-700 fill-current">
-//                                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-//                                     </svg>
-//                                 </div>
-//                                 <input type="text" name="username" id="username" placeholder="username" onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-r-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required />
-//                             </div>
+                    if (res[1].role_id !== 2) {
+                        alert('Not an admin account')
+                        console.log(res[1].role_id)
+                        navigate('/admin-login')
+                    } else {
+                        // Assigning Default Values Upon Login
+                        sessionStorage.setItem('jwt', res[0].jwt)
+                        sessionStorage.setItem('userRole', res[0].userRole)
+                        localStorage.setItem('data', JSON.stringify(res[1]))
 
-//                             <div className="flex">
-//                                 <div className="flex justify-center items-center bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-l-lg w-12">
-//                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="inline text-slate-700 fill-current w-5 h-5">
-//                                         <path fillRule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clipRule="evenodd" />
-//                                     </svg>
-//                                 </div>
-//                                     <input type="password" name="password" id="password" placeholder="••••••••" onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-r-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" required />
-//                                 </div>
-//                             <button type="submit" className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">Login</button>
-//                         </form>
-//                     </div>
-//                 </div>
-//             </div>
-//         </section>
-//         </>
-//   )
-// }
+                        const data = localStorage.getItem('data')
+                        if (data) {
+                            console.log('Fetch Data: ', JSON.parse(data))
+                        }
+                        alert('Login Successfully! Noice Hahahah')
+                        navigate('/list-dashboard', { state: res })
+                        sessionStorage.getItem('userRole') === '2'
+                            ? setIsAdmin(true)
+                            : setIsAdmin(false)
+                        setIsAuthorized(true)
+                        // window.location.reload(false)
+                    }
+                } else {
+                    console.log('User/Password does not exist!')
+                    alert("User/Password doesn't exist!")
+                }
+            })
+        } catch (error) {
+            console.log('Error: ', error)
+        }
+    }
 
-// export default Login
+    const handleShowPassword = (e) => {
+        e.preventDefault()
+        setShowPassword(!showPassword)
+    }
+    return (
+        <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-5 sm:px-6 lg:px-8">
+            <div className="bg-gray-100 py-20">
+                <div className="mx-auto max-w-xs shadow-lg rounded-lg">
+                    <div className="p-6 rounded-lg">
+                        <h2 className="text-2xl text-start font-bold mb-5">
+                            Sign In
+                        </h2>
+                        <form onSubmit={handleSubmit}>
+                            <div className="mb-4 ">
+                                <input
+                                    className="bg-transparent border-b-2 border-gray-300 py-2 w-full focus:outline-none focus:border-blue-400"
+                                    type="email"
+                                    name="email"
+                                    placeholder="Email"
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <div className="mb-4 relative">
+                                <input
+                                    className="bg-transparent border-b-2 border-gray-300 py-2 w-full focus:outline-none focus:border-blue-400"
+                                    type={showPassword ? 'text' : 'password'}
+                                    name="password"
+                                    placeholder="Password"
+                                    onChange={handleChange}
+                                />
+                                <button
+                                    className="absolute top-0 right-0 mt-4 mr-4 focus:outline-none"
+                                    onClick={handleShowPassword}
+                                >
+                                    {showPassword ? (
+                                        <AiOutlineEye
+                                            style={{ opacity: 0.5 }}
+                                        />
+                                    ) : (
+                                        <AiOutlineEyeInvisible
+                                            style={{ opacity: 0.5 }}
+                                        />
+                                    )}
+                                </button>
+                            </div>
+
+                            <div className="mb-6">
+                                <button
+                                    className="w-full text-white font-bold py-2 px-4 rounded bg-green-500 hover:bg-green-600 transition duration-200 focus:outline-none focus:shadow-outline"
+                                    type="submit"
+                                    onClick={handleSubmit}
+                                >
+                                    Sign In
+                                </button>
+                            </div>
+                            <div className="block text-center text-gray-500 text-sm font-bold mb-2">
+                                Don't have an account?
+                                <button
+                                    className="text-[#093545]"
+                                    onClick={() => navigate('/sign-up')}
+                                >
+                                    Sign up.
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default AdminLogin
