@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { userLogin } from '../services/UserLoginServices'
 import { AiOutlineEye, AiOutlineEyeInvisible } from '../icons/icons'
 
-function AdminLogin({ setIsAdmin, setIsAuthorized}) {
+function UserLogin({ setIsAdmin, setIsAuthorized}) {
     const [user, setUser] = useState({ email: '', password: '' })
     const [showPassword, setShowPassword] = useState(false)
 
@@ -128,4 +128,4 @@ function AdminLogin({ setIsAdmin, setIsAuthorized}) {
     )
 }
 
-export default AdminLogin
+export default UserLogin

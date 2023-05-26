@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import VisitListItem from './VisitStatus'
+import VisitStatus from './VisitStatus'
 import { getAllVisits } from '../services/VisitServices'
 import { AiOutlineUser } from '../icons/icons'
 import ReactPaginate from 'react-paginate'
 import Sidebar from '../common/Sidebar'
 import { getUsers, searchUsersByName } from '../services/UserServices'
 import ExpectedVisitor from './ExpectedVisitor'
-// import SearchList from '../searchbox/SearchBox'
 import PendingVisit from './PendingVisit'
 import DeclinedVisits from './DeclinedVisits'
 
@@ -20,9 +19,15 @@ const VisitList = () => {
     const expectedVisitsCount = visits.filter(
         (visit) => visit.status === 'accepted'
     ).length
-    const pendingCounts = visits.filter(
+    const pendingVisitCounts = visits.filter(
         (visit) => visit.status === 'pending'
     ).length
+
+    const declinedVisitCounts = visits.filter(
+        (visit) => visit.status === 'declined'
+    ).length
+
+    
 
     const itemsPerPage = 5
     const pageCount = Math.ceil(visits.length / itemsPerPage)
@@ -31,15 +36,15 @@ const VisitList = () => {
         setCurrentPage(selected)
     }
 
-    const handleChange = (e) => {
-        const { name, value } = e.target
-        setSearchResults((prev) => {
-            searchUsersByName(value).then((res) => {
-                setVisits(res)
-                console.log(res)
-                return { ...prev, [name]: value }
-            })
-        })
+    const handleChange = async (e) => {
+        const { value } = e.target
+
+        try {
+            const searchResults = await searchUsersByName(value)
+            setSearchResults(searchResults)
+        } catch (error) {
+            console.error(error.message)
+        }
     }
 
     const startIndex = currentPage * itemsPerPage + 1
@@ -82,8 +87,8 @@ const VisitList = () => {
                         <ExpectedVisitor
                             expectedVisitsCount={expectedVisitsCount}
                         />
-                        <PendingVisit pendingCounts={pendingCounts} />
-                        <DeclinedVisits />
+                        <PendingVisit pendingCounts={pendingVisitCounts} />
+                        <DeclinedVisits declinedVisitCounts={declinedVisitCounts}/>
                     </div>
 
                     <div className="flex items-center justify-center h-screen mb-4 border-t-2 border-gray-200 pr-[55px]">
@@ -91,8 +96,8 @@ const VisitList = () => {
                             <thead>
                                 <tr>
                                     <td colSpan={7}>
-                                        <div className="text-start flex flex-wrap justify-between pl-10 pb-4 pt-7 text-md font-semibold text-gray-600">
-                                            Visits Request
+                                        <div className="text-start flex flex-wrap justify-between p-10 pb-4 pt-7 text-md font-semibold text-gray-600">
+                                            VisitList
                                             <input
                                                 type="text"
                                                 searchResults={searchResults}
@@ -100,7 +105,6 @@ const VisitList = () => {
                                                 className="block p-2 pl-10 text-xs text-gray-900 border border-gray-300 rounded-lg w-50 h-7 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 placeholder="Search for users"
                                             />
-                                            {/* <SearchList searchResults={searchResults}  />        */}
                                         </div>
                                     </td>
                                 </tr>
@@ -130,13 +134,22 @@ const VisitList = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {currentData.map((visit, index) => {
-                                    const user = users.find(
-                                        (u) => u.id === visit.user_id
+                                {currentData
+                                    .filter(
+                                        (visit) =>
+                                            searchResults.length === 0 ||
+                                            searchResults.includes(visit)
                                     )
+                                    .map((visit, index) => {
+                                        const user = users.find(
+                                            (u) => u.id === visit.user_id
+                                        )
 
-                                    return (
-                                        visit && (
+                                        if (!visit || !user) {
+                                            return null 
+                                        }
+
+                                        return (
                                             <tr
                                                 key={visit.id}
                                                 className="transition-colors text-xs"
@@ -149,11 +162,8 @@ const VisitList = () => {
                                                         size={15}
                                                         className="mr-3"
                                                     />
-                                                    {user
-                                                        ? user.name
-                                                        : visit.user_id}
+                                                    {user.name}
                                                 </td>
-
                                                 <td className="px-6 bg-white text-center text-gray-500 font-light whitespace-nowrap">
                                                     {visit.visit_date}
                                                 </td>
@@ -167,15 +177,14 @@ const VisitList = () => {
                                                     {visit.status}
                                                 </td>
                                                 <td className="px-6 bg-white text-center text-gray-500 font-light whitespace-nowrap">
-                                                    <VisitListItem
+                                                    <VisitStatus
                                                         key={visit.id}
                                                         visit={visit}
                                                     />
                                                 </td>
                                             </tr>
                                         )
-                                    )
-                                })}
+                                    })}
                             </tbody>
                             <tr>
                                 <td colSpan={7}>

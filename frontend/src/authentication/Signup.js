@@ -1,72 +1,93 @@
-import React, { useState } from 'react'
-import { createUser } from '../services/UserServices'
-import { useNavigate } from 'react-router-dom'
-import { AiOutlineEye, AiOutlineEyeInvisible } from '../icons/icons'
+import React, { useState } from 'react';
+import { createUser } from '../services/UserServices';
+import { useNavigate } from 'react-router-dom';
+import { AiOutlineEye, AiOutlineEyeInvisible } from '../icons/icons';
 
-const InputDashboard = () => {
-    const navigate = useNavigate()
-    const [showPassword, setShowPassword] = useState(false)
+const UserSignUp = () => {
+    const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
+    const [emailError, setEmailError] = useState('');
 
     const handleShowPassword = (e) => {
-        e.preventDefault()
-        setShowPassword(!showPassword)
-    }
+        e.preventDefault();
+        setShowPassword(!showPassword);
+    };
 
     const [user, setUser] = useState({
         name: '',
         email: '',
         password: '',
         phone_number: '',
-        role_id : 1
-    })
+        role_id: 1,
+    });
 
-    const { name, email, password, phone_number, role_id } = user
+    const { name, email, password, phone_number, role_id } = user;
+
+    const validateEmail = async (email) => {
+        try {
+            const isEmailAvailable = await createUser(email);
+            if (!isEmailAvailable) {
+                setEmailError('This email is already in use');
+            } else {
+                setEmailError('');
+            }
+        } catch (error) {
+            console.error(error.message);
+        }
+    };
 
     const onSubmitForm = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
         if (!name || !email || !password || !phone_number || !role_id) {
-            alert('Please fill in all fields')
-            return
+            alert('Please fill in all fields');
+            return;
         }
+
+        if (emailError) {
+            alert('Please fix the form errors');
+            return;
+        }
+
         try {
-            await createUser(user)
-            window.location = '/sign-in'
+            await createUser(user);
+            navigate('/sign-in');
         } catch (error) {
-            console.error(error.message)
+            console.error(error.message);
         }
-    }
+    };
+
+    const handleEmailChange = (e) => {
+        const newEmail = e.target.value;
+        setUser({ ...user, email: newEmail });
+        validateEmail(newEmail);
+    };
 
     return (
         <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-5 sm:px-6 lg:px-8">
             <div className="bg-gray-100 py-20">
                 <div className="mx-auto max-w-xs shadow-lg rounded-lg">
                     <div className="p-6 rounded-lg">
-                        <h2 className="text-2xl text-start pb-3 font-bold mb-5">
-                            Sign Up
-                        </h2>
-                        <form className="space-y-4 " onSubmit={onSubmitForm}>
-                            <div className="mb-4 ">
+                        <h2 className="text-2xl text-start pb-3 font-bold mb-5">Sign Up</h2>
+                        <form className="space-y-4" onSubmit={onSubmitForm}>
+                            <div className="mb-4">
                                 <input
                                     className="bg-transparent border-b-2 border-gray-300 py-2 w-full focus:outline-none focus:border-[#4CAF50]"
                                     id="Username"
                                     name="Username"
-                                    type="Username"
+                                    type="text"
                                     autoComplete="Username"
                                     placeholder="Username"
                                     required
+                                    pattern="[a-zA-Z0-9]+"
+                                    title="Username can only contain alphanumeric characters"
                                     value={name}
-                                    onChange={(e) =>
-                                        setUser({
-                                            ...user,
-                                            name: e.target.value,
-                                        })
-                                    }
+                                    onChange={(e) => setUser({ ...user, name: e.target.value })}
                                 />
                             </div>
 
-                            <div className="mb-4 ">
+                            <div className="mb-4">
                                 <input
-                                    className="bg-transparent border-b-2 border-gray-300 py-2 w-full focus:outline-none focus:border-[#4CAF50]"
+                                    className={`bg-transparent border-b-2 border-gray-300 py-2 w-full focus:outline-none focus:border-[#4CAF50] ${emailError ? 'border-red-500' : ''}`}
                                     id="email"
                                     name="email"
                                     type="email"
@@ -74,13 +95,11 @@ const InputDashboard = () => {
                                     placeholder="John@gmail.com"
                                     required
                                     value={email}
-                                    onChange={(e) =>
-                                        setUser({
-                                            ...user,
-                                            email: e.target.value,
-                                        })
-                                    }
+                                    onChange={handleEmailChange}
                                 />
+                                {emailError && (
+                                    <p className="text-red-500 text-sm">{emailError}</p>
+                                )}
                             </div>
 
                             <div className="mb-4 relative">
@@ -90,12 +109,10 @@ const InputDashboard = () => {
                                     name="password"
                                     placeholder="Password"
                                     required
+                                    minLength={8}
                                     value={password}
                                     onChange={(e) =>
-                                        setUser({
-                                            ...user,
-                                            password: e.target.value,
-                                        })
+                                        setUser({ ...user, password: e.target.value })
                                     }
                                 />
                                 <button
@@ -154,7 +171,7 @@ const InputDashboard = () => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default InputDashboard
+export default UserSignUp;

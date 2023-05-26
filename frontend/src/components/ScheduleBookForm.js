@@ -76,18 +76,7 @@ function ScheduleBookForm() {
                 <div className="w-[20%] pt-4 flex flex-row mx-3">
                     <span className="flex justify-center items-center text-white font-semibold text-md text-center mx-5 uppercase">
                         Schedule a Visit
-                    </span>{' '}
-                    {/* <div className="mb-4 mx-3 ml-6 hidden">
-                        <label className="pb-2 text-white" htmlFor="id">
-                            ID
-                        </label>
-                        <input
-                            type="id"
-                            id="id"
-                            name="id"
-                            value={userID ? JSON.parse(userID).id : ''}
-                        />
-                    </div> */}
+                    </span>
                     <div className="flex flex-col mb-4 mx-3 ml-6">
                         <label
                             className="pb-2 text-xs text-white"

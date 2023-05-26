@@ -41,7 +41,7 @@ function AdminLogin({ setIsAdmin, setIsAuthorized}) {
                             console.log('Fetch Data: ', JSON.parse(data))
                         }
                         alert('Login Successfully! Noice Hahahah')
-                        navigate('/list-dashboard', { state: res })
+                        navigate('/visit-request', { state: res })
                         sessionStorage.getItem('userRole') === '2'
                             ? setIsAdmin(true)
                             : setIsAdmin(false)
