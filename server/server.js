@@ -11,6 +11,8 @@ const notificationController = require('./controller/notification')
 const visitorLogController = require('./controller/visitorLog')
 const pendingRequestController = require('./controller/pendingRequest')
 const acceptedRequestController = require('./controller/acceptedRequest')
+const declinedRequestController = require('./controller/declinedRequest')
+
 
 
 const app = express()
@@ -102,6 +104,12 @@ app.delete('/api/v1/visitor-log/:id', (req, res) => {
 app.get('/api/v1/pending-request/:user_id', (req, res) => {
     pendingRequestController
         .getPendingReq(req.params.user_id)
+        .then((data) => res.json(data))
+})
+
+app.get('/api/v1/decline-request/:user_id', (req, res) => {
+    declinedRequestController
+        .getDeclineReq(req.params.user_id)
         .then((data) => res.json(data))
 })
 

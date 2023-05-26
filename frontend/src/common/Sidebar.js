@@ -10,7 +10,27 @@ import { useNavigate } from 'react-router-dom'
 
 const Sidebar = () => {
     const [isOpen, setIsOpen] = useState(false)
+    const [loggedIn, setLoggedIn] = useState(false)
     const navigate = useNavigate()
+
+    const jwt = sessionStorage.getItem('jwt')
+    const userData = JSON.parse(localStorage.getItem('data'))
+
+    let initials = ''
+    if (userData && userData.name) {
+        initials = userData.name[0].toUpperCase()
+    }
+
+    const handleLogout = () => {
+        sessionStorage.removeItem('jwt')
+        localStorage.removeItem('data')
+        setLoggedIn(false)
+        navigate('/admin-login')
+    }
+
+    if (jwt && JSON.stringify(userData) !== '{}' && !loggedIn) {
+        setLoggedIn(true)
+    }
 
     const handleToggle = () => {
         setIsOpen(!isOpen)

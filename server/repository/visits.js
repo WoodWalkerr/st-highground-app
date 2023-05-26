@@ -25,16 +25,6 @@ class VisitRepository {
         }
     }
 
-    // async searchVisitsByUserName (visits) {
-    //     try {
-    //       const visits = await this.db.visits.findAll(visits);
-    //       res.json(visits);
-    //     } catch (error) {
-    //       console.error('Error searching visits:', error);
-    //       res.status(500).json({ error: 'Internal server error' });
-    //     }
-    //   };
-
     async createVisit(visits) {
         try {
             const visitCount = await this.db.visits.count({

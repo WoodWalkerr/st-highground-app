@@ -96,30 +96,7 @@ class UserRepository {
             console.log('Error: ', error)
         }
     }
-
-    //Login
-    // async userlogin(users) {
-    //     try {
-    //         const password = users.password
-    //         const user = await this.db.users.findOne({
-    //             where: {
-    //                 email: users.email,
-    //             },
-    //         })
-    //         const matchPassword = await bcrypt.compare(password, user.password)
-    //         if (matchPassword) {
-    //             const jwt = generateAccessToken({ email: users.email })
-    //             if (jwt) {
-    //                 const getUser = [user, { jwt: jwt }]
-    //                 return getUser
-    //             }
-    //         }
-    //         throw 'The user does not exist'
-    //     } catch (error) {
-    //         console.log('Error: ', error)
-    //     }
-    // }
-
+    
     async userlogin(users) {
         console.log('Login Credentials', users.email)
     
