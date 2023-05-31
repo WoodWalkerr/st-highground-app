@@ -19,7 +19,7 @@ const Tabs = ({ onClose }) => {
         <div className="fixed inset-0 z-50 overflow-auto bg-gray-500 bg-opacity-75 flex">
             <div className="relative p-8 bg-white w-full max-w-sm m-auto flex-col flex rounded-lg">
                 <h1 className="mb-2 text-2xl ml-3 text-black">
-                    Scheduled Visit
+                    Scheduled Visits
                     <button
                         className="absolute top-0 right-0 m-4 text-gray-600 hover:text-gray-900"
                         onClick={handleClose}

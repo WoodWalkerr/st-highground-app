@@ -3,75 +3,83 @@ import { useNavigate } from 'react-router-dom'
 import { userLogin } from '../services/UserLoginServices'
 import { AiOutlineEye, AiOutlineEyeInvisible } from '../icons/icons'
 
-function UserLogin({ setIsAdmin, setIsAuthorized}) {
-    const [user, setUser] = useState({ email: '', password: '' })
-    const [showPassword, setShowPassword] = useState(false)
+function UserLogin({ setIsUser, setIsAuthorized }) {
+  const [user, setUser] = useState({ email: '', password: '' })
+  const [showPassword, setShowPassword] = useState(false)
 
-    const navigate = useNavigate()
+  const navigate = useNavigate()
 
-    const handleChange = (e) => {
-        const { name, value } = e.target
-        setUser((prev) => {
-            return { ...prev, [name]: value }
-        })
-        console.log(name, value)
-    }
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setUser((prev) => {
+      return { ...prev, [name]: value }
+    })
+    console.log(name, value)
+  }
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        try {
-            userLogin(user).then((res) => {
-                if (JSON.stringify(res) !== '{}' && res !== undefined) {
-                    console.log(res)
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    try {
+      userLogin(user).then((res) => {
+        if (JSON.stringify(res) !== '{}' && res !== undefined) {
+          console.log(res)
 
-                    if (res[1].role_id !== 1) {
-                        alert('Not an user account')
-                        console.log(res[1].role_id)
-                        navigate('/sign-up')
-                    } else {
-                        // Assigning Default Values Upon Login
-                        sessionStorage.setItem('jwt', res[0].jwt)
-                        sessionStorage.setItem('userRole', res[0].userRole)
-                        localStorage.setItem('data', JSON.stringify(res[1]))
+          if (res[1].role_id !== 1) {
+            alert('Not a user account')
+            console.log(res[1].role_id)
+            navigate('/sign-up')
+          } else {
+            // Assigning Default Values Upon Login
+            sessionStorage.setItem('jwt', res[0].jwt)
+            sessionStorage.setItem('userRole', res[0].userRole)
+            localStorage.setItem('data', JSON.stringify(res[1]))
 
-                        const data = localStorage.getItem('data')
-                        if (data) {
-                            console.log('Fetch Data: ', JSON.parse(data))
-                        }
-                        alert('Login Successfully! Noice Hahahah')
-                        navigate('/', { state: res })
-                        sessionStorage.getItem('userRole') === '1'
-                            ? setIsAdmin(true)
-                            : setIsAdmin(false)
-                        setIsAuthorized(true)
-                        // window.location.reload(false)
-                    }
-                } else {
-                    console.log('User/Password does not exist!')
-                    alert("User/Password doesn't exist!")
-                }
-            })
-        } catch (error) {
-            console.log('Error: ', error)
+            const data = localStorage.getItem('data')
+            if (data) {
+              console.log('Fetch Data: ', JSON.parse(data))
+            }
+            alert('Login Successfully!')
+            navigate('/', { state: res })
+            sessionStorage.getItem('userRole') === '1'
+              ? setIsUser(true)
+              : setIsUser(false)
+            setIsAuthorized(true)
+            localStorage.removeItem('data')
+          }
+        } else {
+          console.log('User/Password does not exist!')
+          alert("User/Password doesn't exist!")
         }
+      })
+    } catch (error) {
+      console.log('Error: ', error)
     }
+  }
 
-    const handleShowPassword = (e) => {
-        e.preventDefault()
-        setShowPassword(!showPassword)
-    }
+  const handleShowPassword = (e) => {
+    e.preventDefault()
+    setShowPassword(!showPassword)
+  }
     return (
-        <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-5 sm:px-6 lg:px-8">
-            <div className="bg-gray-100 py-20">
+        <div
+            className="flex justify-center items-center max-w-full mx-auto p-5 py-20"
+            name='Home'
+            style={{
+                background: `url(${require('../assets/bonefire.jpg')}) center no-repeat`,
+                backgroundSize: 'cover',
+                height: '100vh',
+            }}
+        >
+            <div className="py-20">
                 <div className="mx-auto max-w-xs shadow-lg rounded-lg">
-                    <div className="p-6 rounded-lg">
+                    <div className="p-6 rounded-lg bg-gray-100">
                         <h2 className="text-2xl text-start font-bold mb-5">
                             Sign In
                         </h2>
                         <form onSubmit={handleSubmit}>
-                            <div className="mb-4 ">
+                            <div className="mb-4">
                                 <input
-                                    className="bg-transparent border-b-2 border-gray-300 py-2 w-full focus:outline-none focus:border-blue-400"
+                                    className="bg-transparent border-b-2 border-gray-300 py-2 w-full focus:outline-none focus:border-[#4CAF50]"
                                     type="email"
                                     name="email"
                                     placeholder="Email"
@@ -80,7 +88,7 @@ function UserLogin({ setIsAdmin, setIsAuthorized}) {
                             </div>
                             <div className="mb-4 relative">
                                 <input
-                                    className="bg-transparent border-b-2 border-gray-300 py-2 w-full focus:outline-none focus:border-blue-400"
+                                    className="bg-transparent border-b-2 border-gray-300 py-2 w-full focus:outline-none focus:border-[#4CAF50]"
                                     type={showPassword ? 'text' : 'password'}
                                     name="password"
                                     placeholder="Password"

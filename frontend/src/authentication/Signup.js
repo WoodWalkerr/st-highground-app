@@ -63,11 +63,20 @@ const UserSignUp = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-5 sm:px-6 lg:px-8">
-            <div className="bg-gray-100 py-20">
-                <div className="mx-auto max-w-xs shadow-lg rounded-lg">
+        <div
+        className="flex justify-center items-center bg-white max-w-full mx-auto p-5 py-20"
+        name='Home'
+        style={{
+            background: `url(${require('../assets/bonefire.jpg')}) center no-repeat`,
+            backgroundSize: 'cover',
+            height: '100vh',
+        }}
+    >
+        <div className="flex flex-col justify-center py-20 sm:px-6 lg:px-8 ">
+            <div className="bg-gray-50 rounded-lg">
+                <div className="mx-auto max-w-xs shadow-lg">
                     <div className="p-6 rounded-lg">
-                        <h2 className="text-2xl text-start pb-3 font-bold mb-5">Sign Up</h2>
+                        <h2 className="text-2xl text-start pb-3 font-bold mb-5 text-black">Sign Up</h2>
                         <form className="space-y-4" onSubmit={onSubmitForm}>
                             <div className="mb-4">
                                 <input
@@ -170,6 +179,7 @@ const UserSignUp = () => {
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     );
 };

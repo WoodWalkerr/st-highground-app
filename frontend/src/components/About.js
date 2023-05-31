@@ -1,10 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import logo from '../assets/lake.jpg';
 
 const About = () => {
+  const navigate = useNavigate();
+
+
   return (
-    <div className="bg-white h-screen flex justify-center items-center">
+    <div className="bg-white h-screen flex justify-center items-center" name='About'>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12  ">
         <div className="flex flex-col justify-center items-center md:flex-row">
           <div className="md:w-1/2">
@@ -19,12 +22,12 @@ const About = () => {
               environment, so we partner with eco-friendly tour operators and promote
               sustainable travel practices.
             </p>
-            <Link
-              to="/contact"
+            <button
               className="inline-block bg-green-500 text-white rounded-lg px-6 py-3 font-semibold hover:bg-green-600 transition duration-200"
+            onClick={() => navigate('/contact-us')}
             >
               Contact Us
-            </Link>
+              </button>
           </div>
           <div className="md:w-1/2 flex justify-center items-center ">
             <img

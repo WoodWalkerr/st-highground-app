@@ -34,6 +34,7 @@ function Splash() {
     return (
         <div
             className="flex justify-center items-center bg-white max-w-full mx-auto p-5 py-20"
+            name='Home'
             style={{
                 background: `url(${require('../assets/background.jpeg')}) center no-repeat`,
                 backgroundSize: 'cover',

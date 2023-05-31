@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { userLogin } from '../services/UserLoginServices'
 import { AiOutlineEye, AiOutlineEyeInvisible } from '../icons/icons'
 
-function AdminLogin({ setIsAdmin, setIsAuthorized}) {
+function AdminLogin({ setIsAdmin, setIsAuthorized }) {
     const [adminData, setAdminData] = useState({ email: '', password: '' })
     const [showPassword, setShowPassword] = useState(false)
 
@@ -21,7 +21,7 @@ function AdminLogin({ setIsAdmin, setIsAuthorized}) {
         e.preventDefault()
         try {
             userLogin(adminData).then((res) => {
-                console.log("eto si admin", res)
+                console.log('eto si admin', res)
 
                 if (JSON.stringify(res) !== '{}' && res !== undefined) {
                     console.log(res)
@@ -40,7 +40,7 @@ function AdminLogin({ setIsAdmin, setIsAuthorized}) {
                         if (data) {
                             console.log('Fetch Data: ', JSON.parse(data))
                         }
-                        alert('Login Successfully! Noice Hahahah')
+                        alert('Login Successfully!')
                         navigate('/visit-request', { state: res })
                         sessionStorage.getItem('userRole') === '2'
                             ? setIsAdmin(true)
@@ -63,17 +63,26 @@ function AdminLogin({ setIsAdmin, setIsAuthorized}) {
         setShowPassword(!showPassword)
     }
     return (
-        <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-5 sm:px-6 lg:px-8">
-            <div className="bg-gray-100 py-20">
+        <div
+            className="flex justify-center items-center max-w-full mx-auto p-5 py-20"
+            name="Home"
+            style={{
+                background: `url(${require('../assets/bonefire.jpg')}) center no-repeat`,
+                backgroundSize: 'cover',
+                height: '100vh',
+            }}
+        >
+            {' '}
+            <div className="py-20">
                 <div className="mx-auto max-w-xs shadow-lg rounded-lg">
-                    <div className="p-6 rounded-lg">
+                    <div className="p-6 rounded-lg bg-white">
                         <h2 className="text-2xl text-start font-bold mb-5">
-                            Sign In
+                            Admin Sign In
                         </h2>
                         <form onSubmit={handleSubmit}>
                             <div className="mb-4 ">
                                 <input
-                                    className="bg-transparent border-b-2 border-gray-300 py-2 w-full focus:outline-none focus:border-blue-400"
+                                    className="bg-transparent border-b-2 border-gray-300 py-2 w-full focus:outline-none focus:border-[#4CAF50]"
                                     type="email"
                                     name="email"
                                     placeholder="Email"
@@ -82,7 +91,7 @@ function AdminLogin({ setIsAdmin, setIsAuthorized}) {
                             </div>
                             <div className="mb-4 relative">
                                 <input
-                                    className="bg-transparent border-b-2 border-gray-300 py-2 w-full focus:outline-none focus:border-blue-400"
+                                    className="bg-transparent border-b-2 border-gray-300 py-2 w-full focus:outline-none focus:border-[#4CAF50]"
                                     type={showPassword ? 'text' : 'password'}
                                     name="password"
                                     placeholder="Password"
@@ -117,7 +126,7 @@ function AdminLogin({ setIsAdmin, setIsAuthorized}) {
                                 Don't have an account?
                                 <button
                                     className="text-[#093545]"
-                                    onClick={() => navigate('/sign-up')}
+                                    onClick={() => navigate('/admin-sign-up')}
                                 >
                                     Sign up.
                                 </button>

@@ -17,13 +17,11 @@ const declinedRequestController = require('./controller/declinedRequest')
 
 const app = express()
 const port = process.env.DB_PORT || 8000
-//middleware
 app.use(express.static(path.join(__dirname, './ui/build/')))
 app.use(cors())
 app.use(express.json())
 app.use(bodyParser.json())
 
-//routing
 app.get('/api/v1/users/:name', (req, res) => {
     usersController.searchUsersByName(req.params.name).then((data) => res.json(data))
 })
@@ -66,7 +64,7 @@ app.delete('/api/v1/visits/:id', (req, res) => {
 app.post('/api/v1/login', (req, res) => {
     usersController.userlogin(req.body).then((data) => res.json(data))
 })
-// New endpoint to send email notification
+
 app.post('/api/v1/email-notification', (req, res) => {
     visitController
         .sendVisitAcceptedEmail(req.body.visits)
@@ -78,8 +76,6 @@ app.post('/api/v1/notifications', (req, res) => {
         .createNotification(req.body.notification)
         .then((notification) => res.json(notification))
 })
-
-// visitor log endpoints
 
 app.get('/api/v1/visitor-log/:id', (req, res) => {
     visitorLogController
@@ -100,7 +96,7 @@ app.put('/api/v1/visitor-log', (req, res) => {
 app.delete('/api/v1/visitor-log/:id', (req, res) => {
     usersController.deleteLog(req.params.id).then((data) => res.json(data))
 })
-// pending request endpoints
+
 app.get('/api/v1/pending-request/:user_id', (req, res) => {
     pendingRequestController
         .getPendingReq(req.params.user_id)
@@ -131,6 +127,7 @@ app.delete('/api/v1/pending-request/:id', (req, res) => {
         .deletePendingReq(req.params.id)
         .then((data) => res.json(data))
 })
+
 app.listen(port, () => {
     console.log(`Server listening on the port: ${port}`)
 })
