@@ -1,76 +1,84 @@
 import React, { useState, useEffect } from 'react'
 import { createVisit, getVisitsForUserAndDate } from '../services/VisitServices'
 import Modal from '../modal/UsersModal'
+import { useNavigate } from 'react-router-dom'
 
 function ScheduleBookForm() {
-  const userID = localStorage.getItem('data')
-  const [showModal, setShowModal] = useState(false)
-  const [availableVisits, setAvailableVisits] = useState(0)
-  const [dateClicked, setDateClicked] = useState(false)
+    const userID = localStorage.getItem('data')
+    const [showModal, setShowModal] = useState(false)
+    const [availableVisits, setAvailableVisits] = useState(0)
+    const [dateClicked, setDateClicked] = useState(false)
+    const navigate = useNavigate()
 
-  const [formData, setFormData] = useState({
-    user_id: userID ? JSON.parse(userID).id : '',
-    visit_date: '',
-    visit_time: '',
-    purpose: '',
-  })
-
-  const { user_id, visit_date, visit_time, purpose } = formData
-
-  const MAX_VISITS_PER_DAY = 3
-
-  useEffect(() => {
-    const fetchAvailableVisits = async () => {
-      const visits = await getVisitsForUserAndDate(user_id, visit_date)
-      const count = MAX_VISITS_PER_DAY - visits.length
-      setAvailableVisits(count)
-    }
-    if (visit_date) {
-      fetchAvailableVisits()
-    }
-  }, [user_id, visit_date])
-
-  const onSubmitForm = async (e) => {
-    e.preventDefault()
-    if (!userID) {
-        // localStorage.removeItem('data')
-        alert('Please sign in to book a visit')
-        return
-      }
-      if (!user_id || !visit_date || !visit_time || !purpose) {
-        alert('Please fill in all fields')
-        return
-      }
-    const selectedTime = new Date(`${visit_date}T${visit_time}`)
-    const openingTime = new Date(`${visit_date}T06:00`)
-    const closingTime = new Date(`${visit_date}T17:00`)
-    if (selectedTime < openingTime || selectedTime > closingTime) {
-      alert('Booking is only available between 6am and 5pm')
-      return
-    }
-
-    if (availableVisits <= 0) {
-      alert(
-        `Sorry, the maximum number of visits has already been reached for this day. Please choose another date.`
-      )
-      return
-    }
-
-    try {
-      await createVisit(formData)
-      setAvailableVisits((prevCount) => prevCount - 1) // Subtract 1 from availableVisits count
-      setShowModal(true)
-    } catch (error) {
-      alert(error.message)
-    }
-  }
-
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData((prev) => {
-      return { ...prev, [name]: value }
+    const [formData, setFormData] = useState({
+        user_id: userID ? JSON.parse(userID).id : '',
+        visit_date: '',
+        visit_time: '',
+        purpose: '',
     })
-  }
+
+    const { user_id, visit_date, visit_time, purpose } = formData
+
+    const MAX_VISITS_PER_DAY = 3
+
+    useEffect(() => {
+        const fetchAvailableVisits = async () => {
+            const visits = await getVisitsForUserAndDate(user_id, visit_date)
+            const count = MAX_VISITS_PER_DAY - visits.length
+            setAvailableVisits(count)
+        }
+        if (visit_date) {
+            fetchAvailableVisits()
+        }
+    }, [user_id, visit_date])
+
+    const onSubmitForm = async (e) => {
+        e.preventDefault();
+      
+        if (!userID) {
+          alert("Please sign in to book a visit");
+          return navigate("/sign-in");
+        }
+      
+        if (!user_id || !visit_date || !visit_time || !purpose) {
+          alert("Please fill in all fields");
+          return;
+        }
+      
+        const selectedTime = new Date(`${visit_date}T${visit_time}`);
+        const openingTime = new Date(`${visit_date}T06:00`);
+        const closingTime = new Date(`${visit_date}T17:00`);
+      
+        if (selectedTime < openingTime || selectedTime > closingTime) {
+          alert("Booking is only available between 6am and 5pm");
+          return;
+        }
+      
+        if (availableVisits <= 0) {
+          alert(
+            "Sorry, the maximum number of visits has already been reached for this day. Please choose another date."
+          );
+          return;
+        }
+      
+        try {
+          await createVisit(formData);
+          setAvailableVisits((prevCount) => prevCount - 1); // Subtract 1 from availableVisits count
+          setShowModal(true);
+        } catch (error) {
+          alert(error.message);
+        }
+      };
+      
+      
+    
+
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setFormData((prev) => {
+            return { ...prev, [name]: value }
+        })
+    }
 
     return (
         <div className=" text-black flex flex-col justify-center max-w-lg items-center">
@@ -86,17 +94,15 @@ function ScheduleBookForm() {
                         >
                             Date{' '}
                             {dateClicked && (
-
-                            <span className="text-black bg-gray-200 px-2 rounded-full">
-                                {availableVisits > 0
-                                    ? `${availableVisits} visits available`
-                                    : 'visits available 0'}
-                            </span>
+                                <span className="text-black bg-gray-200 px-2 rounded-full">
+                                    {availableVisits > 0
+                                        ? `${availableVisits} visits available`
+                                        : 'visits available 0'}
+                                </span>
                             )}
                         </label>
                         <input
                             className="py-2 px-3 rounded-lg bg-gray-200"
-                            
                             type="date"
                             id="date"
                             name="visit_date"
@@ -136,7 +142,9 @@ function ScheduleBookForm() {
                             onChange={handleChange}
                             className="border border-gray-400 p-2 rounded-md  outline-none bg-gray-200 text-gray-700 mb-2"
                         >
-                            <option className="Select Purpose">Select purpose</option>
+                            <option className="Select Purpose">
+                                Select purpose
+                            </option>
                             <option value="Trekking">Trekking</option>
                             <option value="Camping">Camping</option>
                         </select>

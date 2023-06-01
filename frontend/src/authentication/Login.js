@@ -29,7 +29,6 @@ function UserLogin({ setIsUser, setIsAuthorized }) {
             console.log(res[1].role_id)
             navigate('/sign-up')
           } else {
-            // Assigning Default Values Upon Login
             sessionStorage.setItem('jwt', res[0].jwt)
             sessionStorage.setItem('userRole', res[0].userRole)
             localStorage.setItem('data', JSON.stringify(res[1]))
@@ -37,9 +36,8 @@ function UserLogin({ setIsUser, setIsAuthorized }) {
             const data = localStorage.getItem('data')
             if (data) {
               console.log('Fetch Data: ', JSON.parse(data))
+              navigate('/', { state: res })
             }
-            alert('Login Successfully!')
-            navigate('/', { state: res })
             sessionStorage.getItem('userRole') === '1'
               ? setIsUser(true)
               : setIsUser(false)

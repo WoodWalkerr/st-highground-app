@@ -21,8 +21,6 @@ function AdminLogin({ setIsAdmin, setIsAuthorized }) {
         e.preventDefault()
         try {
             userLogin(adminData).then((res) => {
-                console.log('eto si admin', res)
-
                 if (JSON.stringify(res) !== '{}' && res !== undefined) {
                     console.log(res)
 
@@ -31,7 +29,6 @@ function AdminLogin({ setIsAdmin, setIsAuthorized }) {
                         console.log(res[1].role_id)
                         navigate('/admin-login')
                     } else {
-                        // Assigning Default Values Upon Login
                         sessionStorage.setItem('jwt', res[0].jwt)
                         sessionStorage.setItem('userRole', res[0].userRole)
                         localStorage.setItem('data', JSON.stringify(res[1]))
@@ -39,14 +36,12 @@ function AdminLogin({ setIsAdmin, setIsAuthorized }) {
                         const data = localStorage.getItem('data')
                         if (data) {
                             console.log('Fetch Data: ', JSON.parse(data))
+                            navigate('/visit-request', { state: res })
                         }
-                        alert('Login Successfully!')
-                        navigate('/visit-request', { state: res })
                         sessionStorage.getItem('userRole') === '2'
                             ? setIsAdmin(true)
                             : setIsAdmin(false)
                         setIsAuthorized(true)
-                        // window.location.reload(false)
                     }
                 } else {
                     console.log('User/Password does not exist!')
@@ -73,7 +68,7 @@ function AdminLogin({ setIsAdmin, setIsAuthorized }) {
             }}
         >
             {' '}
-            <div className="py-20">
+            <div className="py-20 ">
                 <div className="mx-auto max-w-xs shadow-lg rounded-lg">
                     <div className="p-6 rounded-lg bg-white">
                         <h2 className="text-2xl text-start font-bold mb-5">
