@@ -97,12 +97,9 @@ class UserRepository {
         }
     }
     
-    async userlogin(users) {
-        console.log('Login Credentials', users.email)
-    
+    async userlogin(users) {    
         try {
             const password = users.password
-            console.log('Password', password)
     
             const user = await this.db.users.findOne({
                 where: {
