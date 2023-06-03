@@ -2,66 +2,76 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { userLogin } from '../services/UserLoginServices'
 import { AiOutlineEye, AiOutlineEyeInvisible } from '../icons/icons'
+import { LoginValidation } from '../icons/LoginValidation'
 
 function UserLogin({ setIsUser, setIsAuthorized }) {
-  const [user, setUser] = useState({ email: '', password: '' })
-  const [showPassword, setShowPassword] = useState(false)
+    const [user, setUser] = useState({ email: '', password: '' })
+    const [showPassword, setShowPassword] = useState(false)
+    const [errors, setErrors] = useState({})
 
-  const navigate = useNavigate()
+    const navigate = useNavigate()
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setUser((prev) => {
-      return { ...prev, [name]: value }
-    })
-    console.log(name, value)
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    try {
-      userLogin(user).then((res) => {
-        if (JSON.stringify(res) !== '{}' && res !== undefined) {
-          console.log(res)
-
-          if (res[1].role_id !== 1) {
-            alert('Not a user account')
-            console.log(res[1].role_id)
-            navigate('/sign-up')
-          } else {
-            sessionStorage.setItem('jwt', res[0].jwt)
-            sessionStorage.setItem('userRole', res[0].userRole)
-            localStorage.setItem('data', JSON.stringify(res[1]))
-
-            const data = localStorage.getItem('data')
-            if (data) {
-              console.log('Fetch Data: ', JSON.parse(data))
-              navigate('/', { state: res })
-            }
-            sessionStorage.getItem('userRole') === '1'
-              ? setIsUser(true)
-              : setIsUser(false)
-            setIsAuthorized(true)
-            localStorage.removeItem('data')
-          }
-        } else {
-          console.log('User/Password does not exist!')
-          alert("User/Password doesn't exist!")
-        }
-      })
-    } catch (error) {
-      console.log('Error: ', error)
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setUser((prev) => {
+            return { ...prev, [name]: value }
+        })
+        console.log(name, value)
     }
-  }
 
-  const handleShowPassword = (e) => {
-    e.preventDefault()
-    setShowPassword(!showPassword)
-  }
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+        const validationErrors = LoginValidation(user)
+        setErrors(validationErrors)
+
+        if (Object.keys(validationErrors).length > 0) {
+            return
+        }
+
+        try {
+            userLogin(user).then((res) => {
+                if (JSON.stringify(res) !== '{}' && res !== undefined) {
+                    console.log(res)
+
+                    if (res[1].role_id !== 1) {
+                        alert('Not a user account')
+                        console.log(res[1].role_id)
+                        navigate('/sign-up')
+                    } else {
+                        sessionStorage.setItem('jwt', res[0].jwt)
+                        sessionStorage.setItem('userRole', res[0].userRole)
+                        localStorage.setItem('data', JSON.stringify(res[1]))
+
+                        const data = localStorage.getItem('data')
+                        if (data) {
+                            console.log('Fetch Data: ', JSON.parse(data))
+                            navigate('/', { state: res })
+                        }
+                        sessionStorage.getItem('userRole') === '1'
+                            ? setIsUser(true)
+                            : setIsUser(false)
+                        setIsAuthorized(true)
+                        localStorage.removeItem('data')
+                    }
+                } else {
+                    console.log('User/Password does not exist!')
+                    alert("User/Password doesn't exist!")
+                }
+            })
+        } catch (error) {
+            console.log('Error: ', error)
+        }
+    }
+
+    const handleShowPassword = (e) => {
+        e.preventDefault()
+        setShowPassword(!showPassword)
+    }
     return (
         <div
             className="flex justify-center items-center max-w-full mx-auto p-5 py-20"
-            name='Home'
+            name="Home"
             style={{
                 background: `url(${require('../assets/bonefire.jpg')}) center no-repeat`,
                 backgroundSize: 'cover',
@@ -83,6 +93,11 @@ function UserLogin({ setIsUser, setIsAuthorized }) {
                                     placeholder="Email"
                                     onChange={handleChange}
                                 />
+                                {errors.email && (
+                                    <p className="text-red-500 text-sm">
+                                        {errors.email}
+                                    </p>
+                                )}
                             </div>
                             <div className="mb-4 relative">
                                 <input
@@ -92,6 +107,11 @@ function UserLogin({ setIsUser, setIsAuthorized }) {
                                     placeholder="Password"
                                     onChange={handleChange}
                                 />
+                                {errors.password && (
+                                    <p className="text-red-500 text-sm">
+                                        {errors.password}
+                                    </p>
+                                )}
                                 <button
                                     className="absolute top-0 right-0 mt-4 mr-4 focus:outline-none"
                                     onClick={handleShowPassword}

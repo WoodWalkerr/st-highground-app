@@ -63,7 +63,7 @@ function ScheduleBookForm() {
       
         try {
           await createVisit(formData);
-          setAvailableVisits((prevCount) => prevCount - 1); // Subtract 1 from availableVisits count
+          setAvailableVisits((prevCount) => prevCount - 1);
           setShowModal(true);
         } catch (error) {
           alert(error.message);

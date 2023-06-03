@@ -41,6 +41,7 @@ const VisitList = () => {
 
         try {
             const searchResults = await searchUsersByName(value)
+            console.log("here", searchResults)
             setSearchResults(searchResults)
         } catch (error) {
             console.error(error.message)
@@ -102,7 +103,7 @@ const VisitList = () => {
                                                 type="text"
                                                 searchResults={searchResults}
                                                 onChange={handleChange}
-                                                className="block p-2 pl-10 text-xs text-gray-900 border border-gray-300 rounded-lg w-50 h-7 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                className="hidden p-2 pl-10 text-xs text-gray-900 border border-gray-300 rounded-lg w-50 h-7 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 placeholder="Search for users"
                                             />
                                         </div>
