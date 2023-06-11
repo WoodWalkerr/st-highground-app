@@ -14,8 +14,9 @@ import VisitList from './components/VisitList'
 function App() {
   return (
     <BrowserRouter>
+      <Navbar />
       <Routes>
-        <Route path="/" element={<Layout><Dashboard /></Layout>} />
+        <Route path="/" element={<Dashboard />} />
         <Route path="/sign-up" element={<Layout><Signup /></Layout>} />
         <Route path="/sign-in" element={<Layout><Login /></Layout>} />
         <Route path="/admin-login" element={<Layout><AdminLogin /></Layout>} />

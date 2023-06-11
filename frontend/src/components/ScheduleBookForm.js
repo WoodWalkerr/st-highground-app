@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 function ScheduleBookForm() {
     const userID = localStorage.getItem('data')
+    const user = sessionStorage.getItem('jwt')
     const [showModal, setShowModal] = useState(false)
     const [availableVisits, setAvailableVisits] = useState(0)
     const [dateClicked, setDateClicked] = useState(false)
@@ -35,7 +36,7 @@ function ScheduleBookForm() {
     const onSubmitForm = async (e) => {
         e.preventDefault();
       
-        if (!userID) {
+        if (!user) {
           alert("Please sign in to book a visit");
           return navigate("/sign-in");
         }

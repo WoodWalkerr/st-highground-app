@@ -16,7 +16,7 @@ function UserLogin({ setIsUser, setIsAuthorized }) {
         setUser((prev) => {
             return { ...prev, [name]: value }
         })
-        console.log(name, value)
+        console.log('eto yun', name, value)
     }
 
     const handleSubmit = (e) => {
@@ -78,6 +78,7 @@ function UserLogin({ setIsUser, setIsAuthorized }) {
                 height: '100vh',
             }}
         >
+           
             <div className="py-20">
                 <div className="mx-auto max-w-xs shadow-lg rounded-lg">
                     <div className="p-6 rounded-lg bg-gray-100">
@@ -94,7 +95,7 @@ function UserLogin({ setIsUser, setIsAuthorized }) {
                                     onChange={handleChange}
                                 />
                                 {errors.email && (
-                                    <p className="text-red-500 text-sm">
+                                    <p className="text-red-500 text-xs italic">
                                         {errors.email}
                                     </p>
                                 )}
@@ -108,7 +109,7 @@ function UserLogin({ setIsUser, setIsAuthorized }) {
                                     onChange={handleChange}
                                 />
                                 {errors.password && (
-                                    <p className="text-red-500 text-sm">
+                                    <p className="text-red-500 text-xs italic">
                                         {errors.password}
                                     </p>
                                 )}

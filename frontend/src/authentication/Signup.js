@@ -22,33 +22,33 @@ const UserSignUp = () => {
         role_id: 1,
     })
 
-    const { name, email, password, phone_number} = user
+    const { name, email, password, phone_number } = user
 
     const handleChange = (event) => {
-        const { name, value } = event.target;
-        let newValue = value;
-      
+        const { name, value } = event.target
+        let newValue = value
+
         if (name === 'phone_number') {
-          newValue = value.replace(/\D/g, '');
+            newValue = value.replace(/\D/g, '')
         }
-      
-        const newUser = { ...user, [name]: newValue };
-        setUser(newUser);
-      };
-      
+
+        const newUser = { ...user, [name]: newValue }
+        setUser(newUser)
+    }
+
     const onSubmitForm = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
         if (!name || !email || !password || !phone_number) {
-          setErrors(Validation(user));
-          return;
+            setErrors(Validation(user))
+            return
         }
         try {
-          await createUser(user);
-          navigate('/sign-in');
+            await createUser(user)
+            navigate('/sign-in')
         } catch (error) {
-          console.error(error.message);
+            console.error(error.message)
         }
-      };
+    }
 
     return (
         <div
@@ -79,7 +79,7 @@ const UserSignUp = () => {
                                         onChange={handleChange}
                                     />
                                     {errors.name && (
-                                        <p className="text-red-500 text-sm">
+                                        <p className="text-red-500 text-xs italic">
                                             {errors.name}
                                         </p>
                                     )}
@@ -97,7 +97,7 @@ const UserSignUp = () => {
                                         onChange={handleChange}
                                     />
                                     {errors.email && (
-                                        <p className="text-red-500 text-sm">
+                                        <p className="text-red-500 text-xs italic">
                                             {errors.email}
                                         </p>
                                     )}
@@ -115,7 +115,7 @@ const UserSignUp = () => {
                                         onChange={handleChange}
                                     />
                                     {errors.password && (
-                                        <p className="text-red-500 text-sm">
+                                        <p className="text-red-500 text-xs italic">
                                             {errors.password}
                                         </p>
                                     )}
@@ -148,18 +148,20 @@ const UserSignUp = () => {
                                         onChange={handleChange}
                                     />
                                     {errors.phone_number && (
-                                        <p className="text-red-500 text-sm">
+                                        <p className="text-red-500 text-xs italic">
                                             {errors.phone_number}
                                         </p>
                                     )}
                                 </div>
                                 <div>
+                                   
                                     <button
                                         type="submit"
                                         className="w-full bg-green-500 hover:bg-green-600 transition duration-200 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                                     >
                                         Sign Up
                                     </button>
+                                
                                     <div className="block text-center text-gray-500 text-sm font-bold my-3 mx-2">
                                         Already have an account?
                                         <button
