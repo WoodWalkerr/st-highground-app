@@ -10,7 +10,6 @@ import {
     searchUsersByName,
 } from '../services/UserServices'
 import Sidebar from '../common/Sidebar'
-// import SearchList from '../searchbox/SearchBox';
 
 const ListDashboard = () => {
     const [users, setUsers] = useState([])
