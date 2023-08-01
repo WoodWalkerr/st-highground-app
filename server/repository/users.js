@@ -42,12 +42,9 @@ class UserRepository {
         }
       };
 
-    async getUserById(id) {
+      async getUserById(id) {
         try {
             const user = await this.db.users.findByPk(id)
-            if (!user) {
-            } else {
-            }
             return user
         } catch (error) {
             console.log('Error: ', error)
