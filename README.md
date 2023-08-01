@@ -1,6 +1,6 @@
 # Project Name
 
-My Awesome Node.js Express Project
+Highground Email-based management system
 
 ## Table of Contents
 
