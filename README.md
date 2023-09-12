@@ -1,6 +1,4 @@
-# Project Name
-
-Highground Email-based management system
+# Highground Email-based management system
 
 ## Table of Contents
 
