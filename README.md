@@ -1,4 +1,4 @@
-# Highground Email-based management system
+# Highground Email-based Management System
 
 ## Table of Contents
 
